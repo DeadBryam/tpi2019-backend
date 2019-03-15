@@ -22,20 +22,67 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
+    /**
+     *
+     * @param entity
+     */
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        try {
+            if (getEntityManager() != null && entity != null) {
+                getEntityManager().persist(entity);
+            }   
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e);
+        }
     }
 
+    /**
+     *
+     * @param entity
+     */
     public void edit(T entity) {
-        getEntityManager().merge(entity);
+        try {
+            if (getEntityManager() != null && entity != null) {
+                getEntityManager().merge(entity);
+            } else {
+                System.out.println("algo es nulo");
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e);
+        }
     }
 
+    /**
+     *
+     * @param entity
+     */
     public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+        try {
+            if (getEntityManager() != null && entity != null) {
+                getEntityManager().remove(getEntityManager().merge(entity));
+            } else {
+                System.out.println("algo es nulo");
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e);
+        }
     }
 
-    public T find(Object id) {
-        return getEntityManager().find(entityClass, id);
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public T findById(Object id) {
+        try {
+            if (id != null) {
+                return getEntityManager().find(entityClass, id);
+            }
+        } catch (Exception ex) {
+            System.out.println("ex: " + ex);
+            throw ex;
+        }
+        return null;
     }
 
     public List<T> findAll() {
@@ -60,5 +107,5 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+
 }
