@@ -2,6 +2,16 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.ues.sv.ingenieria.sistemas.tpi2019_inventarioLibreria_war_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>java:app/libreria</jta-data-source>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Almacen</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Articulo</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Compra</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Distribuidor</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Kardex</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Marca</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Medida</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoArticulo</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoMedida</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Venta</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>
