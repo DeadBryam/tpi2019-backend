@@ -6,6 +6,8 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.integration;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
@@ -37,13 +39,13 @@ public class EntityManagerProvider implements TestRule{
     }
 
     @Override
-    public Statement apply(Statement stmnt, Description d) {
-
+    public Statement apply(final Statement arg0, Description d) {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                getEm().clear();
-                getEm().close();
+                //getEm().clear();
+                //getEm().close();
+                arg0.evaluate();
             }
         };
     }

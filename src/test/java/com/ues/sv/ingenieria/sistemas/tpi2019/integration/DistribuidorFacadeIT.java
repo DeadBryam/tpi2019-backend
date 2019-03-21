@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.FlushModeType;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -34,13 +35,11 @@ public class DistribuidorFacadeIT {
     private EntityManager em;
     private final Short id = 1;
     private final Distribuidor reg1 = new Distribuidor(id, "juanito", "79797104");
-    private final Distribuidor reg2 = new Distribuidor(id, "pedrito", "79797104");
+    private final Distribuidor reg2 = new Distribuidor(id, "pedrito", "mama mia");
     private final DistribuidorFacade cut = new DistribuidorFacade();
+    List<Distribuidor> lst;
     private EntityTransaction et;
 
-//    @Rule
-//    public EntityManagerProvider emp = EntityManagerProvider.getInstance("libreria-test", cut);
-    
     @BeforeClass
     public static void setUpClass() {
     }
@@ -54,20 +53,17 @@ public class DistribuidorFacadeIT {
         em = Persistence.createEntityManagerFactory("libreria-test").createEntityManager();
         Whitebox.setInternalState(cut, "em", em);
         et = em.getTransaction();
-
-        et.begin();
-        //emp.getTransaction().begin();
+        em.setFlushMode(FlushModeType.AUTO);
     }
 
     @After
     public void tearDown() {
-        et.rollback();
-      // emp.getTransaction().rollback();
+        em.clear();
+        
+        et.begin();
+        em.createQuery("DELETE FROM Distribuidor").executeUpdate();
+        et.commit();
     }
-    
-//    public AbstractFacade facade(){
-//        return emp.getFacade();
-//    }
 
     /**
      * Test of create method, of class DistribuidorFacade.
@@ -76,8 +72,13 @@ public class DistribuidorFacadeIT {
     public void testCreate() {
         System.out.println("create-IT");
 
+        et.begin();
         cut.create(reg1);
-        assertNotNull(cut.findById(id));
+        et.commit();
+
+        Distribuidor resultado = (Distribuidor) em.createNamedQuery("Distribuidor.findByIdDistribuidor").setParameter("idDistribuidor", id).getSingleResult();
+        assertNotNull(resultado);
+        assertEquals(1, cut.count());
     }
 
     /**
@@ -87,9 +88,18 @@ public class DistribuidorFacadeIT {
     public void testEdit() {
         System.out.println("edit-IT");
 
-       cut.create(reg1);
+        et.begin();
+        cut.create(reg1);
+        et.commit();
+        em.detach(reg1);
+        
+        et.begin();
         cut.edit(reg2);
-        assertEquals(reg1, cut.findById(id));
+        et.commit();
+
+        Distribuidor resultado = (Distribuidor) em.createNamedQuery("Distribuidor.findByIdDistribuidor").setParameter("idDistribuidor", id).getSingleResult();
+        assertEquals(reg2.getDistribuidor(), resultado.getDistribuidor());
+        assertEquals(reg2.getTelefono(), resultado.getTelefono());
     }
 
     /**
@@ -99,9 +109,13 @@ public class DistribuidorFacadeIT {
     public void testRemove() {
         System.out.println("remove-IT");
 
+        et.begin();
         cut.create(reg1);
         cut.remove(reg1);
-        assertNull(cut.findById(id));
+        et.commit();
+
+        lst = em.createNamedQuery("Distribuidor.findAll").getResultList();
+        assertEquals(0, lst.size());
     }
 
     /**
@@ -110,9 +124,13 @@ public class DistribuidorFacadeIT {
     @Test
     public void testFindById() {
         System.out.println("findById - IT");
-
+        
+        et.begin();
         cut.create(reg1);
-        assertEquals(cut.findById(id), reg1);
+        et.commit();
+
+        //assertEquals(cut.findById(id), reg1);
+        assertTrue(cut.findById(id).equals(reg1));
     }
 
     /**
@@ -122,8 +140,11 @@ public class DistribuidorFacadeIT {
     public void testFindAll() {
         System.out.println("findAll-IT");
 
+        et.begin();
         cut.create(reg1);
-        List lst = cut.findAll();
+        et.commit();
+        
+        lst = cut.findAll();
         assertEquals(1, lst.size());
     }
 
@@ -134,8 +155,11 @@ public class DistribuidorFacadeIT {
     public void testFindRange() {
         System.out.println("findRange-IT");
 
+        et.begin();
         cut.create(reg1);
-        List lst = cut.findRange(0, 1);
+        et.commit();
+        
+        lst = cut.findRange(0, 1);
         assertEquals(1, lst.size());
     }
 
@@ -147,7 +171,10 @@ public class DistribuidorFacadeIT {
         System.out.println("count-IT");
         int result;
 
+        et.begin();
         cut.create(reg1);
+        et.commit();
+        
         result = cut.count();
         assertEquals(1, result);
     }
