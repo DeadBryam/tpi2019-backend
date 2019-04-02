@@ -34,11 +34,9 @@ public abstract class AbstractFacade<T> {
             if (getEntityManager() != null && entity != null) {
                 getEntityManager().persist(entity);
             } else {
-                Logger.getLogger(getClass().getName()).log(Level.WARNING, "EntityManager o Entity son nulos");
-                throw new NullPointerException("EntityManager o Entity son nulos");
+                throw new NullPointerException();
             }
         } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             throw e;
         }
     }
@@ -52,11 +50,9 @@ public abstract class AbstractFacade<T> {
             if (getEntityManager() != null && entity != null) {
                 getEntityManager().merge(entity);
             } else {
-                Logger.getLogger(getClass().getName()).log(Level.WARNING, "EntityManager o Entity son nulos");
-                throw new NullPointerException("EntityManager o Entity son nulos");
+                throw new NullPointerException("");
             }
         } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             throw e;
         }
     }
@@ -70,11 +66,9 @@ public abstract class AbstractFacade<T> {
             if (getEntityManager() != null && entity != null) {
                 getEntityManager().remove(getEntityManager().merge(entity));
             } else {
-                Logger.getLogger(getClass().getName()).log(Level.WARNING, "EntityManager o Entity son nulos");
-                throw new NullPointerException("EntityManager o Entity son nulos");
+                throw new NullPointerException("");
             }
         } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             throw e;
         }
     }
@@ -86,38 +80,61 @@ public abstract class AbstractFacade<T> {
      */
     public T findById(Object id) {
         try {
-            if (id != null) {
+            if (entityClass != null && id != null) {
                 return getEntityManager().find(entityClass, id);
+            } else {
+                throw new NullPointerException("");
             }
         } catch (Exception ex) {
-            System.out.println("ex: " + ex);
             throw ex;
         }
-        return null;
     }
 
     public List<T> findAll() {
-        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
+        try {
+            if (entityClass != null && getEntityManager() != null) {
+                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+                cq.select(cq.from(entityClass));
+                return getEntityManager().createQuery(cq).getResultList();
+            } else {
+                throw new NullPointerException();
+            }
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public List<T> findRange(int primero, int ultimo) {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
-        javax.persistence.Query q = getEntityManager().createQuery(cq);
-        q.setMaxResults(ultimo);
-        q.setFirstResult(primero);
-        return q.getResultList();
+        try {
+            if (entityClass != null && getEntityManager() != null && (primero < ultimo)) {
+                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+                cq.select(cq.from(entityClass));
+                javax.persistence.Query q = getEntityManager().createQuery(cq);
+                q.setMaxResults(ultimo);
+                q.setFirstResult(primero);
+                return q.getResultList();
+            } else {
+                throw new NullPointerException("");
+            }
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public int count() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
-        cq.select(getEntityManager().getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = getEntityManager().createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
-        
+          try {
+            if (getEntityManager()!=null && entityClass!=null) {
+                javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+                javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
+                cq.select(getEntityManager().getCriteriaBuilder().count(rt));
+                javax.persistence.Query q = getEntityManager().createQuery(cq);
+                return ((Long) q.getSingleResult()).intValue();
+            }else{
+                throw new NullPointerException();
+            }
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }
