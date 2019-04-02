@@ -33,7 +33,7 @@ public class DistribuidorFacadeIT {
     }
 
     private EntityManager em;
-    private final Short id = 1;
+    private final Short id = 10;
     private final Distribuidor reg1 = new Distribuidor(id, "juanito", "79797104");
     private final Distribuidor reg2 = new Distribuidor(id, "pedrito", "mama mia");
     private final DistribuidorFacade cut = new DistribuidorFacade();
@@ -59,7 +59,7 @@ public class DistribuidorFacadeIT {
     @After
     public void tearDown() {
         em.clear();
-        
+
         et.begin();
         em.createQuery("DELETE FROM Distribuidor").executeUpdate();
         et.commit();
@@ -92,7 +92,7 @@ public class DistribuidorFacadeIT {
         cut.create(reg1);
         et.commit();
         em.detach(reg1);
-        
+
         et.begin();
         cut.edit(reg2);
         et.commit();
@@ -124,7 +124,7 @@ public class DistribuidorFacadeIT {
     @Test
     public void testFindById() {
         System.out.println("findById - IT");
-        
+
         et.begin();
         cut.create(reg1);
         et.commit();
@@ -143,7 +143,7 @@ public class DistribuidorFacadeIT {
         et.begin();
         cut.create(reg1);
         et.commit();
-        
+
         lst = cut.findAll();
         assertEquals(1, lst.size());
     }
@@ -158,7 +158,7 @@ public class DistribuidorFacadeIT {
         et.begin();
         cut.create(reg1);
         et.commit();
-        
+
         lst = cut.findRange(0, 1);
         assertEquals(1, lst.size());
     }
@@ -174,7 +174,7 @@ public class DistribuidorFacadeIT {
         et.begin();
         cut.create(reg1);
         et.commit();
-        
+
         result = cut.count();
         assertEquals(1, result);
     }
