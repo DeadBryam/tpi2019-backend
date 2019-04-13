@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
 @Table(name = "kardex")
@@ -30,8 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Kardex.findAll", query = "SELECT k FROM Kardex k")
     , @NamedQuery(name = "Kardex.findByIdKardex", query = "SELECT k FROM Kardex k WHERE k.idKardex = :idKardex")
     , @NamedQuery(name = "Kardex.findByCantidad", query = "SELECT k FROM Kardex k WHERE k.cantidad = :cantidad")
-    , @NamedQuery(name = "Kardex.findByPrecioCompra", query = "SELECT k FROM Kardex k WHERE k.precioCompra = :precioCompra")
-    , @NamedQuery(name = "Kardex.findByPrecioVenta", query = "SELECT k FROM Kardex k WHERE k.precioVenta = :precioVenta")})
+    , @NamedQuery(name = "Kardex.findByPrecioAnterior", query = "SELECT k FROM Kardex k WHERE k.precioAnterior = :precioAnterior")
+    , @NamedQuery(name = "Kardex.findByPrecioActual", query = "SELECT k FROM Kardex k WHERE k.precioActual = :precioActual")
+    , @NamedQuery(name = "Kardex.findByStockAnterior", query = "SELECT k FROM Kardex k WHERE k.stockAnterior = :stockAnterior")
+    , @NamedQuery(name = "Kardex.findByStockActual", query = "SELECT k FROM Kardex k WHERE k.stockActual = :stockActual")})
 public class Kardex implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,16 +41,22 @@ public class Kardex implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_kardex")
-    private Short idKardex;
+    private Integer idKardex;
     @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad")
-    private short cantidad;
+    private int cantidad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "precio_compra")
-    private BigDecimal precioCompra;
-    @Column(name = "precio_venta")
-    private BigDecimal precioVenta;
+    @Column(name = "precio_anterior")
+    private BigDecimal precioAnterior;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "precio_actual")
+    private BigDecimal precioActual;
+    @Column(name = "stock_anterior")
+    private Integer stockAnterior;
+    @Column(name = "stock_actual")
+    private Integer stockActual;
     @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo")
     @ManyToOne(optional = false)
     private Articulo idArticulo;
@@ -62,45 +70,62 @@ public class Kardex implements Serializable {
     public Kardex() {
     }
 
-    public Kardex(Short idKardex) {
+    public Kardex(Integer idKardex) {
         this.idKardex = idKardex;
     }
 
-    public Kardex(Short idKardex, short cantidad) {
+    public Kardex(Integer idKardex, int cantidad, BigDecimal precioActual) {
         this.idKardex = idKardex;
         this.cantidad = cantidad;
+        this.precioActual = precioActual;
     }
 
-    public Short getIdKardex() {
+    public Integer getIdKardex() {
         return idKardex;
     }
 
-    public void setIdKardex(Short idKardex) {
+    public void setIdKardex(Integer idKardex) {
         this.idKardex = idKardex;
     }
 
-    public short getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(short cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
-    public BigDecimal getPrecioCompra() {
-        return precioCompra;
+    public BigDecimal getPrecioAnterior() {
+        return precioAnterior;
     }
 
-    public void setPrecioCompra(BigDecimal precioCompra) {
-        this.precioCompra = precioCompra;
+    public void setPrecioAnterior(BigDecimal precioAnterior) {
+        this.precioAnterior = precioAnterior;
     }
 
-    public BigDecimal getPrecioVenta() {
-        return precioVenta;
+    public BigDecimal getPrecioActual() {
+        return precioActual;
     }
 
-    public void setPrecioVenta(BigDecimal precioVenta) {
-        this.precioVenta = precioVenta;
+    public void setPrecioActual(BigDecimal precioActual) {
+        this.precioActual = precioActual;
+    }
+
+    public Integer getStockAnterior() {
+        return stockAnterior;
+    }
+
+    public void setStockAnterior(Integer stockAnterior) {
+        this.stockAnterior = stockAnterior;
+    }
+
+    public Integer getStockActual() {
+        return stockActual;
+    }
+
+    public void setStockActual(Integer stockActual) {
+        this.stockActual = stockActual;
     }
 
     public Articulo getIdArticulo() {
@@ -149,7 +174,7 @@ public class Kardex implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Kardex[ idKardex=" + idKardex + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Kardex[ idKardex=" + idKardex + " ]";
     }
     
 }

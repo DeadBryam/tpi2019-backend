@@ -22,7 +22,7 @@ public class MedidaFacadeTest extends AbstractTest<Medida>{
 
     @Override
     protected Medida getEntity() {
-        return new Medida(Short.parseShort("1"));
+        return new Medida(1);
     }
     
 }

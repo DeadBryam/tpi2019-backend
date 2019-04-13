@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
 @Table(name = "distribuidor")
@@ -40,7 +40,7 @@ public class Distribuidor implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_distribuidor")
-    private Short idDistribuidor;
+    private Integer idDistribuidor;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -48,30 +48,29 @@ public class Distribuidor implements Serializable {
     private String distribuidor;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 8)
     @Column(name = "telefono")
-    private String telefono;
+    private int telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDistribuidor")
-    private List<Compra> compraList;
+    private Collection<Compra> compraCollection;
 
     public Distribuidor() {
     }
 
-    public Distribuidor(Short idDistribuidor) {
+    public Distribuidor(Integer idDistribuidor) {
         this.idDistribuidor = idDistribuidor;
     }
 
-    public Distribuidor(Short idDistribuidor, String distribuidor, String telefono) {
+    public Distribuidor(Integer idDistribuidor, String distribuidor, int telefono) {
         this.idDistribuidor = idDistribuidor;
         this.distribuidor = distribuidor;
         this.telefono = telefono;
     }
 
-    public Short getIdDistribuidor() {
+    public Integer getIdDistribuidor() {
         return idDistribuidor;
     }
 
-    public void setIdDistribuidor(Short idDistribuidor) {
+    public void setIdDistribuidor(Integer idDistribuidor) {
         this.idDistribuidor = idDistribuidor;
     }
 
@@ -83,21 +82,21 @@ public class Distribuidor implements Serializable {
         this.distribuidor = distribuidor;
     }
 
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
     @XmlTransient
-    public List<Compra> getCompraList() {
-        return compraList;
+    public Collection<Compra> getCompraCollection() {
+        return compraCollection;
     }
 
-    public void setCompraList(List<Compra> compraList) {
-        this.compraList = compraList;
+    public void setCompraCollection(Collection<Compra> compraCollection) {
+        this.compraCollection = compraCollection;
     }
 
     @Override
@@ -122,7 +121,7 @@ public class Distribuidor implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Distribuidor[ idDistribuidor=" + idDistribuidor + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Distribuidor[ idDistribuidor=" + idDistribuidor + " ]";
     }
     
 }

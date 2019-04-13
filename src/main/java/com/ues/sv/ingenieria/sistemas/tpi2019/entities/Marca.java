@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
 @Table(name = "marca")
@@ -39,32 +39,32 @@ public class Marca implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_marca")
-    private Short idMarca;
+    private Integer idMarca;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "marca")
     private String marca;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMarca")
-    private List<Articulo> articuloList;
+    private Collection<Articulo> articuloCollection;
 
     public Marca() {
     }
 
-    public Marca(Short idMarca) {
+    public Marca(Integer idMarca) {
         this.idMarca = idMarca;
     }
 
-    public Marca(Short idMarca, String marca) {
+    public Marca(Integer idMarca, String marca) {
         this.idMarca = idMarca;
         this.marca = marca;
     }
 
-    public Short getIdMarca() {
+    public Integer getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(Short idMarca) {
+    public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
 
@@ -77,12 +77,12 @@ public class Marca implements Serializable {
     }
 
     @XmlTransient
-    public List<Articulo> getArticuloList() {
-        return articuloList;
+    public Collection<Articulo> getArticuloCollection() {
+        return articuloCollection;
     }
 
-    public void setArticuloList(List<Articulo> articuloList) {
-        this.articuloList = articuloList;
+    public void setArticuloCollection(Collection<Articulo> articuloCollection) {
+        this.articuloCollection = articuloCollection;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Marca[ idMarca=" + idMarca + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Marca[ idMarca=" + idMarca + " ]";
     }
     
 }

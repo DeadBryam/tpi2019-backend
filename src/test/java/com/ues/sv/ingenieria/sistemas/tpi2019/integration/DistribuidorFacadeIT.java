@@ -33,9 +33,9 @@ public class DistribuidorFacadeIT {
     }
 
     private EntityManager em;
-    private final Short id = 10;
-    private final Distribuidor reg1 = new Distribuidor(id, "juanito", "79797104");
-    private final Distribuidor reg2 = new Distribuidor(id, "pedrito", "mama mia");
+    private final int id = 10;
+    private final Distribuidor reg1 = new Distribuidor(id, "juanito", 79797104);
+    private final Distribuidor reg2 = new Distribuidor(id, "pedrito", 78787865);
     private final DistribuidorFacade cut = new DistribuidorFacade();
     List<Distribuidor> lst;
     private EntityTransaction et;

@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
 @Table(name = "medida")
@@ -41,7 +41,7 @@ public class Medida implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_medida")
-    private Short idMedida;
+    private Integer idMedida;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -51,25 +51,25 @@ public class Medida implements Serializable {
     @ManyToOne(optional = false)
     private TipoMedida idTipoMedida;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMedida")
-    private List<Articulo> articuloList;
+    private Collection<Articulo> articuloCollection;
 
     public Medida() {
     }
 
-    public Medida(Short idMedida) {
+    public Medida(Integer idMedida) {
         this.idMedida = idMedida;
     }
 
-    public Medida(Short idMedida, String medida) {
+    public Medida(Integer idMedida, String medida) {
         this.idMedida = idMedida;
         this.medida = medida;
     }
 
-    public Short getIdMedida() {
+    public Integer getIdMedida() {
         return idMedida;
     }
 
-    public void setIdMedida(Short idMedida) {
+    public void setIdMedida(Integer idMedida) {
         this.idMedida = idMedida;
     }
 
@@ -90,12 +90,12 @@ public class Medida implements Serializable {
     }
 
     @XmlTransient
-    public List<Articulo> getArticuloList() {
-        return articuloList;
+    public Collection<Articulo> getArticuloCollection() {
+        return articuloCollection;
     }
 
-    public void setArticuloList(List<Articulo> articuloList) {
-        this.articuloList = articuloList;
+    public void setArticuloCollection(Collection<Articulo> articuloCollection) {
+        this.articuloCollection = articuloCollection;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class Medida implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Medida[ idMedida=" + idMedida + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Medida[ idMedida=" + idMedida + " ]";
     }
     
 }

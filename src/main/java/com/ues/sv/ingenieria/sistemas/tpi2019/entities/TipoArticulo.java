@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
 @Table(name = "tipo_articulo")
@@ -39,32 +39,32 @@ public class TipoArticulo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_tipo_articulo")
-    private Short idTipoArticulo;
+    private Integer idTipoArticulo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "tipo_articulo")
     private String tipoArticulo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoArticulo")
-    private List<Articulo> articuloList;
+    private Collection<Articulo> articuloCollection;
 
     public TipoArticulo() {
     }
 
-    public TipoArticulo(Short idTipoArticulo) {
+    public TipoArticulo(Integer idTipoArticulo) {
         this.idTipoArticulo = idTipoArticulo;
     }
 
-    public TipoArticulo(Short idTipoArticulo, String tipoArticulo) {
+    public TipoArticulo(Integer idTipoArticulo, String tipoArticulo) {
         this.idTipoArticulo = idTipoArticulo;
         this.tipoArticulo = tipoArticulo;
     }
 
-    public Short getIdTipoArticulo() {
+    public Integer getIdTipoArticulo() {
         return idTipoArticulo;
     }
 
-    public void setIdTipoArticulo(Short idTipoArticulo) {
+    public void setIdTipoArticulo(Integer idTipoArticulo) {
         this.idTipoArticulo = idTipoArticulo;
     }
 
@@ -77,12 +77,12 @@ public class TipoArticulo implements Serializable {
     }
 
     @XmlTransient
-    public List<Articulo> getArticuloList() {
-        return articuloList;
+    public Collection<Articulo> getArticuloCollection() {
+        return articuloCollection;
     }
 
-    public void setArticuloList(List<Articulo> articuloList) {
-        this.articuloList = articuloList;
+    public void setArticuloCollection(Collection<Articulo> articuloCollection) {
+        this.articuloCollection = articuloCollection;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class TipoArticulo implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.TipoArticulo[ idTipoArticulo=" + idTipoArticulo + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.TipoArticulo[ idTipoArticulo=" + idTipoArticulo + " ]";
     }
     
 }

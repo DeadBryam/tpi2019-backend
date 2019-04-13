@@ -22,7 +22,7 @@ public class TipoArticuloFacadeTest extends AbstractTest<TipoArticulo>{
 
     @Override
     protected TipoArticulo getEntity() {
-        return new TipoArticulo(Short.parseShort("1"));
+        return new TipoArticulo(1);
     }
     
 }

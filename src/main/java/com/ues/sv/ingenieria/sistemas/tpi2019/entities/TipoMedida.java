@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
 @Table(name = "tipo_medida")
@@ -39,32 +39,32 @@ public class TipoMedida implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_tipo_medida")
-    private Short idTipoMedida;
+    private Integer idTipoMedida;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "tipo_medida")
     private String tipoMedida;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoMedida")
-    private List<Medida> medidaList;
+    private Collection<Medida> medidaCollection;
 
     public TipoMedida() {
     }
 
-    public TipoMedida(Short idTipoMedida) {
+    public TipoMedida(Integer idTipoMedida) {
         this.idTipoMedida = idTipoMedida;
     }
 
-    public TipoMedida(Short idTipoMedida, String tipoMedida) {
+    public TipoMedida(Integer idTipoMedida, String tipoMedida) {
         this.idTipoMedida = idTipoMedida;
         this.tipoMedida = tipoMedida;
     }
 
-    public Short getIdTipoMedida() {
+    public Integer getIdTipoMedida() {
         return idTipoMedida;
     }
 
-    public void setIdTipoMedida(Short idTipoMedida) {
+    public void setIdTipoMedida(Integer idTipoMedida) {
         this.idTipoMedida = idTipoMedida;
     }
 
@@ -77,12 +77,12 @@ public class TipoMedida implements Serializable {
     }
 
     @XmlTransient
-    public List<Medida> getMedidaList() {
-        return medidaList;
+    public Collection<Medida> getMedidaCollection() {
+        return medidaCollection;
     }
 
-    public void setMedidaList(List<Medida> medidaList) {
-        this.medidaList = medidaList;
+    public void setMedidaCollection(Collection<Medida> medidaCollection) {
+        this.medidaCollection = medidaCollection;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class TipoMedida implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.TipoMedida[ idTipoMedida=" + idTipoMedida + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.TipoMedida[ idTipoMedida=" + idTipoMedida + " ]";
     }
     
 }

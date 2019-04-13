@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -20,30 +22,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
-@Table(name = "almacen")
+@Table(name = "bodega")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Almacen.findAll", query = "SELECT a FROM Almacen a")
-    , @NamedQuery(name = "Almacen.findByIdArticulo", query = "SELECT a FROM Almacen a WHERE a.idArticulo = :idArticulo")
-    , @NamedQuery(name = "Almacen.findByStock", query = "SELECT a FROM Almacen a WHERE a.stock = :stock")
-    , @NamedQuery(name = "Almacen.findByPrecio", query = "SELECT a FROM Almacen a WHERE a.precio = :precio")
-    , @NamedQuery(name = "Almacen.findByActivo", query = "SELECT a FROM Almacen a WHERE a.activo = :activo")})
-public class Almacen implements Serializable {
+    @NamedQuery(name = "Bodega.findAll", query = "SELECT b FROM Bodega b")
+    , @NamedQuery(name = "Bodega.findByIdArticulo", query = "SELECT b FROM Bodega b WHERE b.idArticulo = :idArticulo")
+    , @NamedQuery(name = "Bodega.findByStock", query = "SELECT b FROM Bodega b WHERE b.stock = :stock")
+    , @NamedQuery(name = "Bodega.findByPrecio", query = "SELECT b FROM Bodega b WHERE b.precio = :precio")
+    , @NamedQuery(name = "Bodega.findByActivo", query = "SELECT b FROM Bodega b WHERE b.activo = :activo")})
+public class Bodega implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 12)
     @Column(name = "id_articulo")
     private String idArticulo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "stock")
-    private short stock;
+    private int stock;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -51,15 +53,18 @@ public class Almacen implements Serializable {
     private BigDecimal precio;
     @Column(name = "activo")
     private Boolean activo;
+    @JoinColumn(name = "id_num_bodega", referencedColumnName = "id_num_bodega")
+    @ManyToOne(optional = false)
+    private NumBodega idNumBodega;
 
-    public Almacen() {
+    public Bodega() {
     }
 
-    public Almacen(String idArticulo) {
+    public Bodega(String idArticulo) {
         this.idArticulo = idArticulo;
     }
 
-    public Almacen(String idArticulo, short stock, BigDecimal precio) {
+    public Bodega(String idArticulo, int stock, BigDecimal precio) {
         this.idArticulo = idArticulo;
         this.stock = stock;
         this.precio = precio;
@@ -73,11 +78,11 @@ public class Almacen implements Serializable {
         this.idArticulo = idArticulo;
     }
 
-    public short getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(short stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
@@ -97,6 +102,14 @@ public class Almacen implements Serializable {
         this.activo = activo;
     }
 
+    public NumBodega getIdNumBodega() {
+        return idNumBodega;
+    }
+
+    public void setIdNumBodega(NumBodega idNumBodega) {
+        this.idNumBodega = idNumBodega;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,10 +120,10 @@ public class Almacen implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Almacen)) {
+        if (!(object instanceof Bodega)) {
             return false;
         }
-        Almacen other = (Almacen) object;
+        Bodega other = (Bodega) object;
         if ((this.idArticulo == null && other.idArticulo != null) || (this.idArticulo != null && !this.idArticulo.equals(other.idArticulo))) {
             return false;
         }
@@ -119,7 +132,7 @@ public class Almacen implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Almacen[ idArticulo=" + idArticulo + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Bodega[ idArticulo=" + idArticulo + " ]";
     }
     
 }

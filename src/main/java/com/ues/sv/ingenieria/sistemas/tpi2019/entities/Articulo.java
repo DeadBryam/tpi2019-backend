@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
 @Table(name = "articulo")
@@ -34,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Articulo.findAll", query = "SELECT a FROM Articulo a")
     , @NamedQuery(name = "Articulo.findByIdArticulo", query = "SELECT a FROM Articulo a WHERE a.idArticulo = :idArticulo")
     , @NamedQuery(name = "Articulo.findByArticulo", query = "SELECT a FROM Articulo a WHERE a.articulo = :articulo")
-    , @NamedQuery(name = "Articulo.findByPrecio", query = "SELECT a FROM Articulo a WHERE a.precio = :precio")
     , @NamedQuery(name = "Articulo.findByActivo", query = "SELECT a FROM Articulo a WHERE a.activo = :activo")})
 public class Articulo implements Serializable {
 
@@ -42,7 +41,7 @@ public class Articulo implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 12)
     @Column(name = "id_articulo")
     private String idArticulo;
     @Basic(optional = false)
@@ -50,14 +49,10 @@ public class Articulo implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "articulo")
     private String articulo;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "precio")
-    private double precio;
     @Column(name = "activo")
     private Boolean activo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idArticulo")
-    private List<Kardex> kardexList;
+    private Collection<Kardex> kardexCollection;
     @JoinColumn(name = "id_marca", referencedColumnName = "id_marca")
     @ManyToOne(optional = false)
     private Marca idMarca;
@@ -75,10 +70,9 @@ public class Articulo implements Serializable {
         this.idArticulo = idArticulo;
     }
 
-    public Articulo(String idArticulo, String articulo, double precio) {
+    public Articulo(String idArticulo, String articulo) {
         this.idArticulo = idArticulo;
         this.articulo = articulo;
-        this.precio = precio;
     }
 
     public String getIdArticulo() {
@@ -97,14 +91,6 @@ public class Articulo implements Serializable {
         this.articulo = articulo;
     }
 
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
     public Boolean getActivo() {
         return activo;
     }
@@ -114,12 +100,12 @@ public class Articulo implements Serializable {
     }
 
     @XmlTransient
-    public List<Kardex> getKardexList() {
-        return kardexList;
+    public Collection<Kardex> getKardexCollection() {
+        return kardexCollection;
     }
 
-    public void setKardexList(List<Kardex> kardexList) {
-        this.kardexList = kardexList;
+    public void setKardexCollection(Collection<Kardex> kardexCollection) {
+        this.kardexCollection = kardexCollection;
     }
 
     public Marca getIdMarca() {
@@ -168,7 +154,7 @@ public class Articulo implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Articulo[ idArticulo=" + idArticulo + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Articulo[ idArticulo=" + idArticulo + " ]";
     }
     
 }

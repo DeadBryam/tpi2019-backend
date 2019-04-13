@@ -6,23 +6,23 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AlmacenFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Almacen;
+import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.BodegaFacade;
+import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Bodega;
 
 /**
  *
  * @author arevalo
  */
-public class AlmacenFacadeTest extends AbstractTest<Almacen>{ 
+public class AlmacenFacadeTest extends AbstractTest<Bodega>{ 
 
       @Override
-    protected AbstractFacade<Almacen> getFacade() {
-       return new AlmacenFacade();
+    protected AbstractFacade<Bodega> getFacade() {
+       return new BodegaFacade();
     }
 
     @Override
-    protected Almacen getEntity() {
-        return new Almacen("1");
+    protected Bodega getEntity() {
+        return new Bodega("1");
     }
     
 }
