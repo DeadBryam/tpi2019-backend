@@ -22,7 +22,7 @@ public class KardexFacadeTest extends AbstractTest<Kardex>{
 
     @Override
     protected Kardex getEntity() {
-        return new Kardex(Short.parseShort("1"));
+        return new Kardex(1);
     }
     
 }

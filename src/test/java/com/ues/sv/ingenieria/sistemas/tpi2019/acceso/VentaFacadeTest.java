@@ -22,7 +22,7 @@ public class VentaFacadeTest extends AbstractTest<Venta>{
 
     @Override
     protected Venta getEntity() {
-        return new Venta(Short.parseShort("1"));
+        return new Venta(1);
     }
     
 

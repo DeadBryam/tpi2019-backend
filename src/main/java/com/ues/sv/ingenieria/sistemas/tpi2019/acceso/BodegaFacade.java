@@ -5,7 +5,7 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Almacen;
+import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Bodega;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author bryan
  */
 @Stateless
-public class AlmacenFacade extends AbstractFacade<Almacen> {
+public class BodegaFacade extends AbstractFacade<Bodega> {
 
     @PersistenceContext(unitName = "com.ues.sv.ingenieria.sistemas.tpi2019_inventarioLibreria_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class AlmacenFacade extends AbstractFacade<Almacen> {
         return em;
     }
 
-    public AlmacenFacade() {
-        super(Almacen.class);
+    public BodegaFacade() {
+        super(Bodega.class);
     }
     
 }

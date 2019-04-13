@@ -22,7 +22,7 @@ public class TipoMedidaFacadeTest extends AbstractTest<TipoMedida>{
 
     @Override
     protected TipoMedida getEntity() {
-        return new TipoMedida(Short.parseShort("1"));
+        return new TipoMedida(1);
     }
     
 }

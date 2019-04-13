@@ -22,7 +22,7 @@ public class CompraFacadeTest extends AbstractTest<Compra>{
 
     @Override
     protected Compra getEntity() {
-        return new Compra(Short.parseShort("1"));
+        return new Compra(1);
     }
     
 }

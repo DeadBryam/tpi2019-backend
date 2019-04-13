@@ -6,8 +6,8 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Entity
 @Table(name = "compra")
@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c")
     , @NamedQuery(name = "Compra.findByIdCompra", query = "SELECT c FROM Compra c WHERE c.idCompra = :idCompra")
+    , @NamedQuery(name = "Compra.findByEstadoCompra", query = "SELECT c FROM Compra c WHERE c.estadoCompra = :estadoCompra")
     , @NamedQuery(name = "Compra.findByFecha", query = "SELECT c FROM Compra c WHERE c.fecha = :fecha")})
 public class Compra implements Serializable {
 
@@ -42,7 +43,11 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_compra")
-    private Short idCompra;
+    private Integer idCompra;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "estado_compra")
+    private boolean estadoCompra;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha")
@@ -52,26 +57,35 @@ public class Compra implements Serializable {
     @ManyToOne(optional = false)
     private Distribuidor idDistribuidor;
     @OneToMany(mappedBy = "idCompra")
-    private List<Kardex> kardexList;
+    private Collection<Kardex> kardexCollection;
 
     public Compra() {
     }
 
-    public Compra(Short idCompra) {
+    public Compra(Integer idCompra) {
         this.idCompra = idCompra;
     }
 
-    public Compra(Short idCompra, Date fecha) {
+    public Compra(Integer idCompra, boolean estadoCompra, Date fecha) {
         this.idCompra = idCompra;
+        this.estadoCompra = estadoCompra;
         this.fecha = fecha;
     }
 
-    public Short getIdCompra() {
+    public Integer getIdCompra() {
         return idCompra;
     }
 
-    public void setIdCompra(Short idCompra) {
+    public void setIdCompra(Integer idCompra) {
         this.idCompra = idCompra;
+    }
+
+    public boolean getEstadoCompra() {
+        return estadoCompra;
+    }
+
+    public void setEstadoCompra(boolean estadoCompra) {
+        this.estadoCompra = estadoCompra;
     }
 
     public Date getFecha() {
@@ -91,12 +105,12 @@ public class Compra implements Serializable {
     }
 
     @XmlTransient
-    public List<Kardex> getKardexList() {
-        return kardexList;
+    public Collection<Kardex> getKardexCollection() {
+        return kardexCollection;
     }
 
-    public void setKardexList(List<Kardex> kardexList) {
-        this.kardexList = kardexList;
+    public void setKardexCollection(Collection<Kardex> kardexCollection) {
+        this.kardexCollection = kardexCollection;
     }
 
     @Override
@@ -121,7 +135,7 @@ public class Compra implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Compra[ idCompra=" + idCompra + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Compra[ idCompra=" + idCompra + " ]";
     }
     
 }

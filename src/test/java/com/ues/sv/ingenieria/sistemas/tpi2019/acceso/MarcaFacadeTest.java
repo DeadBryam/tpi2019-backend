@@ -22,7 +22,7 @@ public class MarcaFacadeTest extends AbstractTest<Marca>{
 
     @Override
     protected Marca getEntity() {
-        return new Marca(Short.parseShort("1"));
+        return new Marca(1);
     }
     
 }
