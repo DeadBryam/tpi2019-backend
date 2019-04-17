@@ -1,7 +1,6 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.controlador;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,7 +10,7 @@ import java.util.logging.Logger;
  *
  * @author bryan
  */
-public abstract class AbstractBean<T> implements Serializable {
+public abstract class AbstractBean<T> {
 
     List<T> listaDatos;
 
@@ -29,8 +28,8 @@ public abstract class AbstractBean<T> implements Serializable {
             }
         }
     }
-    
-    public void editar(){
+
+    public void editar() {
         if (getFacade() != null) {
             try {
                 getFacade().edit(getEntity());
@@ -38,11 +37,11 @@ public abstract class AbstractBean<T> implements Serializable {
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             }
-        }        
+        }
     }
 
-    public void eliminar(){
-                if (getFacade() != null) {
+    public void eliminar() {
+        if (getFacade() != null) {
             try {
                 getFacade().remove(getEntity());
                 llenarLista();
@@ -51,14 +50,21 @@ public abstract class AbstractBean<T> implements Serializable {
             }
         }
     }
-    
+
     public void llenarLista() {
-        System.out.println("entro aqui supongo");
         if (getFacade().findAll() != null) {
             listaDatos = getFacade().findAll();
-            System.out.println("REGISTROS EN BASE: "+getFacade().count());
+            System.out.println("REGISTROS EN BASE: " + getFacade().count());
         } else {
             listaDatos = Collections.EMPTY_LIST;
         }
+    }
+
+    public List<T> getListaDatos() {
+        return listaDatos;
+    }
+
+    public void setListaDatos(List<T> listaDatos) {
+        this.listaDatos = listaDatos;
     }
 }

@@ -22,7 +22,7 @@ public class AlmacenFacadeTest extends AbstractTest<Bodega>{
 
     @Override
     protected Bodega getEntity() {
-        return new Bodega("1");
+        return new Bodega("1","APA");
     }
     
 }

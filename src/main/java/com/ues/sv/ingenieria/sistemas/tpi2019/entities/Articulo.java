@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -52,7 +52,7 @@ public class Articulo implements Serializable {
     @Column(name = "activo")
     private Boolean activo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idArticulo")
-    private Collection<Kardex> kardexCollection;
+    private List<Kardex> kardexList;
     @JoinColumn(name = "id_marca", referencedColumnName = "id_marca")
     @ManyToOne(optional = false)
     private Marca idMarca;
@@ -100,12 +100,12 @@ public class Articulo implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Kardex> getKardexCollection() {
-        return kardexCollection;
+    public List<Kardex> getKardexList() {
+        return kardexList;
     }
 
-    public void setKardexCollection(Collection<Kardex> kardexCollection) {
-        this.kardexCollection = kardexCollection;
+    public void setKardexList(List<Kardex> kardexList) {
+        this.kardexList = kardexList;
     }
 
     public Marca getIdMarca() {
@@ -154,7 +154,7 @@ public class Articulo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Articulo[ idArticulo=" + idArticulo + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Articulo[ idArticulo=" + idArticulo + " ]";
     }
     
 }

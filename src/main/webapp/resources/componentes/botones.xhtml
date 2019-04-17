@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="listener" required="true" type="com.ues.sv.ingenieria.sistemas.tpi2019.controlador.AbstractBean"/>
+        <cc:attribute name="update" required="true" type="java.lang.String" />
+        <cc:attribute name="render" required="true" type="java.lang.Boolean"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <div class="container"> 
+            <b:commandButton value="Agregar" class="waves-effect waves-light white-text" rendered="#{!cc.attrs.render}"
+                             actionListener="#{cc.attrs.listener.crear()}" ajax="true" update="#{cc.attrs.update}"
+                             style="margin: 0 3px;background: #0071BD;"/>
+            <b:commandButton value="Editar"  class="waves-effect waves-light black-text" rendered="#{cc.attrs.render}"  
+                             actionListener="#{cc.attrs.listener.editar()}" ajax="true" update="#{cc.attrs.update}"
+                             style="margin: 0 3px;background: #91BED5;"/>
+            <b:commandButton value="Eliminar" class="waves-effect waves-light black-text" rendered="#{cc.attrs.render}"  
+                             actionListener="#{cc.attrs.listener.eliminar()}" ajax="true" update="#{cc.attrs.update}"
+                             style="margin: 0 3px;background: #91BED5;"/>
+            <b:commandButton value="Cancelar" class="modal-close waves-light white-text" 
+                             actionListener="#{cc.attrs.listener.cancelar()}" ajax="true" update="#{cc.attrs.update}"
+                             style="margin: 0 3px;background: #F26202;"/>
+        </div>
+    </cc:implementation>
+</html>

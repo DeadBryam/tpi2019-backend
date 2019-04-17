@@ -6,11 +6,13 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,8 +38,8 @@ public class TipoMedida implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_tipo_medida")
     private Integer idTipoMedida;
     @Basic(optional = false)
@@ -46,7 +48,7 @@ public class TipoMedida implements Serializable {
     @Column(name = "tipo_medida")
     private String tipoMedida;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoMedida")
-    private Collection<Medida> medidaCollection;
+    private List<Medida> medidaList;
 
     public TipoMedida() {
     }
@@ -77,12 +79,12 @@ public class TipoMedida implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Medida> getMedidaCollection() {
-        return medidaCollection;
+    public List<Medida> getMedidaList() {
+        return medidaList;
     }
 
-    public void setMedidaCollection(Collection<Medida> medidaCollection) {
-        this.medidaCollection = medidaCollection;
+    public void setMedidaList(List<Medida> medidaList) {
+        this.medidaList = medidaList;
     }
 
     @Override
@@ -107,7 +109,7 @@ public class TipoMedida implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.TipoMedida[ idTipoMedida=" + idTipoMedida + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoMedida[ idTipoMedida=" + idTipoMedida + " ]";
     }
     
 }

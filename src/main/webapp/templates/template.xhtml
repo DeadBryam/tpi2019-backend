@@ -4,6 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,36 +12,41 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="resources/css/materialize.min.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="resources/css/main.css"/>
+        <link type="text/css" rel="stylesheet" href="resources/css/main.css?1"/>
+        <link rel="shortcut icon" href="./resources/img/favicon.ico" type="image/x-icon"/>
+        <link rel="icon" href="./resources/img/favicon.ico" type="image/x-icon"/>
+        <!--h:outputStylesheet library="customthemes" name="cosmos/bootstrap.css"/-->
+        <!--h:outputStylesheet library="customthemes" name="material/bootstrap-material-design.css"/-->
+
         <title>#{title}</title>
     </h:head>
     <body>
         <header>
-            <nav>
-                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <nav style="background: #121C2C;">
+                <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+                <a class="brand-logo right"><img src="./resources/img/logo.png" style="height: 30px"/></a>
             </nav>
         </header>
         <main>
-            <ul id="slide-out" class="sidenav sidenav-fixed">
+            <ul id="slide-out" class="sidenav">
                 <li><h:link value = "Home" outcome = "index" /></li>
                 <li><h:link value = "Bodega" outcome = "bodega" /></li>
                 <li><h:link value = "Kardex" outcome = "kardex" /></li>
+                <li><h:link value = "Productos" outcome = "productos" /></li>
             </ul>
 
             <ui:insert name="content"/>
         </main>
         <footer class="page-footer">
-            <div class="footer-copyright">
+            <div class="footer-copyright" style="background: #121C2C;">
                 <div class="container center-align">
-                  © 2014 Copyright Text
+                    ©2019 SIDI Copyright 
                 </div>
-                
             </div>
         </footer>
 
         <!--JavaScript at end of body for optimized loading-->
         <script type="text/javascript" src="resources/js/materialize.min.js"></script>
-        <script src="resources/js/main.js"></script>
-
+        <script src="resources/js/main.js?1"></script>
     </body>
 </html>

@@ -6,11 +6,13 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,13 +38,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Venta.findAll", query = "SELECT v FROM Venta v")
     , @NamedQuery(name = "Venta.findByIdVenta", query = "SELECT v FROM Venta v WHERE v.idVenta = :idVenta")
     , @NamedQuery(name = "Venta.findByEstadoVenta", query = "SELECT v FROM Venta v WHERE v.estadoVenta = :estadoVenta")
-    , @NamedQuery(name = "Venta.findByFecha", query = "SELECT v FROM Venta v WHERE v.fecha = :fecha")})
+    , @NamedQuery(name = "Venta.findByFecha", query = "SELECT v FROM Venta v WHERE v.fecha = :fecha")
+    , @NamedQuery(name = "Venta.findByIdSucursal", query = "SELECT v FROM Venta v WHERE v.idSucursal = :idSucursal")})
 public class Venta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_venta")
     private Integer idVenta;
     @Basic(optional = false)
@@ -53,11 +57,14 @@ public class Venta implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Size(max = 12)
+    @Column(name = "id_sucursal")
+    private String idSucursal;
     @JoinColumn(name = "id_caja", referencedColumnName = "id_caja")
     @ManyToOne(optional = false)
     private Caja idCaja;
     @OneToMany(mappedBy = "idVenta")
-    private Collection<Kardex> kardexCollection;
+    private List<Kardex> kardexList;
 
     public Venta() {
     }
@@ -96,6 +103,14 @@ public class Venta implements Serializable {
         this.fecha = fecha;
     }
 
+    public String getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(String idSucursal) {
+        this.idSucursal = idSucursal;
+    }
+
     public Caja getIdCaja() {
         return idCaja;
     }
@@ -105,12 +120,12 @@ public class Venta implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Kardex> getKardexCollection() {
-        return kardexCollection;
+    public List<Kardex> getKardexList() {
+        return kardexList;
     }
 
-    public void setKardexCollection(Collection<Kardex> kardexCollection) {
-        this.kardexCollection = kardexCollection;
+    public void setKardexList(List<Kardex> kardexList) {
+        this.kardexList = kardexList;
     }
 
     @Override
@@ -135,7 +150,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Venta[ idVenta=" + idVenta + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Venta[ idVenta=" + idVenta + " ]";
     }
     
 }

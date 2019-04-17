@@ -4,6 +4,30 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <context-param>
+        <param-name>BootsFaces_THEME</param-name>
+        <param-value>cerulean</param-value>
+    </context-param>
+    <mime-mapping>
+        <extension>woff2</extension>
+        <mime-type>fonts/glyphicons-halflings-regular.woff2</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>fonts/glyphicons-halflings-regular.woff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>eot</extension>
+        <mime-type>fonts/glyphicons-halflings-regular.eot</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>tff</extension>
+        <mime-type>fonts/glyphicons-halflings-regular.tff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>json</extension>
+        <mime-type> jq/ui/i18n/dt/datatable-es.json</mime-type>
+    </mime-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

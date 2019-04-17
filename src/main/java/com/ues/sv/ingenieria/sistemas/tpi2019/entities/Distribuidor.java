@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,8 +39,9 @@ public class Distribuidor implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 12)
     @Column(name = "id_distribuidor")
-    private Integer idDistribuidor;
+    private String idDistribuidor;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -51,26 +52,26 @@ public class Distribuidor implements Serializable {
     @Column(name = "telefono")
     private int telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDistribuidor")
-    private Collection<Compra> compraCollection;
+    private List<Compra> compraList;
 
     public Distribuidor() {
     }
 
-    public Distribuidor(Integer idDistribuidor) {
+    public Distribuidor(String idDistribuidor) {
         this.idDistribuidor = idDistribuidor;
     }
 
-    public Distribuidor(Integer idDistribuidor, String distribuidor, int telefono) {
+    public Distribuidor(String idDistribuidor, String distribuidor, int telefono) {
         this.idDistribuidor = idDistribuidor;
         this.distribuidor = distribuidor;
         this.telefono = telefono;
     }
 
-    public Integer getIdDistribuidor() {
+    public String getIdDistribuidor() {
         return idDistribuidor;
     }
 
-    public void setIdDistribuidor(Integer idDistribuidor) {
+    public void setIdDistribuidor(String idDistribuidor) {
         this.idDistribuidor = idDistribuidor;
     }
 
@@ -91,12 +92,12 @@ public class Distribuidor implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Compra> getCompraCollection() {
-        return compraCollection;
+    public List<Compra> getCompraList() {
+        return compraList;
     }
 
-    public void setCompraCollection(Collection<Compra> compraCollection) {
-        this.compraCollection = compraCollection;
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
     }
 
     @Override
@@ -121,7 +122,7 @@ public class Distribuidor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Distribuidor[ idDistribuidor=" + idDistribuidor + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Distribuidor[ idDistribuidor=" + idDistribuidor + " ]";
     }
     
 }

@@ -6,10 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -136,5 +133,9 @@ public abstract class AbstractFacade<T> {
             throw e;
         }
     }
-
+    
+    public List executeQuery(String query){
+        return getEntityManager().createQuery(query).getResultList();
+    }
+    
 }

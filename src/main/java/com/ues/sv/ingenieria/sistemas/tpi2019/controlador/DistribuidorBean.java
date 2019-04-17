@@ -8,8 +8,6 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.controlador;
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.DistribuidorFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Distribuidor;
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -24,8 +22,9 @@ import javax.inject.Named;
 public class DistribuidorBean extends AbstractBean<Distribuidor> implements Serializable {
 
     @EJB
-    DistribuidorFacade facade;
-    Distribuidor entity;
+    private DistribuidorFacade facade;
+    private Distribuidor distribuidor;
+    private final Distribuidor instance = new Distribuidor();
 
     @PostConstruct
     public void init() {
@@ -33,20 +32,12 @@ public class DistribuidorBean extends AbstractBean<Distribuidor> implements Seri
         System.out.println("PASO MORRO");
     }
 
-    public List<Distribuidor> getListaDatos() {
-        return listaDatos;
-    }
-
-    public void setListaDatos(List<Distribuidor> listaDatos) {
-        this.listaDatos = listaDatos;
-    }
-
     public void setFacade(DistribuidorFacade facade) {
         this.facade = facade;
     }
 
     public void setEntity(Distribuidor entity) {
-        this.entity = entity;
+        this.distribuidor = entity;
     }
 
     @Override
@@ -56,7 +47,8 @@ public class DistribuidorBean extends AbstractBean<Distribuidor> implements Seri
 
     @Override
     public Distribuidor getEntity() {
-        return entity;
+        return distribuidor;
     }
+
 
 }
