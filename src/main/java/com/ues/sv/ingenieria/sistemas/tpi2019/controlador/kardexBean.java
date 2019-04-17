@@ -9,7 +9,6 @@ import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.KardexFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Kardex;
 import java.io.Serializable;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -19,21 +18,20 @@ import javax.inject.Named;
  *
  * @author bryan
  */
-
 @Named
 @ViewScoped
-public class kardexBean extends AbstractBean<Kardex> implements Serializable{
+public class kardexBean extends AbstractBean<Kardex> implements Serializable {
 
     @EJB
-    KardexFacade facade;
-    Kardex entity;
-    
+    private KardexFacade facade;
+    private Kardex entidad;
+    private final Kardex instace = new Kardex();
+
     @PostConstruct
-    public void init(){
+    public void init() {
         llenarLista();
-        System.out.println("AQUI IGUAL MORRO");
     }
-    
+
     @Override
     protected AbstractFacade<Kardex> getFacade() {
         return facade;
@@ -41,15 +39,7 @@ public class kardexBean extends AbstractBean<Kardex> implements Serializable{
 
     @Override
     public Kardex getEntity() {
-        return entity;
+        return entidad;
     }
 
-    public List<Kardex> getListaDatos() {
-        return listaDatos;
-    }
-
-    public void setListaDatos(List<Kardex> listaDatos) {
-        this.listaDatos = listaDatos;
-    }
-    
 }

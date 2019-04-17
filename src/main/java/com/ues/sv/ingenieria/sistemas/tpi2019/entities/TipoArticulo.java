@@ -6,11 +6,13 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,8 +38,8 @@ public class TipoArticulo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_tipo_articulo")
     private Integer idTipoArticulo;
     @Basic(optional = false)
@@ -46,7 +48,7 @@ public class TipoArticulo implements Serializable {
     @Column(name = "tipo_articulo")
     private String tipoArticulo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoArticulo")
-    private Collection<Articulo> articuloCollection;
+    private List<Articulo> articuloList;
 
     public TipoArticulo() {
     }
@@ -77,12 +79,12 @@ public class TipoArticulo implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Articulo> getArticuloCollection() {
-        return articuloCollection;
+    public List<Articulo> getArticuloList() {
+        return articuloList;
     }
 
-    public void setArticuloCollection(Collection<Articulo> articuloCollection) {
-        this.articuloCollection = articuloCollection;
+    public void setArticuloList(List<Articulo> articuloList) {
+        this.articuloList = articuloList;
     }
 
     @Override
@@ -107,7 +109,7 @@ public class TipoArticulo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.TipoArticulo[ idTipoArticulo=" + idTipoArticulo + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoArticulo[ idTipoArticulo=" + idTipoArticulo + " ]";
     }
     
 }

@@ -9,15 +9,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,19 +28,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Bodega.findAll", query = "SELECT b FROM Bodega b")
-    , @NamedQuery(name = "Bodega.findByIdArticulo", query = "SELECT b FROM Bodega b WHERE b.idArticulo = :idArticulo")
+    , @NamedQuery(name = "Bodega.findByIdArticulo", query = "SELECT b FROM Bodega b WHERE b.bodegaPK.idArticulo = :idArticulo")
     , @NamedQuery(name = "Bodega.findByStock", query = "SELECT b FROM Bodega b WHERE b.stock = :stock")
     , @NamedQuery(name = "Bodega.findByPrecio", query = "SELECT b FROM Bodega b WHERE b.precio = :precio")
-    , @NamedQuery(name = "Bodega.findByActivo", query = "SELECT b FROM Bodega b WHERE b.activo = :activo")})
+    , @NamedQuery(name = "Bodega.findByActivo", query = "SELECT b FROM Bodega b WHERE b.activo = :activo")
+    , @NamedQuery(name = "Bodega.findByIdSucursal", query = "SELECT b FROM Bodega b WHERE b.bodegaPK.idSucursal = :idSucursal")})
 public class Bodega implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 12)
-    @Column(name = "id_articulo")
-    private String idArticulo;
+    @EmbeddedId
+    protected BodegaPK bodegaPK;
     @Basic(optional = false)
     @NotNull
     @Column(name = "stock")
@@ -53,29 +49,33 @@ public class Bodega implements Serializable {
     private BigDecimal precio;
     @Column(name = "activo")
     private Boolean activo;
-    @JoinColumn(name = "id_num_bodega", referencedColumnName = "id_num_bodega")
+    @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private NumBodega idNumBodega;
+    private Sucursal sucursal;
 
     public Bodega() {
     }
 
-    public Bodega(String idArticulo) {
-        this.idArticulo = idArticulo;
+    public Bodega(BodegaPK bodegaPK) {
+        this.bodegaPK = bodegaPK;
     }
 
-    public Bodega(String idArticulo, int stock, BigDecimal precio) {
-        this.idArticulo = idArticulo;
+    public Bodega(BodegaPK bodegaPK, int stock, BigDecimal precio) {
+        this.bodegaPK = bodegaPK;
         this.stock = stock;
         this.precio = precio;
     }
 
-    public String getIdArticulo() {
-        return idArticulo;
+    public Bodega(String idArticulo, String idSucursal) {
+        this.bodegaPK = new BodegaPK(idArticulo, idSucursal);
     }
 
-    public void setIdArticulo(String idArticulo) {
-        this.idArticulo = idArticulo;
+    public BodegaPK getBodegaPK() {
+        return bodegaPK;
+    }
+
+    public void setBodegaPK(BodegaPK bodegaPK) {
+        this.bodegaPK = bodegaPK;
     }
 
     public int getStock() {
@@ -102,18 +102,18 @@ public class Bodega implements Serializable {
         this.activo = activo;
     }
 
-    public NumBodega getIdNumBodega() {
-        return idNumBodega;
+    public Sucursal getSucursal() {
+        return sucursal;
     }
 
-    public void setIdNumBodega(NumBodega idNumBodega) {
-        this.idNumBodega = idNumBodega;
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idArticulo != null ? idArticulo.hashCode() : 0);
+        hash += (bodegaPK != null ? bodegaPK.hashCode() : 0);
         return hash;
     }
 
@@ -124,7 +124,7 @@ public class Bodega implements Serializable {
             return false;
         }
         Bodega other = (Bodega) object;
-        if ((this.idArticulo == null && other.idArticulo != null) || (this.idArticulo != null && !this.idArticulo.equals(other.idArticulo))) {
+        if ((this.bodegaPK == null && other.bodegaPK != null) || (this.bodegaPK != null && !this.bodegaPK.equals(other.bodegaPK))) {
             return false;
         }
         return true;
@@ -132,7 +132,7 @@ public class Bodega implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Bodega[ idArticulo=" + idArticulo + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Bodega[ bodegaPK=" + bodegaPK + " ]";
     }
     
 }

@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,7 +42,7 @@ public class Caja implements Serializable {
     @Column(name = "caja")
     private Integer caja;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCaja")
-    private Collection<Venta> ventaCollection;
+    private List<Venta> ventaList;
 
     public Caja() {
     }
@@ -68,12 +68,12 @@ public class Caja implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Venta> getVentaCollection() {
-        return ventaCollection;
+    public List<Venta> getVentaList() {
+        return ventaList;
     }
 
-    public void setVentaCollection(Collection<Venta> ventaCollection) {
-        this.ventaCollection = ventaCollection;
+    public void setVentaList(List<Venta> ventaList) {
+        this.ventaList = ventaList;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class Caja implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.Caja[ idCaja=" + idCaja + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Caja[ idCaja=" + idCaja + " ]";
     }
     
 }

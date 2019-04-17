@@ -5,35 +5,26 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
                 template="/templates/template.xhtml"
                 >
 
-    <ui:param name="title" value="SIDI"/>
+    <ui:param name="title" value="Bodega"/>
 
     <ui:define name="content">
-        <h:dataTable var="data" value="#{kardexBean.listaDatos}">
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.idKardex}
-                </h:column>
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.idArticulo.articulo}
-                </h:column>    
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.cantidad}
-                </h:column>          
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.precioActual}
-                </h:column>   
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.stockActual}
-                </h:column>
-            </h:dataTable>
+        <h:form>
+            <div class="container">
+                <b:dataTable value="#{kardexBean.listaDatos}"
+                             var="item" page-length="3" page-length-menu="2,3,5">
+                    <b:dataTableColumn value="#{item.idArticulo.idArticulo}" />
+                    <b:dataTableColumn value="#{bodegaBean.getArticulo(item.idArticulo.idArticulo).idTipoArticulo.tipoArticulo} 
+                                       #{bodegaBean.getArticulo(item.idArticulo.idArticulo).idMarca.marca}, 
+                                       #{bodegaBean.getArticulo(item.idArticulo.idArticulo).articulo}" label="Articulo"/>
+                    <b:dataTableColumn value="#{item.stockActual}" />
+                    <b:dataTableColumn value="#{item.precioActual}" />
+                </b:dataTable>
+            </div>
+        </h:form>
     </ui:define>
 
 </ui:composition>
-

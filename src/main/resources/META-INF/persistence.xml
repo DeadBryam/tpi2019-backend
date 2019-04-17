@@ -10,7 +10,6 @@
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Kardex</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Marca</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Medida</class>
-    <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.NumBodega</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoArticulo</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoMedida</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.entities.Venta</class>

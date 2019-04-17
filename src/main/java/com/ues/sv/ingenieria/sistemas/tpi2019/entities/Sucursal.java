@@ -6,7 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,21 +26,22 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author deadbryam
  */
 @Entity
-@Table(name = "num_bodega")
+@Table(name = "sucursal")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "NumBodega.findAll", query = "SELECT n FROM NumBodega n")
-    , @NamedQuery(name = "NumBodega.findByIdNumBodega", query = "SELECT n FROM NumBodega n WHERE n.idNumBodega = :idNumBodega")
-    , @NamedQuery(name = "NumBodega.findByUbicacion", query = "SELECT n FROM NumBodega n WHERE n.ubicacion = :ubicacion")
-    , @NamedQuery(name = "NumBodega.findByActivo", query = "SELECT n FROM NumBodega n WHERE n.activo = :activo")})
-public class NumBodega implements Serializable {
+    @NamedQuery(name = "Sucursal.findAll", query = "SELECT s FROM Sucursal s")
+    , @NamedQuery(name = "Sucursal.findByIdSucursal", query = "SELECT s FROM Sucursal s WHERE s.idSucursal = :idSucursal")
+    , @NamedQuery(name = "Sucursal.findByUbicacion", query = "SELECT s FROM Sucursal s WHERE s.ubicacion = :ubicacion")
+    , @NamedQuery(name = "Sucursal.findByActivo", query = "SELECT s FROM Sucursal s WHERE s.activo = :activo")})
+public class Sucursal implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_num_bodega")
-    private Integer idNumBodega;
+    @Size(min = 1, max = 12)
+    @Column(name = "id_sucursal")
+    private String idSucursal;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -50,28 +51,28 @@ public class NumBodega implements Serializable {
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNumBodega")
-    private Collection<Bodega> bodegaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sucursal")
+    private List<Bodega> bodegaList;
 
-    public NumBodega() {
+    public Sucursal() {
     }
 
-    public NumBodega(Integer idNumBodega) {
-        this.idNumBodega = idNumBodega;
+    public Sucursal(String idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
-    public NumBodega(Integer idNumBodega, String ubicacion, boolean activo) {
-        this.idNumBodega = idNumBodega;
+    public Sucursal(String idSucursal, String ubicacion, boolean activo) {
+        this.idSucursal = idSucursal;
         this.ubicacion = ubicacion;
         this.activo = activo;
     }
 
-    public Integer getIdNumBodega() {
-        return idNumBodega;
+    public String getIdSucursal() {
+        return idSucursal;
     }
 
-    public void setIdNumBodega(Integer idNumBodega) {
-        this.idNumBodega = idNumBodega;
+    public void setIdSucursal(String idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
     public String getUbicacion() {
@@ -91,29 +92,29 @@ public class NumBodega implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Bodega> getBodegaCollection() {
-        return bodegaCollection;
+    public List<Bodega> getBodegaList() {
+        return bodegaList;
     }
 
-    public void setBodegaCollection(Collection<Bodega> bodegaCollection) {
-        this.bodegaCollection = bodegaCollection;
+    public void setBodegaList(List<Bodega> bodegaList) {
+        this.bodegaList = bodegaList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idNumBodega != null ? idNumBodega.hashCode() : 0);
+        hash += (idSucursal != null ? idSucursal.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof NumBodega)) {
+        if (!(object instanceof Sucursal)) {
             return false;
         }
-        NumBodega other = (NumBodega) object;
-        if ((this.idNumBodega == null && other.idNumBodega != null) || (this.idNumBodega != null && !this.idNumBodega.equals(other.idNumBodega))) {
+        Sucursal other = (Sucursal) object;
+        if ((this.idSucursal == null && other.idSucursal != null) || (this.idSucursal != null && !this.idSucursal.equals(other.idSucursal))) {
             return false;
         }
         return true;
@@ -121,7 +122,7 @@ public class NumBodega implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.datos.NumBodega[ idNumBodega=" + idNumBodega + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Sucursal[ idSucursal=" + idSucursal + " ]";
     }
     
 }

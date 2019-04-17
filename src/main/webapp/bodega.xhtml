@@ -5,36 +5,36 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
                 template="/templates/template.xhtml"
                 >
 
     <ui:param name="title" value="Bodega"/>
 
     <ui:define name="content">
-        <div class="card">
-            <h:dataTable var="data" value="#{kardexBean.listaDatos}">
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.idKardex}
-                </h:column>
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.idArticulo.articulo}
-                </h:column>    
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.cantidad}
-                </h:column>          
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.precioActual}
-                </h:column>   
-                <h:column>    				
-                    <f:facet name = "header">Name</f:facet>    				
-                        #{data.stockActual}
-                </h:column>
-            </h:dataTable>
-        </div>
+        <h:form>
+            <b:formGroup>
+                <b:selectOneMenu value="asd" colMd="2" required="true" label="Sl" labelColMd="2" class="input-field">
+                    <f:selectItems value="#{bodegaBean.cantidadBodegas}"/>
+                </b:selectOneMenu>
+            </b:formGroup>
+        </h:form>
+
+        <h:form>
+            <div class="container">
+                <b:dataTable value="#{bodegaBean.listaDatos}"
+                             var="item" page-length="5" page-length-menu="5,10,15">
+                    <b:dataTableColumn value="#{item.idArticulo}" />
+                    <b:dataTableColumn value="#{bodegaBean.getArticulo(item.idArticulo).idTipoArticulo.tipoArticulo} 
+                                       #{bodegaBean.getArticulo(item.idArticulo).idMarca.marca}, 
+                                       #{bodegaBean.getArticulo(item.idArticulo).articulo}" label="Articulo"/>
+                    <b:dataTableColumn value="#{item.stock}" />
+                    <b:dataTableColumn value="#{item.precio}" />
+                    <b:dataTableColumn value="#{item.idNumBodega.idNumBodega}" label="Numero bodega"/>
+                    <b:dataTableColumn value="#{item.idNumBodega.ubicacion}" />
+                </b:dataTable>
+            </div>
+        </h:form>
     </ui:define>
 
 </ui:composition>

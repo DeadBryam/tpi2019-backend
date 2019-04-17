@@ -18,6 +18,6 @@ public  class DistribuidorFacadeTest extends AbstractTest<Distribuidor>{
 
     @Override
     protected Distribuidor getEntity() {
-        return new Distribuidor(1);
+        return new Distribuidor("asdas");
     }
 }
