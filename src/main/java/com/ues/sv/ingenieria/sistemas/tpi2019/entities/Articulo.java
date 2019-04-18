@@ -6,9 +6,8 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,12 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Articulo.findAll", query = "SELECT a FROM Articulo a")
     , @NamedQuery(name = "Articulo.findByIdArticulo", query = "SELECT a FROM Articulo a WHERE a.idArticulo = :idArticulo")
     , @NamedQuery(name = "Articulo.findByArticulo", query = "SELECT a FROM Articulo a WHERE a.articulo = :articulo")
-    , @NamedQuery(name = "Articulo.findByActivo", query = "SELECT a FROM Articulo a WHERE a.activo = :activo")})
+    , @NamedQuery(name = "Articulo.findByActivo", query = "SELECT a FROM Articulo a WHERE a.activo = :activo")
+    , @NamedQuery(name = "Articulo.findByPrecio", query = "SELECT a FROM Articulo a WHERE a.precio = :precio")})
 public class Articulo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,8 +49,11 @@ public class Articulo implements Serializable {
     private String articulo;
     @Column(name = "activo")
     private Boolean activo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idArticulo")
-    private List<Kardex> kardexList;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "precio")
+    private BigDecimal precio;
     @JoinColumn(name = "id_marca", referencedColumnName = "id_marca")
     @ManyToOne(optional = false)
     private Marca idMarca;
@@ -70,9 +71,10 @@ public class Articulo implements Serializable {
         this.idArticulo = idArticulo;
     }
 
-    public Articulo(String idArticulo, String articulo) {
+    public Articulo(String idArticulo, String articulo, BigDecimal precio) {
         this.idArticulo = idArticulo;
         this.articulo = articulo;
+        this.precio = precio;
     }
 
     public String getIdArticulo() {
@@ -99,13 +101,12 @@ public class Articulo implements Serializable {
         this.activo = activo;
     }
 
-    @XmlTransient
-    public List<Kardex> getKardexList() {
-        return kardexList;
+    public BigDecimal getPrecio() {
+        return precio;
     }
 
-    public void setKardexList(List<Kardex> kardexList) {
-        this.kardexList = kardexList;
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
     }
 
     public Marca getIdMarca() {

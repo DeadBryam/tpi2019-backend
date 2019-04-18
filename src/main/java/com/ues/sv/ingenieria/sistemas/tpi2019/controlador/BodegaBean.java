@@ -31,21 +31,12 @@ public class BodegaBean extends AbstractBean<Bodega> implements Serializable {
     @EJB
     private ArticuloFacade articuloFacade;
     private Bodega bodega;
-    private Articulo articulo;
-    private final Bodega instance = new Bodega();
+    private Sucursal sucursal;
 
     @PostConstruct
     public void init() {
         llenarLista();
         System.out.println("BODEGA");
-    }
-    
-    public void almacen(){
-        
-    }
-
-    public Articulo getArticulo(String id) {
-        return articuloFacade.findById(id);
     }
 
     @Override
@@ -57,4 +48,29 @@ public class BodegaBean extends AbstractBean<Bodega> implements Serializable {
     public Bodega getEntity() {
         return bodega;
     }
+
+    public void onChange() {
+        if (sucursal != null) {
+            listaDatos = bodegaFacade.bodegaPorSucursal(sucursal.getIdSucursal());
+        }else{
+            llenarLista();
+        }
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public Bodega getBodega() {
+        return bodega;
+    }
+
+    public void setBodega(Bodega bodega) {
+        this.bodega = bodega;
+    }
+
 }

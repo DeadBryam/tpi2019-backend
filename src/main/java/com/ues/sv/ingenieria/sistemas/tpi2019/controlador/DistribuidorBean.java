@@ -24,12 +24,10 @@ public class DistribuidorBean extends AbstractBean<Distribuidor> implements Seri
     @EJB
     private DistribuidorFacade facade;
     private Distribuidor distribuidor;
-    private final Distribuidor instance = new Distribuidor();
 
     @PostConstruct
     public void init() {
         llenarLista();
-        System.out.println("PASO MORRO");
     }
 
     public void setFacade(DistribuidorFacade facade) {

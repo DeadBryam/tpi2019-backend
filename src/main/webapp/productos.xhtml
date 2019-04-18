@@ -5,7 +5,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
-                template="/templates/template.xhtml"
+                template="/WEB-INF/templates/template.xhtml"
                 xmlns:cc = "http://java.sun.com/jsf/composite/componentes"
                 >
 
@@ -16,7 +16,6 @@
             <b:row>
                 <b:column span="10">
                     <b:form id="productosformData">
-
                         <b:dataTable value="#{articuloBean.listaDatos}"
                                      var="item" page-length="3" page-length-menu="2,3,5"
                                      select="true" onselect="ajax:articuloBean.onSelect(item);"
@@ -27,46 +26,52 @@
                             <b:dataTableColumn value="#{item.articulo}" />
                             <b:dataTableColumn value="#{item.idMedida.medida} #{item.idMedida.idTipoMedida.tipoMedida}" label="Medida"/>
                             <b:dataTableColumn value="#{item.activo}" />
+                            <b:dataTableColumn value="#{item.precio}" />
                         </b:dataTable>
                     </b:form>
                 </b:column>
                 <b:column span="2">
                     <div class="container" style="width: 100vw;display: inline;">
-                        <a class="waves-effect waves-light btn modal-trigger white-text" style="width: 100%;margin: 6px 0;background: #4F9596;" href="#marca">Marcas</a>
-                        <a class="waves-effect waves-light btn modal-trigger white-text" style="width: 100%;margin: 6px 0;background: #4F9596;" href="#tipoArticulo">TipoArticulo</a>
-                        <a class="waves-effect waves-light btn modal-trigger white-text" style="width: 100%;margin: 6px 0;background: #4F9596;" href="#tipoMedida">TipoMedida</a>
-                        <a class="waves-effect waves-light btn modal-trigger white-text" style="width: 100%;margin: 6px 0;background: #4F9596;" href="#medida">medida</a>
+                        <a class="waves-effect waves-light btn modal-trigger white-text hoverable" style="width: 100%;margin: 6px 0;background: #4F9596;" href="#marca">Marcas</a>
+                        <a class="waves-effect waves-light btn modal-trigger white-text hoverable" style="width: 100%;margin: 6px 0;background: #4F9596;" href="#tipoArticulo">TipoArticulo</a>
+                        <a class="waves-effect waves-light btn modal-trigger white-text hoverable" style="width: 100%;margin: 6px 0;background: #4F9596;" href="#tipoMedida">TipoMedida</a>
+                        <a class="waves-effect waves-light btn modal-trigger white-text hoverable" style="width: 100%;margin: 6px 0;background: #4F9596;" href="#medida">medida</a>
                     </div>
                 </b:column>
             </b:row>
             <b:form id="productosbotones">
                 <b:row>
-                    <b:column span="4" offset="2">
-                        <b:inputText  placeholder="Id articulo" value="#{articuloBean.articulo.idArticulo}"/>
-                        <b:selectOneMenu value="#{articuloBean.articulo.idMedida}" ajax="true" label="Medida">
+                    <b:column span="2" offset="3">
+                        <b:inputText  placeholder="Id articulo" value="#{articuloBean.articulo.idArticulo}" label="Id articulo" required="true"/>
+                        <b:selectOneMenu value="#{articuloBean.articulo.idMedida}" ajax="true" label="Medida" required="true" autoUpdate="true">
                             <f:selectItem itemLabel="Seleccione medida" itemValue=""/>
                             <f:selectItems value="#{medidaBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.medida} #{c.idTipoMedida.tipoMedida}"/>
                         </b:selectOneMenu>                        
-                        <b:selectOneMenu value="#{articuloBean.articulo.activo}" ajax="true" label="Activo">
+                    </b:column>
+                    <b:column span="2">
+                        <b:inputText  placeholder="Articulo" value="#{articuloBean.articulo.articulo}" label="Articulo" required="true"/>
+                        <b:selectOneMenu value="#{articuloBean.articulo.idMarca}" ajax="true" label="Marca" required="true" autoUpdate="true">
+                            <f:selectItem itemLabel="Seleccione marca" itemValue=""/>
+                            <f:selectItems value="#{marcaBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.marca}"/>
+                        </b:selectOneMenu>
+                        <b:selectOneMenu value="#{articuloBean.articulo.activo}" ajax="true" label="Activo" required="true" autoUpdate="true">
                             <f:selectItem itemLabel="Activo" itemValue="true"/>
                             <f:selectItem itemLabel="No activo" itemValue="false"/>
                         </b:selectOneMenu>
                     </b:column>
-                    <b:column span="4">
-                        <b:inputText  placeholder="Articulo" value="#{articuloBean.articulo.articulo}"/>
-                        <b:selectOneMenu value="#{articuloBean.articulo.idMarca}" ajax="true" label="Marca">
-                            <f:selectItem itemLabel="Seleccione marca" itemValue=""/>
-                            <f:selectItems value="#{marcaBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.marca}"/>
-                        </b:selectOneMenu>
-                        <b:selectOneMenu value="#{articuloBean.articulo.idTipoArticulo}" ajax="true" label="Tipo articulo">
+                    <b:column span="2">
+                        <b:inputText  placeholder="Precio" value="#{articuloBean.articulo.precio}" label="Precio" required="true"/>
+                        <b:selectOneMenu value="#{articuloBean.articulo.idTipoArticulo}" ajax="true" label="Tipo articulo" required="true" autoUpdate="true">
                             <f:selectItem itemLabel="Seleccione tipo producto" itemValue=""/>
                             <f:selectItems value="#{tipoArticuloBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.tipoArticulo}"/>
                         </b:selectOneMenu>
                     </b:column>
                 </b:row>
                 <b:row>
-                    <b:column span="6" offset="3">
-                        <cc:botones listener="#{articuloBean}" render="#{articuloBean.botonEdit}" update=":productosformData :productosbotones"/>
+                    <b:column span="12">
+                        <div class="container center-align" style="width: 100%;">
+                            <cc:botones listener="#{articuloBean}" render="#{articuloBean.botonEdit}" update=":productosformData :productosbotones"/>
+                        </div> 
                     </b:column>
                 </b:row>
             </b:form>

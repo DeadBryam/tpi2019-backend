@@ -5,18 +5,17 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Bodega;
-import java.util.List;
+import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Sucursal;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author bryan
+ * @author deadbryam
  */
 @Stateless
-public class BodegaFacade extends AbstractFacade<Bodega> {
+public class SucursalFacade extends AbstractFacade<Sucursal> {
 
     @PersistenceContext(unitName = "com.ues.sv.ingenieria.sistemas.tpi2019_inventarioLibreria_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -26,11 +25,8 @@ public class BodegaFacade extends AbstractFacade<Bodega> {
         return em;
     }
 
-    public BodegaFacade() {
-        super(Bodega.class);
+    public SucursalFacade() {
+        super(Sucursal.class);
     }
     
-    public List<Bodega> bodegaPorSucursal(String sucursal){
-        return executeQuery("SELECT b FROM Bodega b WHERE b.sucursal.idSucursal = :sucursal").setParameter("sucursal", sucursal).getResultList();
-    }
 }

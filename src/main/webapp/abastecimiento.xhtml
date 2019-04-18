@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="WEB-INF/templates/template.xhtml"
+                xmlns:cc = "http://java.sun.com/jsf/composite/componentes"
+                >
+
+    <ui:param name="title" value="Abastecimiento"/>
+
+    <ui:define name="content">
+        <div class="container" style="width: 100vw;margin-top: 30px;">
+            <b:row>
+                <b:column span="3">
+                    <b:form id="formCompra">
+                        COMPRA
+                        <b:selectOneMenu value="#{abastecimientoBean.compra.idDistribuidor}" label="Distribuidor" >
+                            <f:selectItem itemLabel="Seleccione distribuidor" itemValue=""/>
+                            <f:selectItems value="#{distribuidorBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.distribuidor}"/>
+                        </b:selectOneMenu>
+                        <b:selectOneMenu value="#{abastecimientoBean.compra.idSucursal}" label="Sucursal" >
+                            <f:selectItem itemLabel="Seleccione sucursal" itemValue=""/>
+                            <f:selectItems value="#{sucursalBean.listaDatos}" var="c" itemValue="#{c.idSucursal}" itemLabel="#{c.ubicacion}"/>
+                        </b:selectOneMenu>
+                        <b:selectOneMenu value="#{abastecimientoBean.compra.estadoCompra}" label="Estado">
+                            <f:selectItem itemLabel="Seleccione estado" itemValue=""/>
+                            <f:selectItem itemLabel="Comprado" itemValue="true"/>
+                            <f:selectItem itemLabel="Pedido" itemValue="false"/>
+                        </b:selectOneMenu>
+                        <b:commandButton class="waves-effect waves-light btn white-text hoverable"
+                                         style="width: 100%;margin: 6px 0;background: #4F9596;" update=":formAbastecimiento :formCompra"
+                                         actionListener="#{abastecimientoBean.crear()}" value="Abastecer"/>
+                    </b:form>
+                </b:column>
+                <b:column span="9">
+                    <b:form id="formAbastecimiento">
+                        <b:dataTable value="#{abastecimientoBean.abastecimientoList}"
+                                     var="item" page-length="3" page-length-menu="2,3,5"
+                                     select="true" onselect="ajax:abastecimientoBean.onSelectKardex(item);"
+                                     ondeselect="ajax:abastecimientoBean.onDeselectKardex();" update=":facturacionbotones addProductoCompracc:formData addProductoCompracc:botones">
+                            <b:dataTableColumn value="#{articuloBean.articuloCompleto(item.idArticulo.idArticulo)}" label="Articulo"/>
+                            <b:dataTableColumn value="#{item.cantidad}" />
+                            <b:dataTableColumn value="#{item.precioActual}" />
+                        </b:dataTable>
+                    </b:form>
+                </b:column>
+            </b:row>
+            <b:form id="facturacionbotones">
+                <b:row rendered="#{!abastecimientoBean.btnEdit}">
+                    <a class="waves-effect waves-light btn modal-trigger white-text hoverable"
+                       style="width: 100%;margin: 6px 0;background: #4F9596;" href="#addProductoCompra">Agregar producto</a>
+                </b:row>
+                <b:row rendered="#{abastecimientoBean.btnEdit}">
+                    <b:commandButton class="waves-effect waves-light btn modal-trigger white-text hoverable"
+                                     style="width: 100%;margin: 6px 0;background: #4F9596;"
+                                     actionListener="#{abastecimientoBean.eliminarFacturacion()}" value="Eliminar"/>
+                </b:row>
+            </b:form>
+        </div>
+
+        <div id="addProductoCompra" class="modal">
+            <cc:addProductosCompra id="addProductoCompracc"/>
+        </div>
+    </ui:define>
+</ui:composition>

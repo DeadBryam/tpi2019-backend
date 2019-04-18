@@ -29,4 +29,8 @@ public class ArticuloFacade extends AbstractFacade<Articulo> {
         super(Articulo.class);
     }
     
+    public String getArticuloCompleto(String id){
+        return executeQuery("SELECT CONCAT(m.idTipoArticulo.tipoArticulo, \" \", m.idMarca.marca, \", \", m.articulo ) FROM Articulo m WHERE m.idArticulo = '"+id+"'")
+                .getResultList().get(0).toString();
+    }
 }

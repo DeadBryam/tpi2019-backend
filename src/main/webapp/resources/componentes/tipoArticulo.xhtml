@@ -29,7 +29,7 @@
             <b:column span="4">
                 <b:form id="botones">
                     <div class="container" style="width: 90%;padding-top: 30px;">
-                        <b:inputText  placeholder="Tipo articulo" value="#{tipoArticuloBean.tipoArticulo.tipoArticulo}"/>
+                        <b:inputText  placeholder="Tipo articulo" value="#{tipoArticuloBean.tipoArticulo.tipoArticulo}" label="Tipo articulo" required="true"/>
                         <cc:botones update="tipoArticulocc:botones tipoArticulocc:formData" listener="#{tipoArticuloBean}" render="#{tipoArticuloBean.botonEdit}"/>
                     </div>
                 </b:form>

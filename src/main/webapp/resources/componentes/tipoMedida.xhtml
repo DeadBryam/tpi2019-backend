@@ -30,7 +30,7 @@
             <b:column span="4">
                 <b:form id="botones">
                     <div class="container" style="width: 90%;padding-top: 30px;">
-                        <b:inputText placeholder="Tipo medida" value="#{tipoMedidaBean.tipoMedida.tipoMedida}"/>
+                        <b:inputText placeholder="Tipo medida" value="#{tipoMedidaBean.tipoMedida.tipoMedida}" label="Tipo medida" required="true"/>
                         <cc:botones update="tipoMedidacc:botones tipoMedidacc:formData" listener="#{tipoMedidaBean}" render="#{tipoMedidaBean.botonEdit}"/>
                     </div>
                 </b:form>

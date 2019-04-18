@@ -6,19 +6,16 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,16 +36,22 @@ public class Caja implements Serializable {
     @NotNull
     @Column(name = "id_caja")
     private Integer idCaja;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "caja")
-    private Integer caja;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCaja")
-    private List<Venta> ventaList;
+    private String caja;
 
     public Caja() {
     }
 
     public Caja(Integer idCaja) {
         this.idCaja = idCaja;
+    }
+
+    public Caja(Integer idCaja, String caja) {
+        this.idCaja = idCaja;
+        this.caja = caja;
     }
 
     public Integer getIdCaja() {
@@ -59,21 +62,12 @@ public class Caja implements Serializable {
         this.idCaja = idCaja;
     }
 
-    public Integer getCaja() {
+    public String getCaja() {
         return caja;
     }
 
-    public void setCaja(Integer caja) {
+    public void setCaja(String caja) {
         this.caja = caja;
-    }
-
-    @XmlTransient
-    public List<Venta> getVentaList() {
-        return ventaList;
-    }
-
-    public void setVentaList(List<Venta> ventaList) {
-        this.ventaList = ventaList;
     }
 
     @Override

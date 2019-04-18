@@ -23,23 +23,78 @@ import javax.inject.Named;
 public class kardexBean extends AbstractBean<Kardex> implements Serializable {
 
     @EJB
-    private KardexFacade facade;
-    private Kardex entidad;
-    private final Kardex instace = new Kardex();
+    private KardexFacade kardexFacade;
+    private Kardex kardex;
+    private boolean botonEdit = false;
 
     @PostConstruct
     public void init() {
         llenarLista();
     }
 
+    public void onSelect(Kardex select) {
+        setBotonEdit(true);
+        kardex = select;
+    }
+
+    public void onDeselect() {
+        setBotonEdit(false);
+        limpiar();
+    }
+
+    public void cancelar() {
+        onDeselect();
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Overrrides">
     @Override
     protected AbstractFacade<Kardex> getFacade() {
-        return facade;
+        return kardexFacade;
     }
 
     @Override
     public Kardex getEntity() {
-        return entidad;
+        return kardex;
     }
 
+    @Override
+    public void crear() {
+        super.crear();
+        onDeselect();
+    }
+
+    private void limpiar() {
+        kardex = new Kardex();
+    }
+
+    @Override
+    public void editar() {
+        super.editar();
+        onDeselect();
+    }
+
+    @Override
+    public void eliminar() {
+        super.eliminar();
+        onDeselect();
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Getters y Setters">
+    public boolean getBotonEdit() {
+        return botonEdit;
+    }
+
+    public void setBotonEdit(boolean botonEdit) {
+        this.botonEdit = botonEdit;
+    }
+
+    public Kardex getKardex() {
+        return kardex;
+    }
+
+    public void setKardex(Kardex kardex) {
+        this.kardex = kardex;
+    }
+    // </editor-fold>
 }

@@ -4,7 +4,6 @@ body {
     flex-direction: column;
     font-family: monospace;
     font-style: normal;
-    background: #F7EDD2;
 }
 
 main {
@@ -16,6 +15,10 @@ main {
 }
 
 .modal {
-
    width: 90%;
+}
+
+label{
+    font-size: 1.4rem;
+    color: black;
 }

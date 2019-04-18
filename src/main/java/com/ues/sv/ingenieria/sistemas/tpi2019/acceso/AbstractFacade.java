@@ -7,6 +7,7 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -134,8 +135,8 @@ public abstract class AbstractFacade<T> {
         }
     }
     
-    public List executeQuery(String query){
-        return getEntityManager().createQuery(query).getResultList();
+    public Query executeQuery(String query){
+        return getEntityManager().createQuery(query);
     }
     
 }
