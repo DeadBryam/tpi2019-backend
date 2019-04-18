@@ -3,8 +3,6 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns = "http://www.w3.org/1999/xhtml"   
-      xmlns:h = "http://java.sun.com/jsf/html"
-      xmlns:f = "http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui = "http://java.sun.com/jsf/composite"
       xmlns:cc = "http://java.sun.com/jsf/composite/componentes">
@@ -30,7 +28,7 @@
             <b:column span="4">
                 <b:form id="botones">
                     <div class="container" style="width: 90%;padding-top: 30px;">
-                        <b:inputText placeholder="Marca" value="#{marcaBean.marca.marca}"/>
+                        <b:inputText placeholder="Marca" value="#{marcaBean.marca.marca}" required="true" label="Marca"/>
                         <cc:botones update="marcacc:botones marcacc:formData" listener="#{marcaBean}" render="#{marcaBean.botonEdit}"/>
                     </div>
                 </b:form>

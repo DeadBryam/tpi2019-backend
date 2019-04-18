@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui = "http://java.sun.com/jsf/composite"
+      xmlns:cc = "http://java.sun.com/jsf/composite/componentes">
+
+    <ui:interface>
+    </ui:interface>
+
+    <ui:implementation>
+        <b:row style="margin: 10px;">
+            <b:column span="10">
+                <b:form id="formData">
+                    <b:dataTable value="#{articuloBean.listaDatos}"
+                                 var="item" page-length="7" page-length-menu="7,10"
+                                 select="true" onselect="ajax:abastecimientoBean.onSelectArticulo(item);"
+                                 ondeselect="ajax:abastecimientoBean.onDeselectArticulo();">
+                        <b:dataTableColumn value="#{item.idArticulo}" />
+                        <b:dataTableColumn value="#{abastecimientoBean.articuloCompleto(item.idArticulo)}" />
+                    </b:dataTable>
+                </b:form>
+            </b:column>
+            <b:column span="2">
+                <b:form id="botones">
+                    <b:inputText placeholder="Cantidad" value="#{abastecimientoBean.kardex.cantidad}" required="true" label="Cantidad"/>
+                    <b:inputText placeholder="Precio" value="#{abastecimientoBean.kardex.precioActual}" required="true" label="Precio"/>
+                    <b:commandButton value="Agregar" class="waves-effect waves-light white-text" 
+                                     actionListener="#{abastecimientoBean.add()}" ajax="true" update=":formAbastecimiento :addProductoCompracc:formData :addProductoCompracc:botones"
+                                     style="margin: 5px 0;background: #0071BD;width: 100%;"/>
+                    <b:commandButton value="Cancelar" class="modal-close waves-light white-text" 
+                                     ajax="true"
+                                     style="margin: 5px 0;background: #F26202;width: 100%;"/>
+                </b:form>
+            </b:column>
+        </b:row>
+    </ui:implementation>
+</html>

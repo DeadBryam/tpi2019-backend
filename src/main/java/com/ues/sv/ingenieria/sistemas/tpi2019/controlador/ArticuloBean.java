@@ -18,11 +18,10 @@ import javax.inject.Named;
  *
  * @author deadbryam
  */
-
 @Named
 @ViewScoped
-public class ArticuloBean extends AbstractBean<Articulo> implements Serializable{
-    
+public class ArticuloBean extends AbstractBean<Articulo> implements Serializable {
+
     @EJB
     private ArticuloFacade articuloFacade;
     private Articulo articulo;
@@ -34,6 +33,13 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
         articulo = new Articulo();
     }
 
+    public String articuloCompleto(String id) {
+        if (id.isEmpty() || id == null) {
+            return "";
+        }
+        return articuloFacade.getArticuloCompleto(id);
+    }
+
     public void onSelect(Articulo select) {
         setBotonEdit(true);
         articulo = select;
@@ -43,7 +49,7 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
         setBotonEdit(false);
         limpiar();
     }
-    
+
     @Override
     public void crear() {
         super.crear();

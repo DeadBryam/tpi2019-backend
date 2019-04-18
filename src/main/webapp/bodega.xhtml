@@ -4,37 +4,38 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui"
                 xmlns:b="http://bootsfaces.net/ui"
-                template="/templates/template.xhtml"
+                template="WEB-INF//templates/template.xhtml"
                 >
 
     <ui:param name="title" value="Bodega"/>
 
     <ui:define name="content">
-        <h:form>
-            <b:formGroup>
-                <b:selectOneMenu value="asd" colMd="2" required="true" label="Sl" labelColMd="2" class="input-field">
-                    <f:selectItems value="#{bodegaBean.cantidadBodegas}"/>
-                </b:selectOneMenu>
-            </b:formGroup>
-        </h:form>
-
-        <h:form>
-            <div class="container">
-                <b:dataTable value="#{bodegaBean.listaDatos}"
-                             var="item" page-length="5" page-length-menu="5,10,15">
-                    <b:dataTableColumn value="#{item.idArticulo}" />
-                    <b:dataTableColumn value="#{bodegaBean.getArticulo(item.idArticulo).idTipoArticulo.tipoArticulo} 
-                                       #{bodegaBean.getArticulo(item.idArticulo).idMarca.marca}, 
-                                       #{bodegaBean.getArticulo(item.idArticulo).articulo}" label="Articulo"/>
-                    <b:dataTableColumn value="#{item.stock}" />
-                    <b:dataTableColumn value="#{item.precio}" />
-                    <b:dataTableColumn value="#{item.idNumBodega.idNumBodega}" label="Numero bodega"/>
-                    <b:dataTableColumn value="#{item.idNumBodega.ubicacion}" />
-                </b:dataTable>
-            </div>
-        </h:form>
+        <b:row style="margin: 10px;">
+            <b:column span="2">
+                <h:form>
+                    <b:formGroup>
+                        <b:selectOneMenu value="#{bodegaBean.sucursal}" label="Sucursal" ajax="true" onchange="ajax:bodegaBean.onChange()"
+                                         update=":formDataBodega">
+                            <f:selectItem itemLabel="Todas" itemValue=""/>
+                            <f:selectItems value="#{sucursalBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.ubicacion}"/>
+                        </b:selectOneMenu>
+                    </b:formGroup>
+                </h:form>
+            </b:column>
+            <b:column span="10">
+                <h:form id="formDataBodega">
+                    <b:dataTable value="#{bodegaBean.listaDatos}"
+                                 var="item" page-length="5" page-length-menu="5,8,11">
+                        <b:dataTableColumn value="#{item.bodegaPK.idArticulo}" />
+                        <b:dataTableColumn value="#{articuloBean.articuloCompleto(item.bodegaPK.idArticulo)}" />
+                        <b:dataTableColumn value="#{item.stock}" />
+                        <b:dataTableColumn value="#{item.precio}" />
+                        <b:dataTableColumn value="#{item.sucursal.ubicacion}" />
+                    </b:dataTable>
+                </h:form>
+            </b:column>
+        </b:row>
     </ui:define>
 
 </ui:composition>

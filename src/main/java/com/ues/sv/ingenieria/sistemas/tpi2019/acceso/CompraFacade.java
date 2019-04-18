@@ -6,6 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Compra;
+import java.text.SimpleDateFormat;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +17,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CompraFacade extends AbstractFacade<Compra> {
-
+    
     @PersistenceContext(unitName = "com.ues.sv.ingenieria.sistemas.tpi2019_inventarioLibreria_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -28,5 +29,10 @@ public class CompraFacade extends AbstractFacade<Compra> {
     public CompraFacade() {
         super(Compra.class);
     }
-    
+
+    public Compra crear(Compra entity){
+        create(entity);
+        em.flush();
+        return entity;
+    }
 }
