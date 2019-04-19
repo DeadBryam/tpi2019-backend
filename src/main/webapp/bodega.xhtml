@@ -13,15 +13,13 @@
     <ui:define name="content">
         <b:row style="margin: 10px;">
             <b:column span="2">
-                <h:form>
-                    <b:formGroup>
-                        <b:selectOneMenu value="#{bodegaBean.sucursal}" label="Sucursal" ajax="true" onchange="ajax:bodegaBean.onChange()"
-                                         update=":formDataBodega">
-                            <f:selectItem itemLabel="Todas" itemValue=""/>
-                            <f:selectItems value="#{sucursalBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.ubicacion}"/>
-                        </b:selectOneMenu>
-                    </b:formGroup>
-                </h:form>
+                <b:form>
+                    <b:selectOneMenu value="#{bodegaBean.sucursal}" label="Sucursal" ajax="true" onchange="ajax:bodegaBean.onChange()"
+                                     update=":formDataBodega">
+                        <f:selectItem itemLabel="Todas" itemValue=""/>
+                        <f:selectItems value="#{sucursalBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.ubicacion}"/>
+                    </b:selectOneMenu>
+                </b:form>
             </b:column>
             <b:column span="10">
                 <h:form id="formDataBodega">
