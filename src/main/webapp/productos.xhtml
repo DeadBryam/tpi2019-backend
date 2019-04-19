@@ -41,14 +41,18 @@
             </b:row>
             <b:form id="productosbotones">
                 <b:row>
-                    <b:column span="2" offset="3">
+                    <b:column span="3" offset="3">
                         <b:inputText  placeholder="Id articulo" value="#{articuloBean.articulo.idArticulo}" label="Id articulo" required="true"/>
                         <b:selectOneMenu value="#{articuloBean.articulo.idMedida}" ajax="true" label="Medida" required="true" autoUpdate="true">
                             <f:selectItem itemLabel="Seleccione medida" itemValue=""/>
                             <f:selectItems value="#{medidaBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.medida} #{c.idTipoMedida.tipoMedida}"/>
-                        </b:selectOneMenu>                        
+                        </b:selectOneMenu>
+                        <b:selectOneMenu value="#{articuloBean.articulo.idTipoArticulo}" ajax="true" label="Tipo articulo" required="true" autoUpdate="true">
+                            <f:selectItem itemLabel="Seleccione tipo producto" itemValue=""/>
+                            <f:selectItems value="#{tipoArticuloBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.tipoArticulo}"/>
+                        </b:selectOneMenu>
                     </b:column>
-                    <b:column span="2">
+                    <b:column span="3">
                         <b:inputText  placeholder="Articulo" value="#{articuloBean.articulo.articulo}" label="Articulo" required="true"/>
                         <b:selectOneMenu value="#{articuloBean.articulo.idMarca}" ajax="true" label="Marca" required="true" autoUpdate="true">
                             <f:selectItem itemLabel="Seleccione marca" itemValue=""/>
@@ -57,13 +61,6 @@
                         <b:selectOneMenu value="#{articuloBean.articulo.activo}" ajax="true" label="Activo" required="true" autoUpdate="true">
                             <f:selectItem itemLabel="Activo" itemValue="true"/>
                             <f:selectItem itemLabel="No activo" itemValue="false"/>
-                        </b:selectOneMenu>
-                    </b:column>
-                    <b:column span="2">
-                        <b:inputText  placeholder="Precio" value="#{articuloBean.articulo.precio}" label="Precio" required="true"/>
-                        <b:selectOneMenu value="#{articuloBean.articulo.idTipoArticulo}" ajax="true" label="Tipo articulo" required="true" autoUpdate="true">
-                            <f:selectItem itemLabel="Seleccione tipo producto" itemValue=""/>
-                            <f:selectItems value="#{tipoArticuloBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.tipoArticulo}"/>
                         </b:selectOneMenu>
                     </b:column>
                 </b:row>

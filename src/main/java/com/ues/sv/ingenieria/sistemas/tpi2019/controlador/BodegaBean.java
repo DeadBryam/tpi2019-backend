@@ -50,6 +50,7 @@ public class BodegaBean extends AbstractBean<Bodega> implements Serializable {
     }
 
     public void onChange() {
+        System.out.println("HOLA");
         if (sucursal != null) {
             listaDatos = bodegaFacade.bodegaPorSucursal(sucursal.getIdSucursal());
         }else{

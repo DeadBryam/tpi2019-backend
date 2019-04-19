@@ -6,6 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Kardex;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,12 @@ public class KardexFacade extends AbstractFacade<Kardex> {
 
     public KardexFacade() {
         super(Kardex.class);
+    }
+    
+    public List<Kardex> filtrarKardex(String tipo, String sucursal, boolean estado){
+        return executeQuery("SELECT k FROM Kardex k WHERE k.id"+tipo
+                +" IS NOT NULL and k.id"+tipo+".idSucursal LIKE '"+sucursal+"%' and k.id"+tipo+".estado"+tipo+" = "+estado)
+                .getResultList();
     }
     
 }

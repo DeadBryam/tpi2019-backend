@@ -9,6 +9,7 @@ import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.ArticuloFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Articulo;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -32,7 +33,7 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
         llenarLista();
         articulo = new Articulo();
     }
-
+    
     public String articuloCompleto(String id) {
         if (id.isEmpty() || id == null) {
             return "";
@@ -52,6 +53,7 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
 
     @Override
     public void crear() {
+        articulo.setPrecio(BigDecimal.ZERO);
         super.crear();
         onDeselect();
     }

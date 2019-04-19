@@ -15,16 +15,20 @@
         <div class="container" style="width: 100vw;margin-top: 30px;">
             <b:row>
                 <b:column span="3">
+                    VENTA
+                    <b:form>
+                        <b:selectOneMenu value="#{facturacionBean.venta.idSucursal}" label="Sucursal" ajax="true" onchange="ajax:facturacionBean.onChange()"
+                                         update=":addProductocc:formData">
+                            <f:selectItem itemLabel="Seleccione sucursal" itemValue=""/>
+                            <f:selectItems value="#{sucursalBean.listaDatos}" var="c" itemValue="#{c.idSucursal}" itemLabel="#{c.ubicacion}"/>
+                        </b:selectOneMenu>
+                    </b:form>
                     <b:form id="formVenta">
-                        VENTA
                         <b:selectOneMenu value="#{facturacionBean.venta.idCaja}" label="Caja" >
                             <f:selectItem itemLabel="Seleccione caja" itemValue=""/>
                             <f:selectItems value="#{cajaBean.listaDatos}" var="c" itemValue="#{c}" itemLabel="#{c.caja}"/>
                         </b:selectOneMenu>
-                        <b:selectOneMenu value="#{facturacionBean.venta.idSucursal}" label="Distribuidor" >
-                            <f:selectItem itemLabel="Seleccione caja" itemValue=""/>
-                            <f:selectItems value="#{sucursalBean.listaDatos}" var="c" itemValue="#{c.idSucursal}" itemLabel="#{c.ubicacion}"/>
-                        </b:selectOneMenu>
+
                         <b:selectOneMenu value="#{facturacionBean.venta.estadoVenta}" label="Estado">
                             <f:selectItem itemLabel="Seleccione estado" itemValue=""/>
                             <f:selectItem itemLabel="Vendido" itemValue="true"/>
@@ -32,8 +36,9 @@
                         </b:selectOneMenu>
                         <b:commandButton class="waves-effect waves-light btn white-text hoverable"
                                          style="width: 100%;margin: 6px 0;background: #4F9596;" update=":formFacturacion :formVenta"
-                                         actionListener="#{abastecimientoBean.crear()}" value="Abastecer"/>
+                                         actionListener="#{facturacionBean.crear()}" value="Abastecer"/>
                     </b:form>
+
                 </b:column>
                 <b:column span="9">
                     <b:form id="formFacturacion">
@@ -51,7 +56,7 @@
             </b:row>
             <b:form id="facturacionbotones">
                 <b:row rendered="#{!facturacionBean.btnEdit}">
-                    <a class="waves-effect waves-light btn modal-trigger white-text hoverable"
+                    <a class="waves-effect waves-light btn modal-trigger white-text hoverable" onclick="ajax:facturacionBean.onChange()"
                        style="width: 100%;margin: 6px 0;background: #4F9596;" href="#addProducto">Agregar producto</a>
                 </b:row>
                 <b:row rendered="#{facturacionBean.btnEdit}">
