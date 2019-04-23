@@ -23,7 +23,7 @@
             <b:commandButton value="Eliminar" class="waves-effect waves-light white-text" rendered="#{cc.attrs.render}"  
                              actionListener="#{cc.attrs.listener.eliminar()}" ajax="true" update="#{cc.attrs.update}"
                              style="margin: 0 3px;background: #0071BD;"/>
-            <b:commandButton value="Cancelar" class="modal-close waves-light white-text" 
+            <b:commandButton value="Cancelar" class="modal-close waves-light white-text" immediate="true"
                              actionListener="#{cc.attrs.listener.cancelar()}" ajax="true" update="#{cc.attrs.update}"
                              style="margin: 0 3px;background: #F26202;"/>
         </div>
