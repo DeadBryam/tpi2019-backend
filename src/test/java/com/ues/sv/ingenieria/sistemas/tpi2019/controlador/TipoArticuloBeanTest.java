@@ -8,13 +8,17 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.controlador;
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.TipoArticuloFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoArticulo;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  *
  * @author arevalo
  */
-public class TipoArticuloBeanTest extends AbstractBeanTest<TipoArticulo>{
+public class TipoArticuloBeanTest extends AbstractBeanTest<TipoArticulo> {
 
+    TipoArticuloBean bean = new TipoArticuloBean();
+    
     @Override
     protected AbstractFacade<TipoArticulo> getFacade() {
         return new TipoArticuloFacade();
@@ -29,5 +33,10 @@ public class TipoArticuloBeanTest extends AbstractBeanTest<TipoArticulo>{
     protected AbstractBean<TipoArticulo> getBean() {
         return new TipoArticuloBean();
     }
-    
+
+    @Test
+    public void onSelectTest() {
+        bean.onSelect(new TipoArticulo(1));
+        Assert.assertTrue(bean.getBotonEdit());
+    }
 }

@@ -1,0 +1,56 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
+
+import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Bodega;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
+import junit.framework.Assert;
+import org.junit.Test;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import org.mockito.internal.util.reflection.Whitebox;
+
+/**
+ *
+ * @author arevalo
+ */
+public class BodegaFacadeTest extends AbstractTest<Bodega> {
+    
+    BodegaFacade bf;
+    Query query = Mockito.mock(Query.class);
+    List<Bodega> lst = new ArrayList<>();
+
+    @Override
+    protected AbstractFacade<Bodega> getFacade() {
+        return new BodegaFacade();
+    }
+
+    @Override
+    protected Bodega getEntity() {
+        return new Bodega("1", "APA");
+    }
+
+    @Override
+    public void init() {
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+        bf = new BodegaFacade();
+        lst.add(new Bodega("1", "1"));
+        lst.add(new Bodega("1", "1"));
+        lst.add(new Bodega("1", "1"));
+    }
+    
+    @Test
+    public void bodegaPorSucursalTest(){
+        Whitebox.setInternalState(bf, "em", em);
+        Mockito.when(cut.executeQuery("SELECT b FROM Bodega b WHERE b.sucursal.idSucursal = :sucursal")).thenReturn(query);
+        Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
+        Mockito.when(query.getResultList()).thenReturn(lst);
+        lstResultado = bf.bodegaPorSucursal("200IQ");
+        Assert.assertEquals(3,lstResultado.size());
+    }
+}

@@ -8,6 +8,8 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.controlador;
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.TipoMedidaFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoMedida;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  *
@@ -15,6 +17,8 @@ import com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoMedida;
  */
 public class TipoMedidaBeanTest extends AbstractBeanTest<TipoMedida>{
 
+    TipoMedidaBean bean = new TipoMedidaBean();
+    
     @Override
     protected AbstractFacade<TipoMedida> getFacade() {
         return new TipoMedidaFacade();
@@ -30,4 +34,9 @@ public class TipoMedidaBeanTest extends AbstractBeanTest<TipoMedida>{
         return new TipoMedidaBean();
     }
     
+    @Test
+    public void onSelectTest() {
+        bean.onSelect(new TipoMedida(1));
+        Assert.assertTrue(bean.getBotonEdit());
+    }
 }

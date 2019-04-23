@@ -33,10 +33,13 @@ public class VentaFacadeTest extends AbstractTest<Venta> {
         return new Venta(1);
     }
 
-    @Before
+    @Override
     public void init() {
+        super.init(); //To change body of generated methods, choose Tools | Templates.
         vf = new VentaFacade();
     }
+    
+    
 
     @Test
     public void crearTest() {

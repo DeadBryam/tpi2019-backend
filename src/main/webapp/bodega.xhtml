@@ -23,7 +23,7 @@
             </b:column>
             <b:column span="10">
                 <h:form id="formDataBodega">
-                    <b:dataTable value="#{bodegaBean.listaDatos}"
+                    <b:dataTable value="#{bodegaBean.listaDatos}" auto-update="true"
                                  var="item" page-length="5" page-length-menu="5,8,11">
                         <b:dataTableColumn value="#{item.bodegaPK.idArticulo}" />
                         <b:dataTableColumn value="#{articuloBean.articuloCompleto(item.bodegaPK.idArticulo)}" />

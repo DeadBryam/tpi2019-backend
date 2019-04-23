@@ -18,25 +18,29 @@ import org.powermock.reflect.Whitebox;
  *
  * @author arevalo
  */
-public class CompraFacadeTest extends AbstractTest<Compra>{ 
-    CompraFacade cf;
-    Compra compra,co;
+public class CompraFacadeTest extends AbstractTest<Compra> {
 
-      @Override
+    CompraFacade cf;
+    Compra compra, co;
+
+    @Override
     protected AbstractFacade<Compra> getFacade() {
-       return new CompraFacade();
+        return new CompraFacade();
     }
 
     @Override
     protected Compra getEntity() {
         return new Compra(1);
     }
-    
-      @Before
+
+    @Override
     public void init() {
+        super.init(); //To change body of generated methods, choose Tools | Templates.
         cf = new CompraFacade();
     }
 
+    
+    
     @Test
     public void crearTest() {
         co = new Compra(1);
@@ -47,5 +51,5 @@ public class CompraFacadeTest extends AbstractTest<Compra>{
         int resultado = cf.crear(compra).getIdCompra();
         assertEquals(1, resultado);
     }
-    
+
 }

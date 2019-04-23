@@ -15,7 +15,7 @@
             <b:column span="10">
                 <b:form id="formData">
                     <b:dataTable value="#{facturacionBean.bodegaList}"
-                                 var="item" page-length="7" page-length-menu="7,10"
+                                 var="item" page-length="3" page-length-menu="3,5,7"
                                  select="true" onselect="ajax:facturacionBean.onSelectArticulo(item.bodegaPK.idArticulo);"
                                  ondeselect="ajax:facturacionBean.onDeselectArticulo();">
                         <b:dataTableColumn value="#{item.bodegaPK.idArticulo}" />

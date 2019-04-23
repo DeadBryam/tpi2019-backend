@@ -5,6 +5,7 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -95,7 +96,7 @@ public abstract class AbstractFacade<T> {
                 cq.select(cq.from(entityClass));
                 return getEntityManager().createQuery(cq).getResultList();
             } else {
-                throw new NullPointerException();
+                return Collections.EMPTY_LIST;
             }
         } catch (Exception e) {
             throw e;

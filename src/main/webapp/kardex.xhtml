@@ -18,12 +18,14 @@
                     <b:form id="productosformData">
                         <b:dataTable value="#{kardexBean.listaDatos}"
                                      var="item" page-length="3" page-length-menu="2,3,5"
-                                     select="true" onselect="ajax:kardexBean.onSelect(item)" 
+                                     select="true" onselect="ajax:kardexBean.onSelect(item)"
                                      ondeselect="ajax:kardexBean.onDeselect()" update=":botonPedido">
-                            <b:dataTableColumn value="#{item.idKardex}" />
-                            <b:dataTableColumn value="#{item.idArticulo}" />
+                             <b:dataTableColumn value="#{item.idKardex}" />
+                            <b:dataTableColumn value="#{articuloBean.articuloCompleto(item.idArticulo.idArticulo)}"
+                                               label="Articulo"/>
                             <b:dataTableColumn value="#{item.cantidad}" />
-                            <b:dataTableColumn value="#{item.precioActual}" />
+                            <b:dataTableColumn value="#{item.precioActual}" label="precio"/>
+                            <b:dataTableColumn value="#{item.stockAnterior}" />
                             <b:dataTableColumn value="#{item.stockActual}" />
                         </b:dataTable>
                     </b:form>

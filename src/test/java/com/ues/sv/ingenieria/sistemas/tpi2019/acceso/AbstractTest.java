@@ -5,6 +5,7 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -14,6 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Selection;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
@@ -33,46 +35,47 @@ import org.mockito.internal.util.reflection.Whitebox;
 public abstract class AbstractTest<T> {
 
     @Mock
-      EntityManager em;
+    EntityManager em;
 
     protected abstract AbstractFacade<T> getFacade();
 
     protected abstract T getEntity();
     AbstractFacade<T> cut = getFacade();
     T entity;
-    
+
     private final CriteriaBuilder CB = mock(CriteriaBuilder.class);
     private final CriteriaQuery CQ = mock(CriteriaQuery.class);
     private final TypedQuery q = mock(TypedQuery.class);
-    private List<T> lstEsperado;
-    private List<T> lstResultado;
+    protected List<T> lstEsperado = new ArrayList<>();
+    protected List<T> lstResultado = new ArrayList<>();
 
     @Before
     public void init() {
         entity = getEntity();
+        lstEsperado.add(entity);
+        lstEsperado.add(entity);
         Whitebox.setInternalState(cut, "em", em);
         when(this.em.getCriteriaBuilder()).thenReturn(CB);
         when(CB.createQuery()).thenReturn(CQ);
         when(CQ.select(Matchers.any(Selection.class))).thenReturn(CQ);
         when(this.em.createQuery(CQ)).thenReturn(q);
         when(q.getResultList()).thenReturn(lstEsperado);
-        
     }
-    
-     /**
+
+    /**
      * Test of create method, of class AbstractFacade.
      */
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testCreate() {
         cut.create(entity);
         verify(em).persist(entity);
         cut.create(null);
     }
-    
+
     /**
      * Test of edit method, of class AbstractFacade.
      */
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testEdit() {
         cut.edit(entity);
         verify(em).merge(entity);
@@ -82,7 +85,7 @@ public abstract class AbstractTest<T> {
     /**
      * Test of remove method, of class AbstractFacade.
      */
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testRemove() {
         cut.remove(entity);
         verify(em).remove(em.merge(entity));
@@ -94,26 +97,29 @@ public abstract class AbstractTest<T> {
      */
     @Test(expected = NullPointerException.class)
     public void testFindById() {
-        when(this.em.find(entity.getClass(),1)).thenReturn(entity);
-       T resultado = cut.findById(1);
+        when(this.em.find(entity.getClass(), 1)).thenReturn(entity);
+        T resultado = cut.findById(1);
         assertEquals(entity, resultado);
-        entity=null;
+        entity = null;
         cut.findById(null);
     }
 
     /**
      * Test of findAll method, of class AbstractFacade.
      */
-    @Test(expected =Exception.class)
+    @Test(expected = Exception.class)
     public void testFindAll() {
-        lstEsperado=getFacade().findAll();
+        System.out.println("testFindAll");
         lstResultado = cut.findAll();
-        System.out.println("Esperado finAll "+lstEsperado.toString());
-        System.out.println("REsultado "+lstResultado.toString());
-        assertEquals(lstResultado, lstEsperado);
-        
+        assertEquals(2, lstResultado.size());
+
         Whitebox.setInternalState(cut, "em", null);
-       lstResultado= cut.findAll();
+        lstResultado = cut.findAll();
+        assertEquals(0, lstResultado.size());
+
+        Whitebox.setInternalState(cut, "em", em);
+        when(CB.createQuery()).thenReturn(null);
+        lstResultado = cut.findAll();
     }
 
     /**
@@ -122,21 +128,21 @@ public abstract class AbstractTest<T> {
     @Test(expected = Exception.class)
     public void testFindRange() {
         lstResultado = cut.findRange(0, 100);
-        assertEquals(lstResultado, lstEsperado);
+        assertEquals(2, lstResultado.size());
         cut.findRange(0, 0);
     }
 
     /**
      * Test of count method, of class AbstractFacade.
      */
-    @Test (expected = Exception.class)
+    @Test(expected = Exception.class)
     public void testCount() {
         System.err.println("testCount");
         int res;
         when(q.getSingleResult()).thenReturn((Long) 0l);
         res = cut.count();
         assertEquals(0, res);
-        
+
         Whitebox.setInternalState(cut, "em", null);
         cut.count();
     }
