@@ -136,7 +136,11 @@ public abstract class AbstractFacade<T> {
     }
     
     public Query executeQuery(String query){
-        return getEntityManager().createQuery(query);
+        if (getEntityManager()!=null && query!=null) {
+           return getEntityManager().createQuery(query);
+        }else{
+            return null;
+        }
     }
     
 }

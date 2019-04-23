@@ -7,22 +7,74 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.ArticuloFacade;
+import com.ues.sv.ingenieria.sistemas.tpi2019.controlador.ArticuloBean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Articulo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.Query;
+import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.internal.util.reflection.Whitebox;
+import org.powermock.api.mockito.PowerMockito;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  *
  * @author arevalo
  */
-public class ArticuloFacadeTest extends AbstractTest<Articulo>{ 
+@RunWith(value = PowerMockRunner.class)
+public class ArticuloFacadeTest extends AbstractTest<Articulo> {
 
-      @Override
+    ArticuloFacade artfa;
+    ArticuloFacade mock = mock(ArticuloFacade.class);
+
+    @Override
     protected AbstractFacade<Articulo> getFacade() {
-       return new ArticuloFacade();
+        return new ArticuloFacade();
     }
 
     @Override
     protected Articulo getEntity() {
-        return new Articulo("1");
+        return new Articulo();
     }
-    
+
+    public final Query qq = mock(Query.class);
+
+    @Test(expected = Exception.class)
+    public void executeQueryTest() {
+        when(this.em.createQuery(Matchers.any(String.class))).thenReturn(qq);
+        int res = cut.executeQuery("SELECT A FROM " + entity.toString()).getResultList().size();
+        assertEquals(0, res);
+
+        res = cut.executeQuery(null).getResultList().size();
+        assertEquals(0, res);
+    }
+
+    @Before
+    public void inicio() throws Exception {
+        whenNew(ArticuloFacade.class).withNoArguments().thenReturn(mock);
+        artfa = new ArticuloFacade();
+    }
+
+    @Test
+    public void getArticuloCompletoTest() {
+        String id = "LGT456";
+        System.out.println("1");
+        String esperado = "Lapiz de grafitoFacelaMaster triangular";
+        when(artfa.getArticuloCompleto(id)).thenReturn("Lapiz de grafitoFacelaMaster triangular");
+        String resultado = artfa.getArticuloCompleto(id);
+        verify(artfa).getArticuloCompleto(id);
+        Assert.assertEquals(esperado, resultado);
+
+    }
 }

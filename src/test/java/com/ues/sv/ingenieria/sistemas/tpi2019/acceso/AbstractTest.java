@@ -6,6 +6,7 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
 import java.util.List;
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -32,7 +33,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 public abstract class AbstractTest<T> {
 
     @Mock
-    private EntityManager em;
+      EntityManager em;
 
     protected abstract AbstractFacade<T> getFacade();
 
@@ -105,7 +106,10 @@ public abstract class AbstractTest<T> {
      */
     @Test(expected =Exception.class)
     public void testFindAll() {
+        lstEsperado=getFacade().findAll();
         lstResultado = cut.findAll();
+        System.out.println("Esperado finAll "+lstEsperado.toString());
+        System.out.println("REsultado "+lstResultado.toString());
         assertEquals(lstResultado, lstEsperado);
         
         Whitebox.setInternalState(cut, "em", null);

@@ -48,7 +48,7 @@ public class MedidaBean extends AbstractBean<Medida> implements Serializable{
     
     @Override
     public void crear() {
-        System.out.println(medida.getMedida() + "sda "+ medida.getIdTipoMedida());
+//        System.out.println(medida.getMedida() + "sda "+ medida.getIdTipoMedida());
         super.crear();
         onDeselect();
     }

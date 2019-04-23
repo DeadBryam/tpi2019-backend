@@ -53,7 +53,7 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
 
     @Override
     public void crear() {
-        articulo.setPrecio(BigDecimal.ZERO);
+    //    articulo.setPrecio(BigDecimal.ZERO);
         super.crear();
         onDeselect();
     }
