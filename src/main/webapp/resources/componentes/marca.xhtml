@@ -26,12 +26,12 @@
                 </b:form>
             </b:column>
             <b:column span="4">
-                <b:form id="botones">
-                    <div class="container" style="width: 90%;padding-top: 30px;">
+                <div class="container" style="width: 90%;padding-top: 30px;">
+                    <b:form id="botones" auto-update="true">
                         <b:inputText placeholder="Marca" value="#{marcaBean.marca.marca}" required="true" label="Marca"/>
                         <cc:botones update="marcacc:botones marcacc:formData" listener="#{marcaBean}" render="#{marcaBean.botonEdit}"/>
-                    </div>
-                </b:form>
+                    </b:form>
+                </div>
             </b:column>
         </b:row>
     </ui:implementation>

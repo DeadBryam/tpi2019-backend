@@ -33,7 +33,7 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
         llenarLista();
         articulo = new Articulo();
     }
-    
+
     public String articuloCompleto(String id) {
         if (id.isEmpty() || id == null) {
             return "";
@@ -53,9 +53,8 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
 
     @Override
     public void crear() {
-        articulo.setPrecio(BigDecimal.ZERO);
-        super.crear();
-        onDeselect();
+            super.crear();
+            onDeselect();
     }
 
     private void limpiar() {
@@ -88,19 +87,21 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
         return articulo;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="get/set">
     public boolean getBotonEdit() {
         return botonEdit;
     }
-
+    
     public void setBotonEdit(boolean botonEdit) {
         this.botonEdit = botonEdit;
     }
-
+    
     public Articulo getArticulo() {
         return articulo;
     }
-
+    
     public void setArticulo(Articulo articulo) {
         this.articulo = articulo;
     }
+    //</editor-fold>
 }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.bootsfaces.utils.FacesMessages;
 
 /**
  *
@@ -22,9 +23,11 @@ public abstract class AbstractBean<T> {
         if (getFacade() != null) {
             try {
                 getFacade().create(getEntity());
+                mensajeInfo("Transaccion exitosa");
                 llenarLista();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                mensajeError("Ocurrio un error en la transaccion");
             }
         }
     }
@@ -33,9 +36,11 @@ public abstract class AbstractBean<T> {
         if (getFacade() != null) {
             try {
                 getFacade().edit(getEntity());
+                mensajeInfo("Transaccion exitosa");
                 llenarLista();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                mensajeError("Ocurrio un error en la transaccion");
             }
         }
     }
@@ -44,9 +49,11 @@ public abstract class AbstractBean<T> {
         if (getFacade() != null) {
             try {
                 getFacade().remove(getEntity());
+                mensajeInfo("Transaccion exitosa");
                 llenarLista();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                mensajeError("Ocurrio un error en la transaccion");
             }
         }
     }
@@ -54,7 +61,6 @@ public abstract class AbstractBean<T> {
     public void llenarLista() {
         if (getFacade().findAll() != null) {
             listaDatos = getFacade().findAll();
-            System.out.println("REGISTROS EN BASE: " + getFacade().count());
         } else {
             listaDatos = Collections.EMPTY_LIST;
         }
@@ -67,4 +73,13 @@ public abstract class AbstractBean<T> {
     public void setListaDatos(List<T> listaDatos) {
         this.listaDatos = listaDatos;
     }
+
+    public void mensajeInfo(String msg) {
+        FacesMessages.info(msg);
+    }
+
+    public void mensajeError(String msg) {
+        FacesMessages.error(msg);
+    }
+
 }
