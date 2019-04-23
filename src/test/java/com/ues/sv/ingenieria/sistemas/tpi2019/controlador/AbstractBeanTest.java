@@ -40,28 +40,27 @@ public abstract class AbstractBeanTest<T> implements Serializable {
 
     T entity;
 
-    public AbstractBean bean;
-
     @Before
     public void init() {
-        bean = getBean();
         entity = getEntity();
-        Whitebox.setInternalState(cut, "em", em);
+        Whitebox.setInternalState(cut, "em",em);
     }
 
     @Test
     public void crearBeanTest() {
         if (cut != null) {
-            bean.crear();
+            getBean().crear();
             cut.create(entity);
             verify(em).persist(entity);
+        }else{
+            System.out.println("nada");
         }
     }
 
     @Test
     public void EditarBeanTest() {
         if (cut != null) {
-            bean.editar();
+            getBean().editar();
             cut.edit(entity);
             verify(em).merge(entity);
         }
@@ -70,7 +69,7 @@ public abstract class AbstractBeanTest<T> implements Serializable {
     @Test
     public void EliminarBeanTest() {
         if (cut != null) {
-            bean.eliminar();
+            getBean().eliminar();
         }
     }
     
