@@ -5,8 +5,6 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.DistribuidorFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Distribuidor;
 
 public  class DistribuidorFacadeTest extends AbstractTest<Distribuidor>{ 

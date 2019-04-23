@@ -5,8 +5,6 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.BodegaFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Bodega;
 
 /**

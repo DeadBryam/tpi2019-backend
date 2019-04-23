@@ -6,6 +6,11 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Articulo;
+import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Marca;
+import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Medida;
+import com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoArticulo;
+import java.math.BigDecimal;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
@@ -16,8 +21,8 @@ import org.mockito.Matchers;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 /**
  *
@@ -26,8 +31,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(value = PowerMockRunner.class)
 public class ArticuloFacadeTest extends AbstractTest<Articulo> {
 
-    ArticuloFacade artfa;
-    ArticuloFacade mock = mock(ArticuloFacade.class);
+  //  ArticuloFacade mock ;
 
     @Override
     protected AbstractFacade<Articulo> getFacade() {
@@ -51,21 +55,21 @@ public class ArticuloFacadeTest extends AbstractTest<Articulo> {
         assertEquals(0, res);
     }
 
-    @Before
-    public void inicio() throws Exception {
-        whenNew(ArticuloFacade.class).withNoArguments().thenReturn(mock);
-        artfa = new ArticuloFacade();
-    }
-
-    @Test
-    public void getArticuloCompletoTest() {
-        String id = "LGT456";
-        System.out.println("1");
-        String esperado = "Lapiz de grafitoFacelaMaster triangular";
-        when(artfa.getArticuloCompleto(id)).thenReturn("Lapiz de grafitoFacelaMaster triangular");
-        String resultado = artfa.getArticuloCompleto(id);
-        verify(artfa).getArticuloCompleto(id);
-        Assert.assertEquals(esperado, resultado);
-
-    }
+//    @Before
+//    public void inicio(){
+//        mock=new ArticuloFacade();
+//        Whitebox.setInternalState(mock, "em", em);
+//        when(mock.executeQuery("1").getResultList().get(0).toString()).thenReturn("1");
+//        when(mock.getArticuloCompleto("0")).thenReturn("1");
+//    }
+//
+//    @Test
+//    public void getArticuloCompletoTest() {
+//       Articulo ar= new Articulo("1", "Lapiz de grafito", BigDecimal.ZERO);
+//       cut.create(ar);
+//       String esperado=mock.executeQuery("1").getResultList().get(0).toString();
+//        String resultado= mock.getArticuloCompleto("0");
+//        assertEquals( esperado,resultado);
+//
+//    }
 }

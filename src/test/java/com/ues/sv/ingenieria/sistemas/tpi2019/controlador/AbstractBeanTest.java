@@ -7,11 +7,8 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.controlador;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
-import org.junit.Assert;
-import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +24,9 @@ import org.mockito.runners.MockitoJUnitRunner;
  */
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractBeanTest<T> implements Serializable {
- List Datos;
+
+    List Datos;
+
     public abstract T getEntity();
 
     protected abstract AbstractFacade<T> getFacade();
@@ -36,14 +35,14 @@ public abstract class AbstractBeanTest<T> implements Serializable {
     @Mock
     private EntityManager em;
 
-    public AbstractFacade cut = getFacade();
-
+    public AbstractFacade cut=getFacade();
+    
     T entity;
 
     @Before
     public void init() {
         entity = getEntity();
-        Whitebox.setInternalState(cut, "em",em);
+         Whitebox.setInternalState(cut, "em", em);
     }
 
     @Test
@@ -72,16 +71,22 @@ public abstract class AbstractBeanTest<T> implements Serializable {
             getBean().eliminar();
         }
     }
-    
+
 //    @Test
-//    public void llenarlistaBeanTest(){
-//        Datos=bean.listaDatos;
-//        System.out.println("Datos :"+ Datos);
-//        List result =Collections.EMPTY_LIST;
-//        if (cut!=null) {
+//    public void llenarlistaBeanTest() {
+//        Datos = cut.findAll();
+//        System.out.println("Datos "+Datos);
+//        int fad=Mockito.spy(cut.findAll().size());
+//        System.out.println("cut "+cut);
+//        
+//        System.out.println("fad: "+fad);
+//        List result = Collections.EMPTY_LIST;
+//        if (cut != null) {
 //            System.out.println("paso pero fallara ");
-//             result = cut.findAll();
+//            result = cut.findAll();
 //        }
-//        Assert.assertEquals(Datos,result);
+//        Assert.assertEquals(Datos, result);
 //    }
+    
+    
 }
