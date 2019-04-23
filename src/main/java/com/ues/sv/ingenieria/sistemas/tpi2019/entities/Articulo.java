@@ -52,7 +52,7 @@ public class Articulo implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "precio")
+    @Column(name = "precio", columnDefinition = "Decimal(5,2) default '0.00'")
     private BigDecimal precio;
     @JoinColumn(name = "id_marca", referencedColumnName = "id_marca")
     @ManyToOne(optional = false)
