@@ -5,12 +5,7 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.acceso;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.ArticuloFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.controlador.ArticuloBean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Articulo;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Query;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
@@ -18,14 +13,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
-import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import org.mockito.internal.util.reflection.Whitebox;
-import org.powermock.api.mockito.PowerMockito;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
