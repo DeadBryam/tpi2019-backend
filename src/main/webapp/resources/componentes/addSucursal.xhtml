@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui = "http://java.sun.com/jsf/composite"
+      xmlns:cc = "http://java.sun.com/jsf/composite/componentes">
+    <ui:interface>
+    </ui:interface>
+
+    <ui:implementation>
+        <b:row>
+            <b:column span="8">
+                <b:form id="formData">
+                    <div class="container" style="width: 100%;height: 350px;padding-top: 20px;">
+                        <b:dataTable value="#{sucursalBean.listaDatos}"
+                                     var="item" page-length="3" page-length-menu="2,3,5"
+                                     select="true" onselect="ajax:sucursalBean.onSelect(item);"
+                                     ondeselect="ajax:sucursalBean.onDeselect();" update="addSucursalcc:botones">
+                            <b:dataTableColumn value="#{item.idSucursal}" />
+                            <b:dataTableColumn value="#{item.ubicacion}" />
+                        </b:dataTable>
+                    </div>      
+                </b:form>
+            </b:column>
+            <b:column span="4">
+                <div class="container" style="width: 90%;padding-top: 30px;">
+                    <b:form id="botones" auto-update="true">
+                        <b:inputText placeholder="id Sucursal" value="#{sucursalBean.sucursal.idSucursal}" required="true" label="id Sucursal"/>
+                        <b:inputText placeholder="Ubicacion" value="#{sucursalBean.sucursal.ubicacion}" required="true" label="Ubicacion"/>
+                        <cc:botones update="addSucursalcc:botones addSucursalcc:formData" listener="#{sucursalBean}" render="#{sucursalBean.botonEdit}"/>
+                    </b:form>
+                </div>
+            </b:column>
+        </b:row>
+    </ui:implementation>
+</html>

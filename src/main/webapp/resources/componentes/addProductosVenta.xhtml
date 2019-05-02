@@ -7,28 +7,29 @@
       xmlns:ui = "http://java.sun.com/jsf/composite"
       xmlns:cc = "http://java.sun.com/jsf/composite/componentes">
 
-    <ui:interface> 
+    <ui:interface>
     </ui:interface>
 
     <ui:implementation>
         <b:row style="margin: 10px;">
             <b:column span="10">
                 <b:form id="formData">
-                    <b:dataTable value="#{articuloBean.listaDatos}"
+                    <b:dataTable value="#{facturacionBean.bodegaList}"
                                  var="item" page-length="3" page-length-menu="3,5,7"
-                                 select="true" onselect="ajax:abastecimientoBean.onSelectArticulo(item);"
-                                 ondeselect="ajax:abastecimientoBean.onDeselectArticulo();">
-                        <b:dataTableColumn value="#{item.idArticulo}" />
-                        <b:dataTableColumn value="#{abastecimientoBean.articuloCompleto(item.idArticulo)}" />
+                                 select="true" onselect="ajax:facturacionBean.onSelectArticulo(item.bodegaPK.idArticulo);"
+                                 ondeselect="ajax:facturacionBean.onDeselectArticulo();">
+                        <b:dataTableColumn value="#{item.bodegaPK.idArticulo}" />
+                        <b:dataTableColumn value="#{articuloBean.articuloCompleto(item.bodegaPK.idArticulo)}" />
+                        <b:dataTableColumn value="#{item.precio}" />
+                        <b:dataTableColumn value="#{item.stock}" />
                     </b:dataTable>
                 </b:form>
             </b:column>
             <b:column span="2">
                 <b:form id="botones">
-                    <b:inputText placeholder="Cantidad" value="#{abastecimientoBean.kardex.cantidad}" required="true" label="Cantidad"/>
-                    <b:inputText placeholder="Precio" value="#{abastecimientoBean.kardex.precioActual}" required="true" label="Precio"/>
-                    <b:commandButton value="Agregr" class="waves-effect waves-light white-text" 
-                                     actionListener="#{abastecimientoBean.add()}" ajax="true" update=":formAbastecimiento :addProductoCompracc:formData :addProductoCompracc:botones"
+                    <b:inputText placeholder="Cantidad" value="#{facturacionBean.kardex.cantidad}" required="true" label="Cantidad"/>
+                    <b:commandButton value="Agregar" class="waves-effect waves-light white-text" 
+                                     actionListener="#{facturacionBean.add()}" ajax="true" update=":formFacturacion :addProductoVentacc:formData :addProductoVentacc:botones"
                                      style="margin: 5px 0;background: #0071BD;width: 100%;"/>
                     <b:commandButton value="Cancelar" class="modal-close waves-light white-text" 
                                      ajax="true"
