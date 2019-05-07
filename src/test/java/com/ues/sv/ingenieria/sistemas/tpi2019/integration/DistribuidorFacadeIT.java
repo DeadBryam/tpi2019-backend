@@ -5,9 +5,9 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.integration;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.DistribuidorFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.entities.Distribuidor;
+import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
+import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.DistribuidorFacade;
+import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Distribuidor;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
 import javax.persistence.EntityManager;

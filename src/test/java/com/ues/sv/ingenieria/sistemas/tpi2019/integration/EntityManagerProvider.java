@@ -5,7 +5,7 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.integration;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.acceso.AbstractFacade;
+import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;

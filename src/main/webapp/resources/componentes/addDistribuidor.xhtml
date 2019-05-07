@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui = "http://java.sun.com/jsf/composite"
+      xmlns:cc = "http://java.sun.com/jsf/composite/componentes">
+    <ui:interface>
+    </ui:interface>
+
+    <ui:implementation>
+        <b:row>
+            <b:column span="8">
+                <b:form id="formData">
+                    <div class="container" style="width: 100%;height: 350px;padding-top: 20px;">
+                        <b:dataTable value="#{distribuidorBean.listaDatos}"
+                                     var="item" page-length="3" page-length-menu="2,3,5"
+                                     select="true" onselect="ajax:distribuidorBean.onSelect(item);"
+                                     ondeselect="ajax:distribuidorBean.onDeselect();" update="addDistribuidorcc:botones">
+                            <b:dataTableColumn value="#{item.idDistribuidor}" />
+                            <b:dataTableColumn value="#{item.distribuidor}" />
+                            <b:dataTableColumn value="#{item.telefono}" />
+                        </b:dataTable>
+                    </div>      
+                </b:form>
+            </b:column>
+            <b:column span="4">
+                <div class="container" style="width: 90%;padding-top: 30px;">
+                    <b:form id="botones" auto-update="true">
+                        <b:inputText placeholder="id Distribuidor" value="#{distribuidorBean.distribuidor.idDistribuidor}" required="true" label="id Distribuidor"/>
+                        <b:inputText placeholder="Distribuidor" value="#{distribuidorBean.distribuidor.distribuidor}" required="true" label="Distribuidor"/>
+                        <b:inputText placeholder="Telefono" value="#{distribuidorBean.distribuidor.telefono}" required="true" label="Telefono"/>
+                        <cc:botones update="addDistribuidorcc:botones addDistribuidorcc:formData" listener="#{distribuidorBean}" render="#{distribuidorBean.botonEdit}"/>
+                    </b:form>
+                </div>
+            </b:column>
+        </b:row>
+    </ui:implementation>
+</html>

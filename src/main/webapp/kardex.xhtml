@@ -20,7 +20,7 @@
                                      var="item" page-length="3" page-length-menu="2,3,5"
                                      select="true" onselect="ajax:kardexBean.onSelect(item)"
                                      ondeselect="ajax:kardexBean.onDeselect()" update=":botonPedido">
-                             <b:dataTableColumn value="#{item.idKardex}" />
+                            <b:dataTableColumn value="#{item.idKardex}" />
                             <b:dataTableColumn value="#{articuloBean.articuloCompleto(item.idArticulo.idArticulo)}"
                                                label="Articulo"/>
                             <b:dataTableColumn value="#{item.cantidad}" />
@@ -52,10 +52,25 @@
                                              actionListener="#{kardexBean.updateEstado()}" ajax="true" update=":productosformData"
                                              style="margin: 0 3px;background: #0071BD;"/>
                         </b:form>
+                        <a class="waves-effect waves-light btn modal-trigger white-text hoverable"
+                           style="width: 100%;margin: 6px 0;background: #4F9596;" href="#addDistribuidor">Distribuidor</a>
+                        <a class="waves-effect waves-light btn modal-trigger white-text hoverable"
+                           style="width: 100%;margin: 6px 0;background: #4F9596;" href="#addSucursal">Sucursal</a>
+                        <a class="waves-effect waves-light btn modal-trigger white-text hoverable"
+                           style="width: 100%;margin: 6px 0;background: #4F9596;" href="#addCaja">Caja</a>
                     </div> 
                 </b:column>
             </b:row>
+        </div>
 
+        <div id="addDistribuidor" class="modal">
+            <cc:addDistribuidor id="addDistribuidorcc"/>
+        </div>
+        <div id="addSucursal" class="modal">
+            <cc:addSucursal id="addSucursalcc"/>
+        </div>
+        <div id="addCaja" class="modal">
+            <cc:addCaja id="addCajacc"/>
         </div>
     </ui:define>
 </ui:composition>
