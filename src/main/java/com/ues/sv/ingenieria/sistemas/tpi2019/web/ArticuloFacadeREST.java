@@ -19,7 +19,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -47,45 +46,36 @@ public class ArticuloFacadeREST extends AbstractFacade<Articulo> {
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
     public void edit(@PathParam("id") String id, Articulo entity) {
-        super.edit(entity);
+        if (id!=null && !id.equals("") && entity !=null) {
+            super.edit(entity);
+        }
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") String id) {
+        if (id!=null && !id.equals("") ) {
         super.remove(super.findById(id));
+        }
     }
 
     @GET
     @Path("{id}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json","application/xml"})
     public Articulo find(@PathParam("id") String id) {
         return super.findById(id);
     }
 
     @GET
     @Override
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json","application/xml"})
     public List<Articulo> findAll() {
         return super.findAll();
     }
-    
-    @GET
-    @Path("prueba")
-    @Produces({"application/xml","application/json"})
-    public Response Find(){
-        List<Articulo> articulos=super.findAll();
-        System.out.println("Articulos: "+articulos);
-        return Response.ok(articulos,MediaType.APPLICATION_JSON).build();
-                
-    }
-    
-    
-    
-    
+  
     @GET
     @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json","application/xml"})
     public List<Articulo> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(from, to);
     }
