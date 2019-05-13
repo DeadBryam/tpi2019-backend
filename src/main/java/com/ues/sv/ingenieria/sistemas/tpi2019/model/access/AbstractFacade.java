@@ -27,19 +27,18 @@ public abstract class AbstractFacade<T> {
     /**
      *
      * @param entity
+     * @return 
      */
-    public void create(T entity) {
-        try {
+    public T create(T entity) {
             if (getEntityManager() != null && entity != null) {
                 getEntityManager().persist(entity);
+                getEntityManager().flush();
+                return entity;
             } else {
                 throw new NullPointerException();
             }
-        } catch (Exception e) {
-            throw e;
         }
-    }
-
+    
     /**
      *
      * @param entity
@@ -137,11 +136,11 @@ public abstract class AbstractFacade<T> {
     }
     
     public Query executeQuery(String query){
-        if (getEntityManager()!=null && query!=null) {
+        if (getEntityManager()!=null && query!=null && !query.isEmpty()) {
            return getEntityManager().createQuery(query);
-        }else{
-            return null;
         }
+            return null;
+        
     }
     
 }

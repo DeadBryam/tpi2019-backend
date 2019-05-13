@@ -2,19 +2,21 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.ues.sv.ingenieria.sistemas.tpi2019_inventarioLibreria_war_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>java:app/libreriadb</jta-data-source>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Bodega</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Caja</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Compra</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Distribuidor</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Kardex</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Marca</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Medida</class>
+    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Sucursal</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.TipoArticulo</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.TipoMedida</class>
-    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Bodega</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Venta</class>
-    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Medida</class>
-    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Marca</class>
-    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Compra</class>
-    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Sucursal</class>
-    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo</class>
-    <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Distribuidor</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
   </persistence-unit>
 </persistence>

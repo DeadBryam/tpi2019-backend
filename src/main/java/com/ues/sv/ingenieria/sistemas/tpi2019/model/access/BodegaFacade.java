@@ -33,4 +33,9 @@ public class BodegaFacade extends AbstractFacade<Bodega> {
     public List<Bodega> bodegaPorSucursal(String sucursal){
         return executeQuery("SELECT b FROM Bodega b WHERE b.sucursal.idSucursal = :sucursal").setParameter("sucursal", sucursal).getResultList();
     }
+    
+    public List<Bodega> findLike(String sucursal, String like){
+        return executeQuery("SELECT b FROM Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND b.bodegaPK.idArticulo LIKE '%:like%'")
+                .setParameter("sucursal", sucursal).setParameter("like", like).getResultList();
+    }
 }

@@ -110,6 +110,11 @@
             <version>1.6.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1209.jre7</version>
+        </dependency>
     </dependencies>
     
     <profiles>
