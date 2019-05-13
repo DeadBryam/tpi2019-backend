@@ -31,7 +31,6 @@ public class VentaFacade extends AbstractFacade<Venta> {
     
     public Venta crear(Venta entity){
         create(entity);
-        em.flush();
         return entity;
     }
 }

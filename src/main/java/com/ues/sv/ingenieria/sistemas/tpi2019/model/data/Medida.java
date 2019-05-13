@@ -7,6 +7,7 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.model.data;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +24,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -91,7 +91,7 @@ public class Medida implements Serializable {
         this.idTipoMedida = idTipoMedida;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public List<Articulo> getArticuloList() {
         return articuloList;
     }

@@ -29,4 +29,9 @@ public class SucursalFacade extends AbstractFacade<Sucursal> {
         super(Sucursal.class);
     }
     
+    public boolean sucursalExists(String id){
+        return executeQuery("SELECT COUNT(s) FROM Sucursal s WHERE s.idSucursal = :idSucursal")
+                .setParameter("idSucursal", id).getSingleResult().toString().equals("1");
+    }
+    
 }
