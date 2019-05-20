@@ -31,5 +31,10 @@ public class MedidaBeanTest extends AbstractBeanTest<Medida>{
     protected AbstractBean<Medida> getBean() {
         return new MedidaBean();
     }
+
+    @Override
+    protected String name() {
+        return "medidaFacade";
+    }
     
 }

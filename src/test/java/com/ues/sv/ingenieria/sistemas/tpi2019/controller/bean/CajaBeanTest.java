@@ -31,5 +31,10 @@ public class CajaBeanTest extends AbstractBeanTest<Caja>{
     protected AbstractBean<Caja> getBean() {
         return new CajaBean();
     }
+
+    @Override
+    protected String name() {
+        return "cajaFacade";
+    }
     
 }

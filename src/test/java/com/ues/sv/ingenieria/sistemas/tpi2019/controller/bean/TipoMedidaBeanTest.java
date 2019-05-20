@@ -41,4 +41,9 @@ public class TipoMedidaBeanTest extends AbstractBeanTest<TipoMedida>{
         bean.onSelect(new TipoMedida(1));
         Assert.assertTrue(bean.getBotonEdit());
     }
+
+    @Override
+    protected String name() {
+       return "tipoMedidaFacade";
+    }
 }

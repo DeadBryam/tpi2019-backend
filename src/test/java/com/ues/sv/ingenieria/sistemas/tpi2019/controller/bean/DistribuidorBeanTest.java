@@ -5,8 +5,6 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.AbstractBean;
-import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.DistribuidorBean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.DistribuidorFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Distribuidor;
@@ -30,6 +28,11 @@ public class DistribuidorBeanTest extends AbstractBeanTest<Distribuidor>{
     @Override
     protected AbstractBean<Distribuidor> getBean() {
         return new DistribuidorBean();
+    }
+
+    @Override
+    protected String name() {
+       return "facade";
     }
     
 }

@@ -36,9 +36,16 @@ public class TipoArticuloBeanTest extends AbstractBeanTest<TipoArticulo> {
         return new TipoArticuloBean();
     }
 
+    @Override
+    protected String name() {
+        return "tipoArticuloFacade";
+    }
+    
     @Test
     public void onSelectTest() {
         bean.onSelect(new TipoArticulo(1));
         Assert.assertTrue(bean.getBotonEdit());
     }
+
+    
 }

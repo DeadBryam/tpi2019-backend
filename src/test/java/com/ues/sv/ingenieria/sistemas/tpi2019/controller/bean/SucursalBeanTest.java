@@ -31,5 +31,10 @@ public class SucursalBeanTest extends AbstractBeanTest<Sucursal>{
     protected AbstractBean<Sucursal> getBean() {
         return new SucursalBean();
     }
+
+    @Override
+    protected String name() {
+        return "sucursalFacade";
+    }
     
 }

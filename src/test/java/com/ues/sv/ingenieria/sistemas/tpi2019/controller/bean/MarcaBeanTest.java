@@ -22,7 +22,7 @@ import org.mockito.Mockito;
  */
 public class MarcaBeanTest extends AbstractBeanTest<Marca>{
     
-    MarcaBean bean = new MarcaBean();
+    MarcaBean beann = new MarcaBean();
 
     @Override
     public Marca getEntity() {
@@ -38,11 +38,17 @@ public class MarcaBeanTest extends AbstractBeanTest<Marca>{
     protected AbstractBean<Marca> getBean() {
         return new MarcaBean();
     }
+    @Override
+    protected String name() {
+        return "marcaFacade";
+    }
     
     @Test
     public void onSelectTest(){
-        bean.onSelect(new Marca(1));
-        Assert.assertTrue(bean.getBotonEdit());
+        beann.onSelect(new Marca(1));
+        Assert.assertTrue(beann.getBotonEdit());
     }
+
+    
     
 }

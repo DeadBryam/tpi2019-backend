@@ -31,5 +31,10 @@ public class KardexBeanTest extends AbstractBeanTest<Kardex>{
     protected AbstractBean<Kardex> getBean() {
         return new KardexBean();
     }
+
+    @Override
+    protected String name() {
+        return "kardexFacade";
+    }
     
 }
