@@ -9,9 +9,18 @@ import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.AbstractBean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.TipoArticuloBean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.TipoArticuloFacade;
+import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.TipoArticuloFacade;
+import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.TipoArticulo;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.TipoArticulo;
 import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import org.mockito.internal.util.reflection.Whitebox;
 
 /**
  *
@@ -19,7 +28,6 @@ import org.junit.Test;
  */
 public class TipoArticuloBeanTest extends AbstractBeanTest<TipoArticulo> {
 
-    TipoArticuloBean bean = new TipoArticuloBean();
     
     @Override
     protected AbstractFacade<TipoArticulo> getFacade() {
@@ -41,10 +49,25 @@ public class TipoArticuloBeanTest extends AbstractBeanTest<TipoArticulo> {
         return "tipoArticuloFacade";
     }
     
+     TipoArticuloBean bean = mock(TipoArticuloBean.class);
+    TipoArticuloFacade facade = mock(TipoArticuloFacade.class);
+    
+      @Before
+    public void initAr() {
+        Whitebox.setInternalState(bean, "tipoArticuloFacade", facade);
+        doCallRealMethod().when(bean).onSelect(new TipoArticulo(1));
+        doCallRealMethod().when(bean).onDeselect();
+        doCallRealMethod().when(bean).getBotonEdit();
+        doCallRealMethod().when(bean).setBotonEdit(any(boolean.class));
+    }
+
     @Test
     public void onSelectTest() {
         bean.onSelect(new TipoArticulo(1));
-        Assert.assertTrue(bean.getBotonEdit());
+        assertTrue(bean.getBotonEdit());
+
+        bean.onDeselect();
+        verify(bean).setBotonEdit(false);
     }
 
     

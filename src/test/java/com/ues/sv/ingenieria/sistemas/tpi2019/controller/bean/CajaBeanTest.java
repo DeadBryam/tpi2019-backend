@@ -5,11 +5,17 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.CajaBean;
-import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.AbstractBean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.CajaFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Caja;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import org.mockito.internal.util.reflection.Whitebox;
 
 /**
  *
@@ -37,4 +43,24 @@ public class CajaBeanTest extends AbstractBeanTest<Caja>{
         return "cajaFacade";
     }
     
+    CajaBean bean = mock(CajaBean.class);
+    CajaFacade facade = mock(CajaFacade.class);
+    
+      @Before
+    public void initAr() {
+        Whitebox.setInternalState(bean, "cajaFacade", facade);
+        doCallRealMethod().when(bean).onSelect(new Caja(1));
+        doCallRealMethod().when(bean).onDeselect();
+        doCallRealMethod().when(bean).getBotonEdit();
+        doCallRealMethod().when(bean).setBotonEdit(any(boolean.class));
+    }
+
+    @Test
+    public void onSelectTest() {
+        bean.onSelect(new Caja(1));
+        assertTrue(bean.getBotonEdit());
+
+        bean.onDeselect();
+        verify(bean).setBotonEdit(false);
+    }
 }

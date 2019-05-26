@@ -33,6 +33,6 @@ public class BodegaBeanTest extends AbstractBeanTest<Bodega>{
     protected String name() {
         return "bodegaFacade";
     }
+    
 
-  
 }

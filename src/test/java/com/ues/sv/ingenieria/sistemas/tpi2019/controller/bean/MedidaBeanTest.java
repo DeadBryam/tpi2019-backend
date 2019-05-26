@@ -5,11 +5,17 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.MedidaBean;
-import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.AbstractBean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.MedidaFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Medida;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import org.mockito.internal.util.reflection.Whitebox;
 
 /**
  *
@@ -37,4 +43,24 @@ public class MedidaBeanTest extends AbstractBeanTest<Medida>{
         return "medidaFacade";
     }
     
+     MedidaBean bean = mock(MedidaBean.class);
+    MedidaFacade facade = mock(MedidaFacade.class);
+    
+      @Before
+    public void initAr() {
+        Whitebox.setInternalState(bean, "medidaFacade", facade);
+        doCallRealMethod().when(bean).onSelect(new Medida(1));
+        doCallRealMethod().when(bean).onDeselect();
+        doCallRealMethod().when(bean).getBotonEdit();
+        doCallRealMethod().when(bean).setBotonEdit(any(boolean.class));
+    }
+
+    @Test
+    public void onSelectTest() {
+        bean.onSelect(new Medida(1));
+        assertTrue(bean.getBotonEdit());
+
+        bean.onDeselect();
+        verify(bean).setBotonEdit(false);
+    }
 }

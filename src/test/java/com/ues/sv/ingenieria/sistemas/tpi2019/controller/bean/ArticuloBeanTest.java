@@ -14,6 +14,7 @@ import org.junit.Test;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.internal.util.reflection.Whitebox;
 
@@ -52,6 +53,7 @@ public class ArticuloBeanTest extends AbstractBeanTest<Articulo>{
     public void initAr() {
         Whitebox.setInternalState(bean, "articuloFacade", facade);
         doCallRealMethod().when(bean).onSelect(new Articulo(id));
+        doCallRealMethod().when(bean).onDeselect();
         doCallRealMethod().when(bean).getBotonEdit();
         doCallRealMethod().when(bean).setBotonEdit(any(boolean.class));
         doCallRealMethod().when(bean).articuloCompleto(any(String.class));
@@ -61,6 +63,10 @@ public class ArticuloBeanTest extends AbstractBeanTest<Articulo>{
     public void onSelectTest() {
         bean.onSelect(new Articulo(id));
         assertTrue(bean.getBotonEdit());
+
+        bean.onDeselect();
+        verify(bean).setBotonEdit(false);
+        
     }
 
     @Test

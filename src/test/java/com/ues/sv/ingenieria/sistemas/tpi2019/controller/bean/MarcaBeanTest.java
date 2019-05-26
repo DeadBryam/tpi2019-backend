@@ -5,16 +5,17 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.MarcaBean;
-import com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean.AbstractBean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.MarcaFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Marca;
-import javax.validation.constraints.AssertTrue;
-import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import org.mockito.internal.util.reflection.Whitebox;
 
 /**
  *
@@ -22,8 +23,6 @@ import org.mockito.Mockito;
  */
 public class MarcaBeanTest extends AbstractBeanTest<Marca>{
     
-    MarcaBean beann = new MarcaBean();
-
     @Override
     public Marca getEntity() {
         return new Marca();
@@ -43,12 +42,26 @@ public class MarcaBeanTest extends AbstractBeanTest<Marca>{
         return "marcaFacade";
     }
     
-    @Test
-    public void onSelectTest(){
-        beann.onSelect(new Marca(1));
-        Assert.assertTrue(beann.getBotonEdit());
+     MarcaBean bean = mock(MarcaBean.class);
+    MarcaFacade facade = mock(MarcaFacade.class);
+    
+      @Before
+    public void initAr() {
+        Whitebox.setInternalState(bean, "marcaFacade", facade);
+        doCallRealMethod().when(bean).onSelect(new Marca(1));
+        doCallRealMethod().when(bean).onDeselect();
+        doCallRealMethod().when(bean).getBotonEdit();
+        doCallRealMethod().when(bean).setBotonEdit(any(boolean.class));
     }
 
+    @Test
+    public void onSelectTest() {
+        bean.onSelect(new Marca(1));
+        assertTrue(bean.getBotonEdit());
+
+        bean.onDeselect();
+        verify(bean).setBotonEdit(false);
+    }
     
     
 }

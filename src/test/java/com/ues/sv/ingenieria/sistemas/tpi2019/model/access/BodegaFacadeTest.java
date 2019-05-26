@@ -55,4 +55,15 @@ public class BodegaFacadeTest extends AbstractTest<Bodega> {
         lstResultado = bf.bodegaPorSucursal("200IQ");
         Assert.assertEquals(3,lstResultado.size());
     }
+    
+    @Test
+    public void findLikeTest(){
+        Whitebox.setInternalState(bf, "em", em);
+        Mockito.when(cut.executeQuery("SELECT b FROM Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND b.bodegaPK.idArticulo LIKE '%:like%'")).thenReturn(query);
+        Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
+        Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
+        Mockito.when(query.getResultList()).thenReturn(lst);
+        lstResultado = bf.findLike("200IQ","2");
+        Assert.assertEquals(3,lstResultado.size());
+    }
 }
