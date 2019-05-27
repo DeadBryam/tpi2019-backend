@@ -10,23 +10,23 @@ import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
 
-
-
 /**
  *
  * @author lordbryan
  */
-
 @Provider
 public class CORSFilter implements ContainerResponseFilter {
 
     public CORSFilter() {
     }
-    
+
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext response) {
+        response.getHeaders().putSingle("Access-Control-Expose-Headers", "*");
+        response.getHeaders().putSingle("Access-Control-Allow-Headers", "*");
+        response.getHeaders().putSingle("Access-Control-Allow-Credentials", "true");
         response.getHeaders().putSingle("Access-Control-Allow-Origin", "*");
         response.getHeaders().putSingle("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
-        response.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type");
+
     }
 }
