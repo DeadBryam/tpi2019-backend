@@ -27,18 +27,18 @@ public abstract class AbstractFacade<T> {
     /**
      *
      * @param entity
-     * @return 
+     * @return
      */
     public T create(T entity) {
-            if (getEntityManager() != null && entity != null) {
-                getEntityManager().persist(entity);
-                getEntityManager().flush();
-                return entity;
-            } else {
-                throw new NullPointerException();
-            }
+        if (getEntityManager() != null && entity != null) {
+            getEntityManager().persist(entity);
+            getEntityManager().flush();
+            return entity;
+        } else {
+            throw new NullPointerException();
         }
-    
+    }
+
     /**
      *
      * @param entity
@@ -102,13 +102,13 @@ public abstract class AbstractFacade<T> {
         }
     }
 
-    public List<T> findRange(int primero, int ultimo) {
+    public List<T> findRange(int primero, int tamnio) {
         try {
-            if (entityClass != null && getEntityManager() != null && (primero < ultimo)) {
+            if (entityClass != null && getEntityManager() != null && tamnio > 0 && primero >= 0) {
                 javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
                 cq.select(cq.from(entityClass));
                 javax.persistence.Query q = getEntityManager().createQuery(cq);
-                q.setMaxResults(ultimo);
+                q.setMaxResults(tamnio);
                 q.setFirstResult(primero);
                 return q.getResultList();
             } else {
@@ -120,27 +120,27 @@ public abstract class AbstractFacade<T> {
     }
 
     public int count() {
-          try {
-            if (getEntityManager()!=null && entityClass!=null) {
+        try {
+            if (getEntityManager() != null && entityClass != null) {
                 javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
                 javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
                 cq.select(getEntityManager().getCriteriaBuilder().count(rt));
                 javax.persistence.Query q = getEntityManager().createQuery(cq);
                 return ((Long) q.getSingleResult()).intValue();
-            }else{
+            } else {
                 throw new NullPointerException();
             }
         } catch (Exception e) {
             throw e;
         }
     }
-    
-    public Query executeQuery(String query){
-        if (getEntityManager()!=null && query!=null && !query.isEmpty()) {
-           return getEntityManager().createQuery(query);
+
+    public Query executeQuery(String query) {
+        if (getEntityManager() != null && query != null && !query.isEmpty()) {
+            return getEntityManager().createQuery(query);
         }
-            return null;
-        
+        return null;
+
     }
-    
+
 }
