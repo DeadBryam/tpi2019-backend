@@ -29,4 +29,9 @@ public class CajaFacade extends AbstractFacade<Caja> {
         super(Caja.class);
     }
     
+    public boolean CajaExist(String id){
+        return executeQuery("SELECT COUNT(c) FROM Caja c WHERE c.idCaja = :idCaja")
+                .setParameter("idCaja", id).getSingleResult().toString().equals("1");
+    }
+    
 }

@@ -44,13 +44,11 @@ public class SucursalFacadeTest extends AbstractTest<Sucursal>{
         query.setFirstResult(1);
     }
     boolean ver=true;
-    boolean pr;
     @Test
-    public void findLikeTest(){
+    public void sucursalExistsTest(){
         Whitebox.setInternalState(sf, "em", em);
         Mockito.when(cut.executeQuery("SELECT COUNT(s) FROM Sucursal s WHERE s.idSucursal = :idSucursal")).thenReturn(query);
         Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Integer.class))).thenReturn(query);
-        System.out.println("query : "+query.getResultList());
         Mockito.when(query.getSingleResult()).thenReturn(list);
         Mockito.when(query.getSingleResult().toString().equals("1")).thenReturn(ver);
         assertNotNull(sf.sucursalExists("APA1245"));
