@@ -1,5 +1,5 @@
 node{
-stage("Clone"){
+stage("Clone :v"){
     git "https://github.com/DeadBryam/TPI2k19.git"
 }
 stage("Unit test"){
