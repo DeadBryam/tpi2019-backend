@@ -5,7 +5,7 @@ stage("Clone :v"){
 stage("Unit test"){
     sh "mvn surefire-report:report"
 }
-stage("Sonarquibo"){
+stage("Sonarquibi"){
     withSonarQubeEnv('SonarQubeServer') {
       sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
     }
