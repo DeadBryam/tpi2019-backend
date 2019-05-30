@@ -48,6 +48,7 @@ public class ArticuloBeanTest extends AbstractBeanTest<Articulo>{
     ArticuloBean bean = mock(ArticuloBean.class);
     ArticuloFacade facade = mock(ArticuloFacade.class);
     String id = "200IQ";
+    Articulo articulo= mock(Articulo.class);
 
     @Before
     public void initAr() {
@@ -57,6 +58,7 @@ public class ArticuloBeanTest extends AbstractBeanTest<Articulo>{
         doCallRealMethod().when(bean).getBotonEdit();
         doCallRealMethod().when(bean).setBotonEdit(any(boolean.class));
         doCallRealMethod().when(bean).articuloCompleto(any(String.class));
+        doCallRealMethod().when(bean).cancelar();
     }
 
     @Test
@@ -66,6 +68,8 @@ public class ArticuloBeanTest extends AbstractBeanTest<Articulo>{
 
         bean.onDeselect();
         verify(bean).setBotonEdit(false);
+        
+        bean.cancelar();
         
     }
 
@@ -81,4 +85,26 @@ public class ArticuloBeanTest extends AbstractBeanTest<Articulo>{
         resultado = bean.articuloCompleto(id);
         assertEquals(id, resultado);
     }
+    
+    @Test
+    public void getandset(){
+        doCallRealMethod().when(bean).getArticulo();
+        when(bean.getArticulo()).thenReturn(articulo);
+        doCallRealMethod().when(bean).setArticulo(articulo);
+        doCallRealMethod().when(bean).getEntity();
+        doCallRealMethod().when(bean).getFacade();
+        
+        doCallRealMethod().when(bean).init();
+        
+        assertEquals(articulo, bean.getArticulo());
+        
+        when(bean.getEntity()).thenReturn(articulo);
+        assertEquals(articulo, bean.getEntity());
+        
+        bean.setArticulo(articulo);
+        bean.init();
+        when(bean.getFacade()).thenReturn(facade);
+        assertEquals(facade, bean.getFacade());
+    }
+    
 }
