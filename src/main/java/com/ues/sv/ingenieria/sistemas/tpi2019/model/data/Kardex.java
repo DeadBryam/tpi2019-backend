@@ -52,7 +52,6 @@ public class Kardex implements Serializable {
     @Column(name = "precio_anterior")
     private BigDecimal precioAnterior;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "precio_actual")
     private BigDecimal precioActual;
     @Column(name = "stock_anterior")

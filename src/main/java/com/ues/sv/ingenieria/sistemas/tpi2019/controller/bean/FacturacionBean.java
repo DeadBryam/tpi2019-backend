@@ -67,7 +67,7 @@ public class FacturacionBean implements Serializable {
     public void add() {
         if ((articulo != null || !articulo.getIdArticulo().isEmpty() || articulo.getIdArticulo() != null) && kardex.getCantidad() > 0) {
             kardex.setIdArticulo(articulo);
-            kardex.setPrecioActual(articulo.getPrecio());
+            //kardex.setPrecioActual(articulo.getPrecio());
             facturacionList.add(kardex);
             kardex = new Kardex();
             onDeselectArticulo();
