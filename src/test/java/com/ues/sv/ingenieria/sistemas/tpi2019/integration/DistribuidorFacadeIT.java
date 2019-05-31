@@ -5,11 +5,9 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.integration;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.DistribuidorFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Distribuidor;
 import java.util.List;
-import javax.ejb.embeddable.EJBContainer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
@@ -20,7 +18,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Rule;
 import org.mockito.internal.util.reflection.Whitebox;
 
 /**
@@ -33,7 +30,7 @@ public class DistribuidorFacadeIT {
     }
 
     private EntityManager em;
-    private final String id = "asd";
+    private final String id = "DIZ124";
     private final Distribuidor reg1 = new Distribuidor(id, "juanito", 79797104);
     private final Distribuidor reg2 = new Distribuidor(id, "pedrito", 78787865);
     private final DistribuidorFacade cut = new DistribuidorFacade();
