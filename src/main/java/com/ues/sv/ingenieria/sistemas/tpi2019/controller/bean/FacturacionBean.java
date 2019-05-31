@@ -76,6 +76,7 @@ public class FacturacionBean implements Serializable {
 
     public void eliminarFacturacion() {
         for (int i = 0; i < facturacionList.size(); i++) {
+            System.out.println("hola "+facturacionList.size());
             if (facturacionList.get(i).getIdArticulo().getIdArticulo().equals(kardex.getIdArticulo().getIdArticulo())
                     && facturacionList.get(i).getCantidad() == kardex.getCantidad()) {
                 facturacionList.remove(i);
@@ -157,5 +158,14 @@ public class FacturacionBean implements Serializable {
         this.bodegaList = bodegaList;
     }
 
-//</editor-fold>
+
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+    }
+    //</editor-fold>
+
 }

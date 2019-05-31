@@ -71,4 +71,15 @@ public class ArticuloFacadeTest extends AbstractTest<Articulo> {
         resultado = af.getArticuloCompleto(id);
         assertEquals("Boligrafo", resultado);
     }
+    
+    @Test
+    public void findLikeTest(){
+        Whitebox.setInternalState(af, "em", em);
+        when(cut.executeQuery("SELECT a FROM Articulo a WHERE lower(a.articulo) LIKE :like")).thenReturn(query);
+        when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
+        when(query.getResultList()).thenReturn(lst);
+        
+        assertEquals(1, af.findLike("200IQ").size());
+        
+    }
 }

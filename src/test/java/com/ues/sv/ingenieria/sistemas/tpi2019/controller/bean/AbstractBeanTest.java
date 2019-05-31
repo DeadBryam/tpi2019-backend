@@ -12,6 +12,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -50,6 +51,7 @@ public abstract class AbstractBeanTest<T> implements Serializable {
         doCallRealMethod().when(absbean).eliminar();
         doCallRealMethod().when(absbean).llenarLista();
         doCallRealMethod().when(absbean).getListaDatos();
+        doCallRealMethod().when(absbean).setListaDatos(any(List.class));
         Datos.add(entity);
         Datos.add(entity);
         Datos.add(entity);
@@ -99,5 +101,7 @@ public abstract class AbstractBeanTest<T> implements Serializable {
         when(absfacade.findAll()).thenReturn(Datos);
         absbean.llenarLista();
         assertEquals(3, absbean.getListaDatos().size());
+        
+        absbean.setListaDatos(Datos);
     }
 }

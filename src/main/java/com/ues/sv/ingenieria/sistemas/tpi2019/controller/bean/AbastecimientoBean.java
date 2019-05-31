@@ -107,7 +107,8 @@ public class AbastecimientoBean implements Serializable {
         kardex = new Kardex();
         setBtnEdit(false);
     }
-
+    
+    //<editor-fold defaultstate="collapsed" desc="getters/setters">
     public Compra getCompra() {
         return compra;
     }
@@ -147,5 +148,5 @@ public class AbastecimientoBean implements Serializable {
     public void setBtnEdit(boolean btnEdit) {
         this.btnEdit = btnEdit;
     }
-
+    //</editor-fold>
 }
