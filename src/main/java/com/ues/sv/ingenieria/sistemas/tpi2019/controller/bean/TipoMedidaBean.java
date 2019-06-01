@@ -31,7 +31,6 @@ public class TipoMedidaBean extends AbstractBean<TipoMedida> implements Serializ
     public void init() {
         llenarLista();
         tipoMedida = new TipoMedida();
-        System.out.println("TipoMedidaBean");
     }
 
     public void onSelect(TipoMedida select) {

@@ -9,7 +9,6 @@ import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.CajaFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.KardexFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.SucursalFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.VentaFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Caja;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Kardex;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Venta;
@@ -53,6 +52,8 @@ public class FacturacionRest {
 
     @PathParam("idsucursal")
     String idSucursal;
+    
+    public final static String UNKNOWN = "Unknown sucursal.";
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -65,7 +66,7 @@ public class FacturacionRest {
                     .header("Page-Reg", cajaFacade.findRange(first, size).size())
                     .build();
         }
-        return Response.status(404, "Unknown sucursal.")
+        return Response.status(404, UNKNOWN)
                 .build();
 
     }
@@ -79,7 +80,7 @@ public class FacturacionRest {
             return Response.ok(cajaFacade.findById(id))
                     .build();
         }
-        return Response.status(404, "Unknown sucursal.")
+        return Response.status(404, UNKNOWN)
                 .build();
     }
 
@@ -96,7 +97,7 @@ public class FacturacionRest {
             return Response.status(404, "Unknown sucursal.")
                     .build();
         }
-        return Response.status(400, "Missing data.")
+        return Response.status(400, UNKNOWN)
                 .build();
     }
 
@@ -107,7 +108,7 @@ public class FacturacionRest {
     public Response addVenta(@PathParam("idcaja") int id,
             @QueryParam("estado") @DefaultValue("true") boolean estado,
             List<Kardex> itemList) {
-        if (itemList != null && itemList.size() > 0 && sucursalFacade.sucursalExists(idSucursal) && cajaFacade.cajaExist(id)) {
+        if (itemList != null && !itemList.isEmpty() && sucursalFacade.sucursalExists(idSucursal) && cajaFacade.cajaExist(id)) {
             venta = new Venta();
             venta.setEstadoVenta(estado);
             venta.setIdCaja(new Caja(id));

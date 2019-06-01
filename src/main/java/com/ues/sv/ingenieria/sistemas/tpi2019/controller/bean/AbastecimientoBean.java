@@ -37,7 +37,7 @@ public class AbastecimientoBean implements Serializable {
     Compra compra;
     Kardex kardex;
     Articulo articulo;
-    List<Kardex> abastecimientoList = new ArrayList<>();
+    private List<Kardex> abastecimientoList = new ArrayList<>();
     boolean btnEdit = false;
     Compra idCompra;
 
@@ -48,7 +48,7 @@ public class AbastecimientoBean implements Serializable {
     }
 
     public String articuloCompleto(String id) {
-        if (id.isEmpty() || id == null) {
+        if (id.isEmpty()) {
             return "";
         }
         return articuloFacade.getArticuloCompleto(id);
@@ -56,10 +56,7 @@ public class AbastecimientoBean implements Serializable {
 
     public void crear() {
         compra.setFecha(new Date());
-        //compraFacade.create(compra);
-        //idCompra = compraFacade.getIdCompra(compra);
         idCompra = compraFacade.crear(compra);
-        System.out.println("SIRVE "+idCompra.getIdCompra());
         for (Kardex item : abastecimientoList) {
             item.setIdCompra(idCompra);
             kardexFacade.create(item);
@@ -69,14 +66,15 @@ public class AbastecimientoBean implements Serializable {
     }
 
     public void add() {
-        if ((articulo != null || !articulo.getIdArticulo().isEmpty() || articulo.getIdArticulo() != null) && kardex.getCantidad() > 0) {
-            kardex.setIdArticulo(articulo);
-            kardex.setPrecioAnterior(articulo.getPrecio());
-            abastecimientoList.add(kardex);
-            kardex = new Kardex();
-            onDeselectArticulo();
+        if (articulo != null) {
+            if ((!articulo.getIdArticulo().isEmpty() || articulo.getIdArticulo() != null) && kardex.getCantidad() > 0) {
+                kardex.setIdArticulo(articulo);
+                kardex.setPrecioAnterior(articulo.getPrecio());
+                abastecimientoList.add(kardex);
+                kardex = new Kardex();
+                onDeselectArticulo();
+            }
         }
-        System.out.println("ABASTECIMIENTO"+abastecimientoList.size());
     }
 
     public void onSelectArticulo(Articulo select) {

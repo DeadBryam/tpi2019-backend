@@ -7,6 +7,7 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.model.access;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -50,8 +51,8 @@ public abstract class AbstractFacade<T> {
             } else {
                 throw new NullPointerException("");
             }
-        } catch (Exception e) {
-            throw e;
+        } catch (NullPointerException e) {
+            System.err.println(e);
         }
     }
 
@@ -66,8 +67,8 @@ public abstract class AbstractFacade<T> {
             } else {
                 throw new NullPointerException("");
             }
-        } catch (Exception e) {
-            throw e;
+        } catch (NullPointerException e) {
+            System.err.println(e);
         }
     }
 
@@ -83,9 +84,10 @@ public abstract class AbstractFacade<T> {
             } else {
                 throw new NullPointerException("");
             }
-        } catch (Exception ex) {
-            throw ex;
+        } catch (NullPointerException ex) {
+            System.err.println(ex);
         }
+        return null;
     }
 
     public List<T> findAll() {
@@ -98,8 +100,9 @@ public abstract class AbstractFacade<T> {
                 return Collections.EMPTY_LIST;
             }
         } catch (Exception e) {
-            throw e;
+             System.err.println(e);
         }
+        return Collections.emptyList();
     }
 
     public List<T> findRange(int primero, int tamnio) {
@@ -114,9 +117,10 @@ public abstract class AbstractFacade<T> {
             } else {
                 throw new NullPointerException("");
             }
-        } catch (Exception e) {
-            throw e;
+        } catch (NullPointerException e) {
+             System.err.println(e);
         }
+        return Collections.emptyList();
     }
 
     public int count() {
@@ -130,9 +134,10 @@ public abstract class AbstractFacade<T> {
             } else {
                 throw new NullPointerException();
             }
-        } catch (Exception e) {
-            throw e;
+        } catch (NullPointerException e) {
+             System.err.println(e);
         }
+        return 0;
     }
 
     public Query executeQuery(String query) {
@@ -140,7 +145,6 @@ public abstract class AbstractFacade<T> {
             return getEntityManager().createQuery(query);
         }
         return null;
-
     }
 
 }

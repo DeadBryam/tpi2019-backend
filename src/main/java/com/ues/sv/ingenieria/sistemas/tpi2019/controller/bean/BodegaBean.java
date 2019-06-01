@@ -8,11 +8,9 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.controller.bean;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.ArticuloFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.BodegaFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Bodega;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Sucursal;
 import java.io.Serializable;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -36,7 +34,6 @@ public class BodegaBean extends AbstractBean<Bodega> implements Serializable {
     @PostConstruct
     public void init() {
         llenarLista();
-        System.out.println("BODEGA");
     }
 
     @Override
@@ -50,7 +47,6 @@ public class BodegaBean extends AbstractBean<Bodega> implements Serializable {
     }
 
     public void onChange() {
-        System.out.println("HOLA");
         if (sucursal != null) {
             listaDatos = bodegaFacade.bodegaPorSucursal(sucursal.getIdSucursal());
         }else{

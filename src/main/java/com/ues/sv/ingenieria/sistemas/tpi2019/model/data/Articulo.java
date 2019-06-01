@@ -65,7 +65,7 @@ public class Articulo implements Serializable {
     private TipoArticulo idTipoArticulo;
 
     public Articulo() {
-        precio = BigDecimal.ONE;
+        precio = BigDecimal.ZERO;
     }
 
     public Articulo(String idArticulo) {
@@ -147,6 +147,7 @@ public class Articulo implements Serializable {
         if (!(object instanceof Articulo)) {
             return false;
         }
+        
         Articulo other = (Articulo) object;
         if ((this.idArticulo == null && other.idArticulo != null) || (this.idArticulo != null && !this.idArticulo.equals(other.idArticulo))) {
             return false;

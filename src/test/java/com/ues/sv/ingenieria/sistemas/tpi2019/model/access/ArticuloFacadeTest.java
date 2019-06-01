@@ -5,17 +5,15 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.model.access;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.ArticuloFacade;
-import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.inject.Any;
 import javax.persistence.Query;
-import junit.framework.Assert;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;

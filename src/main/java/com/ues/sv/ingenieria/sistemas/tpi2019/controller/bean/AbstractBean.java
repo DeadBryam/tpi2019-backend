@@ -14,6 +14,8 @@ import net.bootsfaces.utils.FacesMessages;
 public abstract class AbstractBean<T> {
 
     List<T> listaDatos;
+    public final static String EXITO = "Transaccion exitosa.";
+    public final static String ERROR = "Ocurrio un error en la transaccion.";
 
     protected abstract AbstractFacade<T> getFacade();
 
@@ -23,11 +25,11 @@ public abstract class AbstractBean<T> {
         if (getFacade() != null) {
             try {
                 getFacade().create(getEntity());
-                mensajeInfo("Transaccion exitosa");
+                mensajeInfo(EXITO);
                 llenarLista();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-                mensajeError("Ocurrio un error en la transaccion");
+                mensajeError(ERROR);
             }
         }
     }
@@ -36,11 +38,11 @@ public abstract class AbstractBean<T> {
         if (getFacade() != null) {
             try {
                 getFacade().edit(getEntity());
-                mensajeInfo("Transaccion exitosa");
+                mensajeInfo(EXITO);
                 llenarLista();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-                mensajeError("Ocurrio un error en la transaccion");
+                mensajeError(ERROR);
             }
         }
     }
@@ -49,11 +51,11 @@ public abstract class AbstractBean<T> {
         if (getFacade() != null) {
             try {
                 getFacade().remove(getEntity());
-                mensajeInfo("Transaccion exitosa");
+                mensajeInfo(EXITO);
                 llenarLista();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-                mensajeError("Ocurrio un error en la transaccion");
+                mensajeError(ERROR);
             }
         }
     }
@@ -62,7 +64,7 @@ public abstract class AbstractBean<T> {
         if (getFacade().findAll() != null) {
             listaDatos = getFacade().findAll();
         } else {
-            listaDatos = Collections.EMPTY_LIST;
+            listaDatos = Collections.emptyList();
         }
     }
 

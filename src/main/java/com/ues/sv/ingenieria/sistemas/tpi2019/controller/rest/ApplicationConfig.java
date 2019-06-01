@@ -29,7 +29,6 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.ues.sv.ingenieria.sistemas.tpi2019.controller.rest.AbastecimientoREST.class);
         resources.add(com.ues.sv.ingenieria.sistemas.tpi2019.controller.rest.ArticuloRest.class);
         resources.add(com.ues.sv.ingenieria.sistemas.tpi2019.controller.rest.BodegaRest.class);
         resources.add(com.ues.sv.ingenieria.sistemas.tpi2019.controller.rest.CORSFilter.class);

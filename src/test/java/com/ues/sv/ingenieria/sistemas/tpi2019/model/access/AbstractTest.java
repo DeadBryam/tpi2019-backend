@@ -8,7 +8,6 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.model.access;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,7 +15,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Selection;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
@@ -66,7 +64,7 @@ public abstract class AbstractTest<T> {
     /**
      * Test of create method, of class AbstractFacade.
      */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = Exception.class)
     public void testCreate() {
         cut.create(entity);
         verify(em).persist(entity);
@@ -76,7 +74,7 @@ public abstract class AbstractTest<T> {
     /**
      * Test of edit method, of class AbstractFacade.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testEdit() {
         cut.edit(entity);
         verify(em).merge(entity);
@@ -86,7 +84,7 @@ public abstract class AbstractTest<T> {
     /**
      * Test of remove method, of class AbstractFacade.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testRemove() {
         cut.remove(entity);
         verify(em).remove(em.merge(entity));
@@ -96,7 +94,7 @@ public abstract class AbstractTest<T> {
     /**
      * Test of findById method, of class AbstractFacade.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testFindById() {
         when(this.em.find(entity.getClass(), 1)).thenReturn(entity);
         T resultado = cut.findById(1);
@@ -108,7 +106,7 @@ public abstract class AbstractTest<T> {
     /**
      * Test of findAll method, of class AbstractFacade.
      */
-    @Test(expected = Exception.class)
+    @Test
     public void testFindAll() {
         System.out.println("testFindAll");
         lstResultado = cut.findAll();
@@ -126,7 +124,7 @@ public abstract class AbstractTest<T> {
     /**
      * Test of findRange method, of class AbstractFacade.
      */
-    @Test(expected = Exception.class)
+    @Test
     public void testFindRange() {
         lstResultado = cut.findRange(0, 100);
         assertEquals(2, lstResultado.size());
@@ -136,7 +134,7 @@ public abstract class AbstractTest<T> {
     /**
      * Test of count method, of class AbstractFacade.
      */
-    @Test(expected = Exception.class)
+    @Test
     public void testCount() {
         System.err.println("testCount");
         int res;

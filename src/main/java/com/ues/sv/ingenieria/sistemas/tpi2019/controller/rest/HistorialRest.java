@@ -39,14 +39,14 @@ public class HistorialRest {
     public Response findRange(
             @QueryParam("first") @DefaultValue("0") int first,
             @QueryParam("size") @DefaultValue("10") int size) {
-//        if (sucursalFacade.sucursalExists(idSucursal)) {
+        if (sucursalFacade.sucursalExists(idSucursal)) {
             return Response.ok(kardexFacade.findRange(first, size))
                     .header("Total-Reg", kardexFacade.count())
                     .header("Page-Reg", kardexFacade.findRange(first, size).size())
                     .build();
-//        }
-//        return Response.status(404, "Unknown sucursal.")
-//                .build();
+        }
+        return Response.status(404, "Unknown sucursal.")
+                .build();
 
     }
     
