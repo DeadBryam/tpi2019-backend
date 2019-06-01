@@ -6,7 +6,6 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.model.access;
 
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Compra;
-import java.text.SimpleDateFormat;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

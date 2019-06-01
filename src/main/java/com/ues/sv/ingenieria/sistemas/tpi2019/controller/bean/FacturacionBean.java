@@ -41,8 +41,8 @@ public class FacturacionBean implements Serializable {
     Venta venta;
     Kardex kardex;
     Articulo articulo;
-    List<Kardex> facturacionList = new ArrayList<>();
-    List<Bodega> bodegaList;
+    private List<Kardex> facturacionList = new ArrayList<>();
+    private List<Bodega> bodegaList;
     boolean btnEdit = false;
     Venta idVenta;
 
@@ -54,7 +54,6 @@ public class FacturacionBean implements Serializable {
 
     public void crear() {
         venta.setFecha(new Date());
-        //ventaFacade.create(venta);
         idVenta = ventaFacade.crear(venta);
         for (Kardex item : facturacionList) {
             item.setIdVenta(idVenta);
@@ -65,12 +64,13 @@ public class FacturacionBean implements Serializable {
     }
 
     public void add() {
-        if ((articulo != null || !articulo.getIdArticulo().isEmpty() || articulo.getIdArticulo() != null) && kardex.getCantidad() > 0) {
-            kardex.setIdArticulo(articulo);
-            kardex.setPrecioActual(articulo.getPrecio());
-            facturacionList.add(kardex);
-            kardex = new Kardex();
-            onDeselectArticulo();
+        if (articulo != null) {
+            if ((!articulo.getIdArticulo().isEmpty() || articulo.getIdArticulo() != null) && kardex.getCantidad() > 0) {
+                kardex.setIdArticulo(articulo);
+                facturacionList.add(kardex);
+                kardex = new Kardex();
+                onDeselectArticulo();
+            }
         }
     }
 
@@ -87,13 +87,11 @@ public class FacturacionBean implements Serializable {
     }
 
     public void onChange() {
-        System.out.println("afighegfwaegh");
         if (!venta.getIdSucursal().isEmpty()) {
             bodegaList = bodegaFacade.bodegaPorSucursal(venta.getIdSucursal());
         } else {
             bodegaList = new ArrayList<>();
         }
-        System.out.println("BODEGA LSIT: "+bodegaList.size());
     }
 
     public void onSelectArticulo(String select) {
@@ -112,9 +110,6 @@ public class FacturacionBean implements Serializable {
     public void onDeselectKardex() {
         kardex = new Kardex();
         setBtnEdit(false);
-    }
-
-    public void cancelar() {
     }
 
     //<editor-fold defaultstate="collapsed" desc="getters/setters">

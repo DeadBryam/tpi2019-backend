@@ -9,7 +9,6 @@ import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.ArticuloFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -35,7 +34,7 @@ public class ArticuloBean extends AbstractBean<Articulo> implements Serializable
     }
 
     public String articuloCompleto(String id) {
-        if (id.isEmpty() || id == null) {
+        if (id.isEmpty()) {
             return "";
         }
         return articuloFacade.getArticuloCompleto(id);

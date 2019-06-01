@@ -52,6 +52,6 @@ public class CajaFacadeTest extends AbstractTest<Caja>{
         Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Integer.class))).thenReturn(query);
         Mockito.when(query.getSingleResult()).thenReturn(list);
         Mockito.when(query.getSingleResult().toString().equals("1")).thenReturn(ver);
-        assertNotNull(cf.CajaExist("1"));
+        assertNotNull(cf.cajaExist(1));
     }
 }

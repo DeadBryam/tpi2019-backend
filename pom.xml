@@ -13,17 +13,6 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>1.4.0.Final</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     
     <dependencies>
         <dependency>
@@ -94,11 +83,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
             <version>1.6.4</version>
@@ -136,7 +120,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.10</version>
-                
                         <configuration>
                             <useSystemClassLoader>false</useSystemClassLoader>
                         </configuration>
@@ -179,6 +162,7 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <excludes>
                                 <exclude>*Test.java</exclude>
                             </excludes>
