@@ -46,6 +46,7 @@ public class BodegaRestTest {
         when(bodegaFacade.count()).thenReturn(listaBodega.size());
         
         assertEquals(200,bodegaRest.findLike("").getStatus());
+        assertEquals(200,bodegaRest.findLike("P").getStatus());
         
     }
     
