@@ -36,13 +36,11 @@ public class BodegaRest {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findRange(
-            @QueryParam("first") @DefaultValue("0") int first,
-            @QueryParam("size") @DefaultValue("10") int size) {
+            @QueryParam("filter") @DefaultValue("") String filter) {
         System.out.println(idSucursal);
         if (sucursalFacade.sucursalExists(idSucursal)) {
-            return Response.ok(bodegaFacade.bodegaPorSucursal(idSucursal))
-                    .header("Total-Reg", bodegaFacade.count())
-                    .header("Page-Reg", bodegaFacade.findRange(first, size).size())
+            return Response.ok(bodegaFacade.findLike(idSucursal, filter))
+                    .header("Total-Reg", bodegaFacade.findLike(idSucursal, filter).size())
                     .build();
         }
         return Response.status(404, "Unknown sucursal.")
