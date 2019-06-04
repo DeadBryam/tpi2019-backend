@@ -38,8 +38,9 @@ public class BodegaRest {
     public Response findRange(
             @QueryParam("first") @DefaultValue("0") int first,
             @QueryParam("size") @DefaultValue("10") int size) {
+        System.out.println(idSucursal);
         if (sucursalFacade.sucursalExists(idSucursal)) {
-            return Response.ok(bodegaFacade.findRange(first, size))
+            return Response.ok(bodegaFacade.bodegaPorSucursal(idSucursal))
                     .header("Total-Reg", bodegaFacade.count())
                     .header("Page-Reg", bodegaFacade.findRange(first, size).size())
                     .build();

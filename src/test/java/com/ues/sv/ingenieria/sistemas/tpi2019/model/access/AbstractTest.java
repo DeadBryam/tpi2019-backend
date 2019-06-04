@@ -5,7 +5,6 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.model.access;
 
-import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.AbstractFacade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;

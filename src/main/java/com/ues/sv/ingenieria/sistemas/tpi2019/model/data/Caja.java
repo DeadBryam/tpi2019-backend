@@ -6,12 +6,16 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.model.data;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "caja")
@@ -41,6 +45,8 @@ public class Caja implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "caja")
     private String caja;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCaja")
+    private List<Venta> ventaList;
 
     public Caja() {
     }
@@ -70,6 +76,15 @@ public class Caja implements Serializable {
         this.caja = caja;
     }
 
+    @JsonbTransient
+    public List<Venta> getVentaList() {
+        return ventaList;
+    }
+
+    public void setVentaList(List<Venta> ventaList) {
+        this.ventaList = ventaList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -92,7 +107,7 @@ public class Caja implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Caja[ idCaja=" + idCaja + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Caja[ idCaja=" + idCaja + " ]";
     }
     
 }

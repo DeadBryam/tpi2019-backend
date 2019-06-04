@@ -22,10 +22,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "tipo_articulo")
@@ -109,7 +110,7 @@ public class TipoArticulo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.TipoArticulo[ idTipoArticulo=" + idTipoArticulo + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.TipoArticulo[ idTipoArticulo=" + idTipoArticulo + " ]";
     }
     
 }

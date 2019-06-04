@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "bodega")
@@ -132,7 +132,7 @@ public class Bodega implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Bodega[ bodegaPK=" + bodegaPK + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Bodega[ bodegaPK=" + bodegaPK + " ]";
     }
     
 }
