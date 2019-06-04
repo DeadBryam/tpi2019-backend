@@ -38,21 +38,13 @@ public class BodegaRest {
     public Response findLike(
             @QueryParam("filter") @DefaultValue("") String filter) {
         if (sucursalFacade.sucursalExists(idSucursal)) {
+            if (filter.isEmpty()) {
+                return Response.ok(bodegaFacade.bodegaPorSucursal(idSucursal))
+                        .header("Total-Reg", bodegaFacade.bodegaPorSucursal(idSucursal).size())
+                        .build();
+            }
             return Response.ok(bodegaFacade.findLike(idSucursal, filter))
                     .header("Total-Reg", bodegaFacade.findLike(idSucursal, filter).size())
-                    .build();
-        }
-        return Response.status(404, "Unknown sucursal.")
-                .build();
-    }
-    
-    @GET
-    @Path("/all")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response findAll() {
-        if (sucursalFacade.sucursalExists(idSucursal)) {
-            return Response.ok(bodegaFacade.bodegaPorSucursal(idSucursal))
-                    .header("Total-Reg", bodegaFacade.bodegaPorSucursal(idSucursal).size())
                     .build();
         }
         return Response.status(404, "Unknown sucursal.")
