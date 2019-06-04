@@ -40,8 +40,4 @@ public class ArticuloFacade extends AbstractFacade<Articulo> {
                 .setParameter("like", "%"+like+"%").getResultList();
     }
     
-    public List<Articulo> likeName(String like){
-        return executeQuery("SELECT a.articulo FROM Articulo a WHERE a.idArticulo LIKE :like")
-                .setParameter("like", "%"+like+"%").getResultList();
-    }
 }

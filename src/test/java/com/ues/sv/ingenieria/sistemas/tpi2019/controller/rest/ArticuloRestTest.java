@@ -55,14 +55,4 @@ public class ArticuloRestTest {
         assertEquals("Totalreg", articuloRest.findArticuloLike("").getHeaders()
                 .keySet().toString().replaceAll("\\p{P}", ""));
     }
-    
-     @Test
-    public void ArticuloLikeNameTest() {
-        doCallRealMethod().when(articuloRest).findArticuloLikeName(any(String.class));
-        when(articuloFacade.likeName(any(String.class))).thenReturn(listaArticulo);
-
-        assertEquals(200, articuloRest.findArticuloLikeName("1").getStatus());
-        assertEquals("Totalreg", articuloRest.findArticuloLikeName("").getHeaders()
-                .keySet().toString().replaceAll("\\p{P}", ""));
-    }
 }
