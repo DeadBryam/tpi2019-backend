@@ -123,7 +123,7 @@ public class FacturacionRest {
             }
 
             return Response.ok().build();
-        } else if (sucursalFacade.sucursalExists(idSucursal) || cajaFacade.cajaExist(id)) {
+        } else if (!sucursalFacade.sucursalExists(idSucursal) || !cajaFacade.cajaExist(id)) {
             return Response.status(404, "coming soon.")
                     .build();
         }

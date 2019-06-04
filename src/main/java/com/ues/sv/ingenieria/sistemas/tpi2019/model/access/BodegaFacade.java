@@ -5,6 +5,7 @@
  */
 package com.ues.sv.ingenieria.sistemas.tpi2019.model.access;
 
+import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Bodega;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -38,13 +39,9 @@ public class BodegaFacade extends AbstractFacade<Bodega> {
         return lst;
     }
     
-    public List<Bodega> findLike(String sucursal, String like){
-        List<Bodega> lst = executeQuery("SELECT b FROM Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND b.bodegaPK.idArticulo LIKE :like")
-                .setParameter("sucursal", sucursal).setParameter("like", "%"+like+"%").getResultList();
-        for (Bodega item : lst) {
-            em.refresh(item);
-        }
-        
+    public List<Articulo> findLike(String sucursal, String like){
+        List<Articulo> lst = executeQuery("SELECT t from Articulo t, Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND t.idArticulo = b.bodegaPK.idArticulo AND b.bodegaPK.idArticulo LIKE :like")
+                .setParameter("sucursal", sucursal).setParameter("like", "%"+like+"%").getResultList();        
         return lst;
     }
 }
