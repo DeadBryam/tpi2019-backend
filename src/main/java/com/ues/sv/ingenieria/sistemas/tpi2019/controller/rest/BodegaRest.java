@@ -35,7 +35,7 @@ public class BodegaRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findRange(
+    public Response findLike(
             @QueryParam("filter") @DefaultValue("") String filter) {
         if (sucursalFacade.sucursalExists(idSucursal)) {
             return Response.ok(bodegaFacade.findLike(idSucursal, filter))
@@ -44,7 +44,19 @@ public class BodegaRest {
         }
         return Response.status(404, "Unknown sucursal.")
                 .build();
-
+    }
+    
+    @GET
+    @Path("/all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findAll() {
+        if (sucursalFacade.sucursalExists(idSucursal)) {
+            return Response.ok(bodegaFacade.bodegaPorSucursal(idSucursal))
+                    .header("Total-Reg", bodegaFacade.bodegaPorSucursal(idSucursal).size())
+                    .build();
+        }
+        return Response.status(404, "Unknown sucursal.")
+                .build();
     }
 
 }

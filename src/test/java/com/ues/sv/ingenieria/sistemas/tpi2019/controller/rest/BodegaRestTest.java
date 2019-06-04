@@ -40,12 +40,12 @@ public class BodegaRestTest {
     
     @Test
     public void findRangeTest(){
-        doCallRealMethod().when(bodegaRest).findRange(any(String.class));
+        doCallRealMethod().when(bodegaRest).findLike(any(String.class));
         when(sucursalFacade.sucursalExists(any(String.class))).thenReturn(Boolean.TRUE);
         when(bodegaFacade.findRange(any(Integer.class),any(Integer.class))).thenReturn(listaBodega);
         when(bodegaFacade.count()).thenReturn(listaBodega.size());
         
-        assertEquals(200,bodegaRest.findRange("").getStatus());
+        assertEquals(200,bodegaRest.findLike("").getStatus());
         
     }
     
