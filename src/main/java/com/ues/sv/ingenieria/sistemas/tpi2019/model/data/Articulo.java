@@ -7,7 +7,10 @@ package com.ues.sv.ingenieria.sistemas.tpi2019.model.data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "articulo")
@@ -54,6 +58,8 @@ public class Articulo implements Serializable {
     @NotNull
     @Column(name = "precio")
     private BigDecimal precio;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idArticulo")
+    private List<Kardex> kardexList;
     @JoinColumn(name = "id_marca", referencedColumnName = "id_marca")
     @ManyToOne(optional = false)
     private Marca idMarca;
@@ -110,6 +116,15 @@ public class Articulo implements Serializable {
         this.precio = precio;
     }
 
+    @JsonbTransient
+    public List<Kardex> getKardexList() {
+        return kardexList;
+    }
+
+    public void setKardexList(List<Kardex> kardexList) {
+        this.kardexList = kardexList;
+    }
+
     public Marca getIdMarca() {
         return idMarca;
     }
@@ -147,7 +162,6 @@ public class Articulo implements Serializable {
         if (!(object instanceof Articulo)) {
             return false;
         }
-        
         Articulo other = (Articulo) object;
         if ((this.idArticulo == null && other.idArticulo != null) || (this.idArticulo != null && !this.idArticulo.equals(other.idArticulo))) {
             return false;
@@ -157,7 +171,7 @@ public class Articulo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Articulo[ idArticulo=" + idArticulo + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo[ idArticulo=" + idArticulo + " ]";
     }
     
 }

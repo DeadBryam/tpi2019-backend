@@ -77,6 +77,7 @@ public class FacturacionRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(
             @PathParam("idcaja") int id) {
+        System.out.println(idSucursal);
         if (sucursalFacade.sucursalExists(idSucursal)) {
             return Response.ok(cajaFacade.findById(id))
                     .header("Registro Encontrado", 1)

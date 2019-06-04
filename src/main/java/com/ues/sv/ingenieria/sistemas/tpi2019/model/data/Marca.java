@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "marca")
@@ -109,7 +109,7 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Marca[ idMarca=" + idMarca + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Marca[ idMarca=" + idMarca + " ]";
     }
     
 }

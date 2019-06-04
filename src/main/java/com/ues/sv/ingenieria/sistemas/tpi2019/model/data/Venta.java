@@ -26,10 +26,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "venta")
@@ -150,7 +151,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Venta[ idVenta=" + idVenta + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Venta[ idVenta=" + idVenta + " ]";
     }
     
 }

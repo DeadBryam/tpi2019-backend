@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "compra")
@@ -150,7 +150,7 @@ public class Compra implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Compra[ idCompra=" + idCompra + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Compra[ idCompra=" + idCompra + " ]";
     }
     
 }

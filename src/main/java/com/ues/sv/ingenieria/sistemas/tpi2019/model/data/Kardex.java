@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "kardex")
@@ -175,7 +175,7 @@ public class Kardex implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Kardex[ idKardex=" + idKardex + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Kardex[ idKardex=" + idKardex + " ]";
     }
     
 }

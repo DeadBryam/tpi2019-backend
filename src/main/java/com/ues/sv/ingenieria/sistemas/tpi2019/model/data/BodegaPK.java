@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Embeddable
 public class BodegaPK implements Serializable {
@@ -80,7 +80,7 @@ public class BodegaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.BodegaPK[ idArticulo=" + idArticulo + ", idSucursal=" + idSucursal + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.BodegaPK[ idArticulo=" + idArticulo + ", idSucursal=" + idSucursal + " ]";
     }
     
 }

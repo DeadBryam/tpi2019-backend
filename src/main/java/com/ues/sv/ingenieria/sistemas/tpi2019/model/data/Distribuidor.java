@@ -6,12 +6,16 @@
 package com.ues.sv.ingenieria.sistemas.tpi2019.model.data;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author deadbryam
+ * @author lordbryan
  */
 @Entity
 @Table(name = "distribuidor")
@@ -47,6 +51,8 @@ public class Distribuidor implements Serializable {
     @NotNull
     @Column(name = "telefono")
     private int telefono;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDistribuidor")
+    private List<Compra> compraList;
 
     public Distribuidor() {
     }
@@ -85,6 +91,15 @@ public class Distribuidor implements Serializable {
         this.telefono = telefono;
     }
 
+    @JsonbTransient
+    public List<Compra> getCompraList() {
+        return compraList;
+    }
+
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,7 +122,7 @@ public class Distribuidor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ues.sv.ingenieria.sistemas.tpi2019.entities.Distribuidor[ idDistribuidor=" + idDistribuidor + " ]";
+        return "com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Distribuidor[ idDistribuidor=" + idDistribuidor + " ]";
     }
     
 }
