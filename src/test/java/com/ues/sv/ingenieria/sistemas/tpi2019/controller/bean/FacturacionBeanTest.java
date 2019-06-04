@@ -78,12 +78,10 @@ public class FacturacionBeanTest implements Serializable{
         when(articuloFacade.findById("APA1245")).thenReturn(articulo);
         doCallRealMethod().when(bean).onSelectArticulo(any(String.class));
         doCallRealMethod().when(bean).init();
-        doCallRealMethod().when(bean).cancelar();
         doCallRealMethod().when(bean).onDeselectArticulo();
         doCallRealMethod().when(bean).onDeselectKardex();
         doCallRealMethod().when(bean).onSelectKardex(any(Kardex.class));
 
-        bean.cancelar();
         bean.init();
         bean.onDeselectArticulo();
         bean.onDeselectKardex();

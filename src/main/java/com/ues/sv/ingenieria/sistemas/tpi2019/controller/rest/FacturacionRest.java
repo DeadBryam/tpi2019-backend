@@ -67,6 +67,7 @@ public class FacturacionRest {
                     .build();
         }
         return Response.status(404, UNKNOWN)
+                .header("Missing data.", 0)
                 .build();
 
     }
@@ -78,9 +79,11 @@ public class FacturacionRest {
             @PathParam("idcaja") int id) {
         if (sucursalFacade.sucursalExists(idSucursal)) {
             return Response.ok(cajaFacade.findById(id))
+                    .header("Registro Encontrado", 1)
                     .build();
         }
         return Response.status(404, UNKNOWN)
+                .header("Missing data.", 0)
                 .build();
     }
 
@@ -91,6 +94,7 @@ public class FacturacionRest {
         if (reg != null && sucursalFacade.sucursalExists(idSucursal)) {
             reg = cajaFacade.create(reg);
             return Response.status(Response.Status.CREATED)
+                    .header("Registro creado", reg)
                     .entity(reg)
                     .build();
         } else if (!sucursalFacade.sucursalExists(idSucursal)) {
@@ -98,6 +102,7 @@ public class FacturacionRest {
                     .build();
         }
         return Response.status(400, UNKNOWN)
+                .header("Missing data.", 0)
                 .build();
     }
 
@@ -121,12 +126,16 @@ public class FacturacionRest {
                 kardexfacade.create(item);
             }
 
-            return Response.ok().build();
+            return Response.ok()
+                    .header("Registro creado", 1)
+                    .build();
         } else if (sucursalFacade.sucursalExists(idSucursal) || cajaFacade.cajaExist(id)) {
             return Response.status(404, "coming soon.")
+                    .header("coming soon.", id)
                     .build();
         }
         return Response.status(400, "Missing data.")
+                .header("Missing data.", "")
                 .build();
 
     }

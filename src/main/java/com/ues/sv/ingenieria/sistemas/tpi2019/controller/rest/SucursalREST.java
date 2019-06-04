@@ -48,6 +48,7 @@ public class SucursalREST {
     public Response findById(
             @PathParam("idsucursal") String id) {
         return Response.ok(facade.findById(id))
+                .header("Registro Encontrado", 1)
                 .build();
     }
 
@@ -57,12 +58,14 @@ public class SucursalREST {
     public Response create(Sucursal reg) {
         if (reg == null) {
             return Response.status(400, "Missing data.")
+                    .header("Missing data.", "")
                     .build();
         }
 
         reg = facade.create(reg);
         return Response.status(Response.Status.CREATED)
                 .entity(reg)
+                .header("Registro creado", reg)
                 .build();
     }
 

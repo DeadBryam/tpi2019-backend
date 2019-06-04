@@ -9,7 +9,7 @@ import com.ues.sv.ingenieria.sistemas.tpi2019.model.access.ArticuloFacade;
 import com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Articulo;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Matchers.any;
@@ -43,6 +43,8 @@ public class ArticuloRestTest {
         when(articuloFacade.count()).thenReturn(listaArticulo.size());
         
         assertEquals(200,articuloRest.findRange(0,2).getStatus());
+        
+        
     }
     
     @Test
@@ -51,9 +53,8 @@ public class ArticuloRestTest {
         when(articuloFacade.findLike(any(String.class))).thenReturn(listaArticulo);
         
         assertEquals(200, articuloRest.findArticuloLike("1").getStatus());
-        
-        assertEquals(200, articuloRest.findArticuloLike("").getStatus());
-        
+        assertEquals("Sin Registros",articuloRest.findArticuloLike("").getHeaders()
+                .keySet().toString().replaceAll("\\p{P}", ""));
     }
     
 }

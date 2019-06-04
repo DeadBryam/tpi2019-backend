@@ -31,7 +31,7 @@ public class SucursalRestTest {
     
     @Before
     public void init(){
-        Whitebox.setInternalState(sucursalRest, "sucursalFacade", sucursalFacade);
+        Whitebox.setInternalState(sucursalRest, "facade", sucursalFacade);
         sucursal= new Sucursal("1");
         when(sucursalFacade.sucursalExists(any(String.class))).thenReturn(Boolean.TRUE);
         listCaja.add(sucursal);

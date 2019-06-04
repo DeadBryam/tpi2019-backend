@@ -46,6 +46,7 @@ public class HistorialRest {
                     .build();
         }
         return Response.status(404, "Unknown sucursal.")
+                .header("Unknown sucursal.", 0)
                 .build();
 
     }
