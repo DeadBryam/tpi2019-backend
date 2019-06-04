@@ -47,9 +47,14 @@ public class SucursalREST {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(
             @PathParam("idsucursal") String id) {
-        return Response.ok(facade.findById(id))
+        if (facade.sucursalExists(id)) {
+            return Response.ok(facade.findById(id))
                 .header("Registro Encontrado", 1)
                 .build();
+        }
+        return Response.status(400, "Unknown sucursal.")
+                    .header("Unknown sucursal.", 0)
+                    .build();
     }
 
     @POST

@@ -72,6 +72,7 @@ public class FacturacionRestTest {
     @Test
     public void finById(){
         doCallRealMethod().when(facturacionRest).findById(any(Integer.class));
+        when(cajaFacade.cajaExist(any(Integer.class))).thenReturn(algo);
         when(cajaFacade.findById(any(Object.class))).thenReturn(caja);
         
         assertEquals(200, facturacionRest.findById(3).getStatus());

@@ -78,13 +78,13 @@ public class FacturacionRest {
     public Response findById(
             @PathParam("idcaja") int id) {
         System.out.println(idSucursal);
-        if (sucursalFacade.sucursalExists(idSucursal)) {
+        if (sucursalFacade.sucursalExists(idSucursal) && cajaFacade.cajaExist(id)) {
             return Response.ok(cajaFacade.findById(id))
                     .header("Registro Encontrado", 1)
                     .build();
         }
         return Response.status(404, UNKNOWN)
-                .header("Missing data.", 0)
+                .header("Unknown sucursal.", 0)
                 .build();
     }
 
