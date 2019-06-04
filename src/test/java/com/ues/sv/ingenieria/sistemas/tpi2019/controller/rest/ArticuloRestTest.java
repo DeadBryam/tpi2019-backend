@@ -23,38 +23,37 @@ import org.mockito.internal.util.reflection.Whitebox;
  * @author arevalo
  */
 public class ArticuloRestTest {
-    
-    ArticuloFacade articuloFacade= mock(ArticuloFacade.class);
-    ArticuloRest articuloRest =mock(ArticuloRest.class);
-    List<Articulo> listaArticulo=new ArrayList<>();
-   // Articulo articulo=mock(Articulo.class);
+
+    ArticuloFacade articuloFacade = mock(ArticuloFacade.class);
+    ArticuloRest articuloRest = mock(ArticuloRest.class);
+    List<Articulo> listaArticulo = new ArrayList<>();
+    // Articulo articulo=mock(Articulo.class);
+
     @Before
-    public void init(){
+    public void init() {
         Whitebox.setInternalState(articuloRest, "articuloFacade", articuloFacade);
         listaArticulo.add(new Articulo());
         listaArticulo.add(new Articulo());
         listaArticulo.add(new Articulo());
     }
-    
+
     @Test
-    public void findRangeTest(){
-        doCallRealMethod().when(articuloRest).findRange(any(Integer.class),any(Integer.class));
-        when(articuloFacade.findRange(any(Integer.class),any(Integer.class))).thenReturn(listaArticulo);
+    public void findRangeTest() {
+        doCallRealMethod().when(articuloRest).findRange(any(Integer.class), any(Integer.class));
+        when(articuloFacade.findRange(any(Integer.class), any(Integer.class))).thenReturn(listaArticulo);
         when(articuloFacade.count()).thenReturn(listaArticulo.size());
-        
-        assertEquals(200,articuloRest.findRange(0,2).getStatus());
-        
-        
+
+        assertEquals(200, articuloRest.findRange(0, 2).getStatus());
     }
-    
+
     @Test
-    public void  findArticuloLikeTest(){
+    public void findArticuloLikeTest() {
         doCallRealMethod().when(articuloRest).findArticuloLike(any(String.class));
         when(articuloFacade.findLike(any(String.class))).thenReturn(listaArticulo);
-        
+
         assertEquals(200, articuloRest.findArticuloLike("1").getStatus());
-        assertEquals("Sin Registros",articuloRest.findArticuloLike("").getHeaders()
+        assertEquals("Totalreg", articuloRest.findArticuloLike("").getHeaders()
                 .keySet().toString().replaceAll("\\p{P}", ""));
     }
-    
+
 }

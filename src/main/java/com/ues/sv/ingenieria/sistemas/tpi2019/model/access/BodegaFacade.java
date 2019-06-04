@@ -39,8 +39,8 @@ public class BodegaFacade extends AbstractFacade<Bodega> {
         return lst;
     }
     
-    public List<Articulo> findLike(String sucursal, String like){
-        List<Articulo> lst = executeQuery("SELECT t from Articulo t, Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND t.idArticulo = b.bodegaPK.idArticulo AND b.bodegaPK.idArticulo LIKE :like")
+    public List findLike(String sucursal, String like){
+        List lst = executeQuery("SELECT t, b from Articulo t, Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND t.idArticulo = b.bodegaPK.idArticulo AND b.bodegaPK.idArticulo LIKE :like")
                 .setParameter("sucursal", sucursal).setParameter("like", "%"+like+"%").getResultList();        
         return lst;
     }

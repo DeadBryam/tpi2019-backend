@@ -46,7 +46,7 @@ public class ArticuloRest {
             @QueryParam("filter") @DefaultValue("") String filtro) {
         if (filtro == null || filtro.isEmpty()) {
             return Response.ok()
-                    .header("Sin Registros", 0)
+                    .header("Total-reg", 0)
                     .build();
         }
 

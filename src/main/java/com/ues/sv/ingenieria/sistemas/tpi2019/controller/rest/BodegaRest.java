@@ -37,7 +37,6 @@ public class BodegaRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findRange(
             @QueryParam("filter") @DefaultValue("") String filter) {
-        System.out.println(idSucursal);
         if (sucursalFacade.sucursalExists(idSucursal)) {
             return Response.ok(bodegaFacade.findLike(idSucursal, filter))
                     .header("Total-Reg", bodegaFacade.findLike(idSucursal, filter).size())

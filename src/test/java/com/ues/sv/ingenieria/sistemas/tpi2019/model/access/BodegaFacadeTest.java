@@ -27,7 +27,7 @@ public class BodegaFacadeTest extends AbstractTest<Bodega> {
     BodegaFacade bf;
     Query query = Mockito.mock(Query.class);
     List<Bodega> lst = new ArrayList<>();
-    List<Articulo> resul = new ArrayList<>();
+    List resul = new ArrayList<>();
 
     @Override
     protected AbstractFacade<Bodega> getFacade() {
@@ -61,7 +61,7 @@ public class BodegaFacadeTest extends AbstractTest<Bodega> {
     @Test
     public void findLikeTest(){
         Whitebox.setInternalState(bf, "em", em);
-        Mockito.when(cut.executeQuery("SELECT t from Articulo t, Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND t.idArticulo = b.bodegaPK.idArticulo AND b.bodegaPK.idArticulo LIKE :like")).thenReturn(query);
+        Mockito.when(cut.executeQuery("SELECT t, b from Articulo t, Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND t.idArticulo = b.bodegaPK.idArticulo AND b.bodegaPK.idArticulo LIKE :like")).thenReturn(query);
         Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
         Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
         Mockito.when(query.getResultList()).thenReturn(lst);

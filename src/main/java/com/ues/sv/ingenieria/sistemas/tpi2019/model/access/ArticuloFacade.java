@@ -36,7 +36,7 @@ public class ArticuloFacade extends AbstractFacade<Articulo> {
     }
     
     public List<Articulo> findLike(String like){
-        return executeQuery("SELECT a FROM Articulo a WHERE lower(a.articulo) LIKE :like")
+        return executeQuery("SELECT a FROM Articulo a WHERE a.idArticulo LIKE :like")
                 .setParameter("like", "%"+like+"%").getResultList();
     }
 }

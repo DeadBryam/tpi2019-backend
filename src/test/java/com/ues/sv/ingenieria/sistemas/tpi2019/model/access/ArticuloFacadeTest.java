@@ -73,7 +73,7 @@ public class ArticuloFacadeTest extends AbstractTest<Articulo> {
     @Test
     public void findLikeTest(){
         Whitebox.setInternalState(af, "em", em);
-        when(cut.executeQuery("SELECT a FROM Articulo a WHERE lower(a.articulo) LIKE :like")).thenReturn(query);
+        when(cut.executeQuery("SELECT a FROM Articulo a WHERE a.idArticulo LIKE :like")).thenReturn(query);
         when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
         when(query.getResultList()).thenReturn(lst);
         

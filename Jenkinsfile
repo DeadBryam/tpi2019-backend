@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
+	sleep 10
         sh 'git pull . master'
       }
     }
