@@ -54,5 +54,21 @@ public class ArticuloRest {
                 .header("Total-Reg", articuloFacade.findLike(filtro).size())
                 .build();
     }
+    
+     @GET
+    @Path("/name")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findArticuloLikeName(
+            @QueryParam("filter") @DefaultValue("") String filtro) {
+        if (filtro == null || filtro.isEmpty()) {
+            return Response.ok()
+                    .header("Total-reg", 0)
+                    .build();
+        }
+
+        return Response.ok(articuloFacade.likeName(filtro))
+                .header("Total-Reg", articuloFacade.findLike(filtro).size())
+                .build();
+    }
 
 }

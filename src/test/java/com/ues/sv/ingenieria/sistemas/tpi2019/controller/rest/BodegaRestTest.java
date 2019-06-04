@@ -49,4 +49,13 @@ public class BodegaRestTest {
         
     }
     
+    @Test
+    public void finAll(){
+        doCallRealMethod().when(bodegaRest).findAll();
+        when(bodegaFacade.bodegaPorSucursal(any(String.class))).thenReturn(listaBodega);
+        when(sucursalFacade.sucursalExists(any(String.class))).thenReturn(Boolean.TRUE);
+        
+        assertEquals(200, bodegaRest.findAll().getStatus());
+    }
+    
 }
