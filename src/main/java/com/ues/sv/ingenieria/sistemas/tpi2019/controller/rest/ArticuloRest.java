@@ -29,19 +29,6 @@ public class ArticuloRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findRange(
-            @QueryParam("first") @DefaultValue("0") int first,
-            @QueryParam("size") @DefaultValue("10") int size) {
-        return Response.ok(articuloFacade.findRange(first, size))
-                .header("Total-Reg", articuloFacade.count())
-                .header("Page-Reg", articuloFacade.findRange(first, size).size())
-                .header("Page-size", size)
-                .build();
-    }
-
-    @GET
-    @Path("/filtro")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response findArticuloLike(
             @QueryParam("filter") @DefaultValue("") String filtro) {
         if (filtro == null || filtro.isEmpty()) {

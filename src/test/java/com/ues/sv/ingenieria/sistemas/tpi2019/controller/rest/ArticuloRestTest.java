@@ -38,15 +38,6 @@ public class ArticuloRestTest {
     }
 
     @Test
-    public void findRangeTest() {
-        doCallRealMethod().when(articuloRest).findRange(any(Integer.class), any(Integer.class));
-        when(articuloFacade.findRange(any(Integer.class), any(Integer.class))).thenReturn(listaArticulo);
-        when(articuloFacade.count()).thenReturn(listaArticulo.size());
-
-        assertEquals(200, articuloRest.findRange(0, 2).getStatus());
-    }
-
-    @Test
     public void findArticuloLikeTest() {
         doCallRealMethod().when(articuloRest).findArticuloLike(any(String.class));
         when(articuloFacade.findLike(any(String.class))).thenReturn(listaArticulo);
