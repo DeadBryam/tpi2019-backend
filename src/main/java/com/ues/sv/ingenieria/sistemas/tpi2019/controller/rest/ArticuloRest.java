@@ -40,7 +40,7 @@ public class ArticuloRest {
     }
 
     @GET
-    @Path("/f")
+    @Path("/filtro")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findArticuloLike(
             @QueryParam("filter") @DefaultValue("") String filtro) {
