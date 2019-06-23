@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import junit.framework.Assert;
+import org.eclipse.persistence.config.HintValues;
+import org.eclipse.persistence.config.QueryHints;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
@@ -53,6 +55,7 @@ public class BodegaFacadeTest extends AbstractTest<Bodega> {
         Whitebox.setInternalState(bf, "em", em);
         Mockito.when(cut.executeQuery("SELECT b FROM Bodega b WHERE b.sucursal.idSucursal = :sucursal")).thenReturn(query);
         Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
+        Mockito.when(query.setHint(QueryHints.REFRESH, HintValues.TRUE)).thenReturn(query);
         Mockito.when(query.getResultList()).thenReturn(lst);
         lstResultado = bf.bodegaPorSucursal("200IQ");
         Assert.assertEquals(3,lstResultado.size());
@@ -64,6 +67,7 @@ public class BodegaFacadeTest extends AbstractTest<Bodega> {
         Mockito.when(cut.executeQuery("SELECT t, b from Articulo t, Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND t.idArticulo = b.bodegaPK.idArticulo AND b.bodegaPK.idArticulo LIKE :like")).thenReturn(query);
         Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
         Mockito.when(query.setParameter(Matchers.any(String.class), Matchers.any(Object.class))).thenReturn(query);
+        Mockito.when(query.setHint(QueryHints.REFRESH, HintValues.TRUE)).thenReturn(query);
         Mockito.when(query.getResultList()).thenReturn(lst);
         resul = bf.findLike("200IQ","2");
         Assert.assertEquals(3,resul.size());

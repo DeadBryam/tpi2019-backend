@@ -14,7 +14,8 @@
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.TipoArticulo</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.TipoMedida</class>
     <class>com.ues.sv.ingenieria.sistemas.tpi2019.model.data.Venta</class>
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>

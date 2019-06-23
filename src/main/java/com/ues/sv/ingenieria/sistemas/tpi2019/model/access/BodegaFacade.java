@@ -11,6 +11,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.eclipse.persistence.config.HintValues;
+import org.eclipse.persistence.config.QueryHints;
 
 /**
  *
@@ -32,16 +34,14 @@ public class BodegaFacade extends AbstractFacade<Bodega> {
     }
     
     public List<Bodega> bodegaPorSucursal(String sucursal){
-        List<Bodega> lst = executeQuery("SELECT b FROM Bodega b WHERE b.sucursal.idSucursal = :sucursal").setParameter("sucursal", sucursal).getResultList();
-        for (Bodega item: lst) {
-            em.refresh(item);
-        }
+        List<Bodega> lst = executeQuery("SELECT b FROM Bodega b WHERE b.sucursal.idSucursal = :sucursal").setParameter("sucursal", sucursal).setHint(QueryHints.REFRESH, HintValues.TRUE).getResultList();
         return lst;
     }
     
     public List findLike(String sucursal, String like){
         List lst = executeQuery("SELECT t, b from Articulo t, Bodega b WHERE b.bodegaPK.idSucursal = :sucursal AND t.idArticulo = b.bodegaPK.idArticulo AND b.bodegaPK.idArticulo LIKE :like")
-                .setParameter("sucursal", sucursal).setParameter("like", "%"+like+"%").getResultList();        
+                .setParameter("sucursal", sucursal).setParameter("like", "%"+like+"%")
+                .setHint(QueryHints.REFRESH, HintValues.TRUE).getResultList();        
         return lst;
     }
 }
