@@ -33,7 +33,7 @@ public class ArticuloRest {
             @QueryParam("filter") @DefaultValue("") String filtro) {
         if (filtro == null || filtro.isEmpty()) {
             return Response.ok()
-                    .header("Total-reg", 0)
+                    .header("Reg",0);
                     .build();
         }
 
