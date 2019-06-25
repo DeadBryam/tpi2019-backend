@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #172.18.46.96
-SITE="matuzalen.daz.zeit"
+SITE="192.168.43.162"
 URI="http://$SITE:2608/libreria/wr"
 IDSUC="$1"
 IDCAJ="$2"
@@ -57,7 +57,7 @@ done
 echo "METODOS CORRECTOS: $contadorMe"
 echo "METODOS INCORRECTOS: $contadorFa"
 
-if [ $contadorMe > "0" ];
+if [ $contadorFa != 0 ];
 	then
 		echo "Error!, algo anda mal" 1>&2
 		exit 1
